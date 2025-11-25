@@ -1,0 +1,96 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Asus\\Desktop\\Proiect III\\Platforma pentru tranzactii auto\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\desktop\\proiect iii\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\models\\anunturi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\models\\anunturi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\desktop\\proiect iii\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\controllers\\anunturicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\controllers\\anunturicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\desktop\\proiect iii\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\views\\anunturi\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\views\\anunturi\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\desktop\\proiect iii\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\views\\anunturi\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\views\\anunturi\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Proiect III\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\Create.cshtml",
+              "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Views\\Anunturi\\Create.cshtml",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\Proiect III\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\Create.cshtml",
+              "RelativeToolTip": "Platforma pentru tranzactii auto\\Views\\Anunturi\\Create.cshtml",
+              "ViewState": "AgIAABsAAAAAAAAAAAAkwDEAAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T12:00:19.852Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Proiect III\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\Index.cshtml",
+              "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Views\\Anunturi\\Index.cshtml",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\Proiect III\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\Index.cshtml",
+              "RelativeToolTip": "Platforma pentru tranzactii auto\\Views\\Anunturi\\Index.cshtml",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAABwAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-25T11:49:37.009Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Anunturi.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Proiect III\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Models\\Anunturi.cs",
+              "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Models\\Anunturi.cs",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\Proiect III\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Models\\Anunturi.cs",
+              "RelativeToolTip": "Platforma pentru tranzactii auto\\Models\\Anunturi.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAADwvxYAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T12:04:41.53Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AnunturiController.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Desktop\\Proiect III\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Controllers\\AnunturiController.cs",
+              "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Controllers\\AnunturiController.cs",
+              "ToolTip": "C:\\Users\\Asus\\Desktop\\Proiect III\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Controllers\\AnunturiController.cs",
+              "RelativeToolTip": "Platforma pentru tranzactii auto\\Controllers\\AnunturiController.cs",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAYwE8AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-25T11:37:58.72Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

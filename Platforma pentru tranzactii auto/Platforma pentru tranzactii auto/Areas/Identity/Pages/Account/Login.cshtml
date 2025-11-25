@@ -1,0 +1,97 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Autentificare";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #0d6efd 0%, #003b99 100%);
+        min-height: 100vh;
+        padding-top: 40px;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .login-card {
+        background: white;
+        border-radius: 18px;
+        padding: 35px 40px;
+        max-width: 450px;
+        margin: auto;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @@keyframes fadeIn {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    .login-icon {
+        width: 80px;
+        margin-bottom: 15px;
+    }
+
+    .btn-primary {
+        border-radius: 50px;
+        padding: 10px;
+        font-weight: 600;
+    }
+</style>
+
+<div class="login-card">
+
+    <div class="text-center">
+        <img class="login-icon" src="https://cdn-icons-png.flaticon.com/512/847/847969.png" />
+    </div>
+
+    <h3 class="text-center mb-3">Logare în cont</h3>
+
+    <form id="account" method="post">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+        <div class="form-floating mb-3">
+            <input asp-for="Input.Email" class="form-control" placeholder="nume@email.com" />
+            <label asp-for="Input.Email"></label>
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input asp-for="Input.Password" type="password" class="form-control" placeholder="Parolă" />
+            <label asp-for="Input.Password"></label>
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-check mb-3">
+            <input asp-for="Input.RememberMe" class="form-check-input" />
+            <label asp-for="Input.RememberMe" class="form-check-label"></label>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Autentificare</button>
+
+        <div class="mt-3 text-center">
+            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Creează un cont nou</a>
+        </div>
+
+        <div class="text-center">
+            <a asp-page="./ForgotPassword">Ai uitat parola?</a>
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

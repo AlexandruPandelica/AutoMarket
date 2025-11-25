@@ -1,0 +1,145 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Creează un cont nou";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #1ea3f7 0%, #0d6efd 50%, #003b99 100%);
+        min-height: 100vh;
+        padding-top: 40px;
+        font-family: 'Segoe UI', sans-serif;
+    }
+
+    .register-card {
+        background: white;
+        border-radius: 18px;
+        padding: 35px 40px;
+        max-width: 550px;
+        margin: auto;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        animation: fadeIn 0.4s ease-in-out;
+    }
+
+    @@keyframes fadeIn {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+
+    .profile-preview {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 10px;
+        border: 3px solid #0d6efd;
+    }
+
+    .title {
+        font-weight: 700;
+        letter-spacing: 1px;
+        margin-bottom: 20px;
+        text-align: center;
+        color: #0d6efd;
+    }
+
+    .btn-primary {
+        border-radius: 50px;
+        padding: 12px;
+        font-weight: 600;
+    }
+</style>
+
+<div class="register-card">
+
+    <h2 class="title">Creează un cont nou</h2>
+
+    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
+
+        <!-- PREVIEW IMAGINE PROFIL -->
+        <div class="text-center">
+            <img id="previewImg" class="profile-preview" src="https://cdn.icon-icons.com/icons2/2506/PNG/512/user_icon_150670.png" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label fw-semibold">Imagine profil</label>
+            <input asp-for="Input.ImagineProfilFile" type="file" accept="image/*" class="form-control" onchange="previewProfile(event)" />
+            <span asp-validation-for="Input.ImagineProfilFile" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input asp-for="Input.Email" class="form-control" placeholder="Email" />
+            <label asp-for="Input.Email">Email</label>
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input asp-for="Input.Nume" class="form-control" placeholder="Nume" />
+            <label asp-for="Input.Nume">Nume</label>
+            <span asp-validation-for="Input.Nume" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input asp-for="Input.Prenume" class="form-control" placeholder="Prenume" />
+            <label asp-for="Input.Prenume">Prenume</label>
+            <span asp-validation-for="Input.Prenume" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input asp-for="Input.Telefon" class="form-control" placeholder="Telefon" />
+            <label asp-for="Input.Telefon">Telefon</label>
+            <span asp-validation-for="Input.Telefon" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input asp-for="Input.Adresa" class="form-control" placeholder="Adresă" />
+            <label asp-for="Input.Adresa">Adresă</label>
+            <span asp-validation-for="Input.Adresa" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input asp-for="Input.Password" type="password" class="form-control" placeholder="Parolă" />
+            <label asp-for="Input.Password">Parolă</label>
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+
+        <div class="form-floating mb-4">
+            <input asp-for="Input.ConfirmPassword" type="password" class="form-control" placeholder="Confirmare parolă" />
+            <label asp-for="Input.ConfirmPassword">Confirmare parolă</label>
+            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+        </div>
+
+        <button id="registerSubmit" type="submit" class="btn btn-primary w-100">
+            Creează cont
+        </button>
+
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        // PREVIEW imagine profil
+        function previewProfile(event) {
+            const reader = new FileReader();
+            reader.onload = function () {
+                document.getElementById("previewImg").src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
+
+    <partial name="_ValidationScriptsPartial" />
+}

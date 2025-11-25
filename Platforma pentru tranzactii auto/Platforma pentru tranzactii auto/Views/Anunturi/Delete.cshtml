@@ -1,0 +1,16 @@
+﻿@model Platforma_pentru_tranzactii_auto.Models.Anunturi
+
+<div class="container mt-4">
+
+    <h2>Ștergere Anunț</h2>
+    <p>Ești sigur că vrei să ștergi acest anunț?</p>
+
+    <h4>@Model.Marca @Model.Model</h4>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ID_Anunt" />
+        <button class="btn btn-danger">Da, șterge</button>
+        <a href="/Anunturi" class="btn btn-secondary">Înapoi</a>
+    </form>
+
+</div>

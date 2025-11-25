@@ -1,0 +1,103 @@
+﻿@page
+@model LogoutModel
+@{
+    ViewData["Title"] = "Delogare";
+}
+
+<style>
+    body {
+        background: linear-gradient(135deg, #1ea3f7, #0d6efd, #003b99);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Segoe UI', sans-serif;
+        color: #fff;
+    }
+
+    .logout-card {
+        background: rgba(255, 255, 255, 0.13);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border-radius: 20px;
+        padding: 40px;
+        max-width: 450px;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        animation: fadeIn 0.4s ease;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .logout-icon {
+        font-size: 70px;
+        margin-bottom: 15px;
+    }
+
+    .logout-title {
+        font-size: 28px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #fff;
+    }
+
+    .logout-btn {
+        background: #ff4747;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 50px;
+        font-size: 18px;
+        font-weight: 600;
+        color: #fff;
+        width: 100%;
+        transition: 0.3s;
+    }
+
+        .logout-btn:hover {
+            background: #e33d3d;
+            transform: translateY(-1px);
+        }
+
+    .logout-message {
+        font-size: 16px;
+        margin-top: 15px;
+        opacity: 0.85;
+    }
+
+    @@keyframes fadeIn {
+        from
+
+    {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    }
+</style>
+
+<div class="logout-card">
+    <div class="logout-icon">🔒</div>
+
+    @if (User.Identity?.IsAuthenticated ?? false)
+    {
+        <div class="logout-title">Ești pe cale să te deloghezi</div>
+
+        <form asp-area="Identity" asp-page="/Account/Logout"
+              asp-route-returnUrl="@Url.Page("/", new { area = "" })"
+              method="post">
+            <button type="submit" class="logout-btn">Deloghează-mă</button>
+        </form>
+    }
+    else
+    {
+        <div class="logout-title">Ai fost delogat cu succes</div>
+        <p class="logout-message">Poți închide această fereastră sau te poți întoarce la pagina principală.</p>
+        <a href="/" class="logout-btn" style="text-decoration:none;text-align:center;display:inline-block;margin-top:10px;">
+            Înapoi la pagina principală
+        </a>
+    }
+</div>

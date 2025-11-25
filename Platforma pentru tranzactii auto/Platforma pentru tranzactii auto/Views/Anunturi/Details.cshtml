@@ -1,0 +1,40 @@
+﻿@model Platforma_pentru_tranzactii_auto.Models.Anunturi
+
+<div class="container mt-4">
+
+    <h2>@Model.Marca @Model.Model</h2>
+
+    <p class="text-muted">
+        Publicat la @Model.Data_Postarii.ToShortDateString() • Vizualizări: @Model.Nr_Vizualizari
+    </p>
+
+    <!-- GALERIE IMAGINI -->
+    <div id="galerie" class="mb-4">
+        @if (Model.Imagine != null)
+        {
+            foreach (var img in Model.Imagine)
+            {
+                <img src="@img.Cale_Imagine" class="img-fluid mb-3" style="max-height:320px" />
+            }
+        }
+    </div>
+
+    <hr />
+
+    <h4>Detalii mașină</h4>
+    <ul>
+        <li><strong>Preț:</strong> @Model.Pret €</li>
+        <li><strong>An fabricație:</strong> @Model.An_Fabricatie</li>
+        <li><strong>Kilometraj:</strong> @Model.Kilometraj km</li>
+        <li><strong>Locație:</strong> @Model.Locatie</li>
+    </ul>
+
+    <p>@Model.Descriere</p>
+
+    <hr />
+
+    <a href="/Anunturi/Edit/@Model.ID_Anunt" class="btn btn-warning">Editează</a>
+    <a href="/Anunturi/Delete/@Model.ID_Anunt" class="btn btn-danger">Șterge</a>
+    <a href="/Anunturi" class="btn btn-secondary">Înapoi</a>
+
+</div>

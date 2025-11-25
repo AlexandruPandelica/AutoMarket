@@ -1,0 +1,61 @@
+﻿@model Platforma_pentru_tranzactii_auto.Models.Anunturi
+@{
+    ViewData["Title"] = "Adaugă Anunț";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Adaugă un anunț</h2>
+
+    <form asp-action="Create" method="post" enctype="multipart/form-data">
+        <div class="row g-3">
+
+            <div class="col-md-6">
+                <label class="form-label">Marca</label>
+                <input asp-for="Marca" class="form-control" required />
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Model</label>
+                <input asp-for="Model" class="form-control" required />
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Preț (€)</label>
+                <input asp-for="Pret" type="number" class="form-control" required />
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">An fabricație</label>
+                <input asp-for="An_Fabricatie" type="number" class="form-control" />
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Kilometraj</label>
+                <input asp-for="Kilometraj" type="number" class="form-control" />
+            </div>
+
+            <div class="col-md-12">
+                <label class="form-label">Descriere</label>
+                <textarea asp-for="Descriere" class="form-control" rows="4"></textarea>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Locație</label>
+                <input asp-for="Locatie" class="form-control" />
+            </div>
+
+            <div class="col-md-12">
+                <label class="form-label">Imagini</label>
+                <input type="file" name="poze" class="form-control" multiple accept="image/*" />
+                <input type="hidden" name="poze" value="" />
+
+            </div>
+
+            <div class="col-12 mt-3">
+                <button class="btn btn-primary">Salvează</button>
+                <a href="/Anunturi" class="btn btn-secondary">Înapoi</a>
+            </div>
+
+        </div>
+    </form>
+</div>

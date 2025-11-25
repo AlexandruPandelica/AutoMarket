@@ -1,0 +1,53 @@
+﻿@model IEnumerable<Platforma_pentru_tranzactii_auto.Models.Anunturi>
+@{
+    ViewData["Title"] = "Anunturi Auto";
+}
+
+<div class="container mt-4">
+
+    <h2 class="mb-4">Anunțuri Auto</h2>
+
+    <!-- FILTRARE -->
+    <form method="get" class="row g-3 mb-4">
+        <div class="col-md-3">
+            <input type="text" name="marca" class="form-control" placeholder="Marca" />
+        </div>
+        <div class="col-md-3">
+            <input type="text" name="model" class="form-control" placeholder="Model" />
+        </div>
+        <div class="col-md-2">
+            <input type="number" name="pretMin" class="form-control" placeholder="Preț min" />
+        </div>
+        <div class="col-md-2">
+            <input type="number" name="pretMax" class="form-control" placeholder="Preț max" />
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary w-100">Filtrează</button>
+        </div>
+    </form>
+
+    <!-- LISTĂ ANUNȚURI -->
+    <div class="row">
+        @foreach (var anunt in Model)
+        {
+            var img = anunt.Imagine?.FirstOrDefault()?.Cale_Imagine ?? "/imagini/no-image.jpg";
+
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <img src="@img" class="card-img-top" style="height:220px; object-fit:cover;" />
+
+                    <div class="card-body">
+                        <h5>@anunt.Marca @anunt.Model</h5>
+                        <p class="text-muted">
+                            @anunt.Pret € • @anunt.An_Fabricatie • @anunt.Kilometraj km
+                        </p>
+
+                        <a href="/Anunturi/Details/@anunt.ID_Anunt" class="btn btn-success w-100">
+                            Vezi detalii
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

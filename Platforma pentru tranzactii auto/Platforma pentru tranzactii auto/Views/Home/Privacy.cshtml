@@ -1,0 +1,124 @@
+﻿@{
+    ViewData["Title"] = "Despre Platformă";
+}
+
+<style>
+    .about-hero {
+        background: linear-gradient(135deg, #0d6efd 0%, #003b99 100%);
+        color: white;
+        padding: 60px 20px;
+        border-radius: 15px;
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+        .about-hero h1 {
+            font-weight: 700;
+            font-size: 2.8rem;
+        }
+
+    .info-card {
+        background: white;
+        padding: 25px;
+        border-radius: 15px;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.1);
+        transition: 0.3s;
+    }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 25px rgba(0,0,0,0.18);
+        }
+
+    .icon-box {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        background-color: #e7f1ff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 28px;
+        color: #0d6efd;
+        margin-bottom: 15px;
+    }
+
+    .section-title {
+        font-weight: 700;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+    .about-text {
+        font-size: 1.1rem;
+        line-height: 1.7;
+    }
+</style>
+
+<div class="container mt-4">
+
+    <!-- HERO SECTION -->
+    <div class="about-hero">
+        <h1>Despre Platforma AutoMarket</h1>
+        <p class="mt-3 lead">
+            Platforma inteligentă pentru tranzacții auto – creată pentru a conecta cumpărătorii și vânzătorii într-un mod rapid, sigur și eficient.
+        </p>
+    </div>
+
+    <!-- PREZENTARE GENERALĂ -->
+    <div class="mb-5">
+        <h2 class="section-title">Ce este AutoMarket?</h2>
+        <p class="about-text">
+            AutoMarket este o platformă modernă unde utilizatorii pot publica, gestiona și găsi anunțuri auto
+            într-un mod simplu și intuitiv. Scopul nostru este să facilităm procesul de vânzare și achiziție prin:
+        </p>
+
+        <ul class="about-text">
+            <li>🔍 Filtrare avansată după marcă, model, preț, kilometraj</li>
+            <li>📸 Vizualizare imagini multiple pentru fiecare vehicul</li>
+            <li>⭐ Posibilitatea de a salva anunțurile favorite</li>
+            <li>💬 Sistem de comentarii și rating</li>
+            <li>📊 Număr de vizualizări pentru fiecare anunț</li>
+            <li>🔐 Conturi securizate pentru clienți și administratori</li>
+        </ul>
+    </div>
+
+    <!-- CARDURI INFORMATII -->
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="info-card text-center">
+                <div class="icon-box">🚗</div>
+                <h4>Publicare Anunțuri Auto</h4>
+                <p>Utilizatorii pot adăuga anunțuri cu detalii complete: preț, marcă, model, an, poze și descriere.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="info-card text-center">
+                <div class="icon-box">⭐</div>
+                <h4>Favorite & Wishlist</h4>
+                <p>Salvează anunțurile care îți plac într-o listă personalizată pentru acces rapid oricând.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="info-card text-center">
+                <div class="icon-box">🛡️</div>
+                <h4>Securitate & Conturi</h4>
+                <p>Sistem complet de autentificare, roluri (Client/Admin) și gestionare date în siguranță.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- MISIUNE -->
+    <div class="mt-5 mb-5">
+        <h2 class="section-title">Misiunea Noastră</h2>
+        <p class="about-text">
+            Ne propunem să simplificăm procesul de tranzacții auto prin tehnologie modernă, transparență și
+            o experiență intuitivă pentru utilizatori. Credem într-o piață digitală sigură, accesibilă și rapidă
+            pentru toată lumea.
+        </p>
+    </div>
+</div>

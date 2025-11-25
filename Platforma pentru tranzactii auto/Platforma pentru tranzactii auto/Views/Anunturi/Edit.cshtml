@@ -1,0 +1,59 @@
+﻿@model Platforma_pentru_tranzactii_auto.Models.Anunturi
+
+<div class="container mt-4">
+    <h2 class="mb-4">Editează anunțul</h2>
+
+    <form asp-action="Edit" enctype="multipart/form-data">
+
+        <input type="hidden" asp-for="ID_Anunt" />
+
+        <div class="row g-3">
+
+            <div class="col-md-6">
+                <label>Marca</label>
+                <input asp-for="Marca" class="form-control" />
+            </div>
+
+            <div class="col-md-6">
+                <label>Model</label>
+                <input asp-for="Model" class="form-control" />
+            </div>
+
+            <div class="col-md-4">
+                <label>Preț</label>
+                <input asp-for="Pret" type="number" class="form-control" />
+            </div>
+
+            <div class="col-md-4">
+                <label>An fabricație</label>
+                <input asp-for="An_Fabricatie" type="number" class="form-control" />
+            </div>
+
+            <div class="col-md-4">
+                <label>Kilometraj</label>
+                <input asp-for="Kilometraj" type="number" class="form-control" />
+            </div>
+
+            <div class="col-md-12">
+                <label>Descriere</label>
+                <textarea asp-for="Descriere" rows="3" class="form-control"></textarea>
+            </div>
+
+            <div class="col-md-6">
+                <label>Locație</label>
+                <input asp-for="Locatie" class="form-control" />
+            </div>
+
+            <div class="col-md-12">
+                <h5>Adaugă noi imagini</h5>
+                <input type="file" name="noiPoze" multiple class="form-control" />
+            </div>
+
+            <div class="col-12 mt-3">
+                <button class="btn btn-primary">Salvează modificările</button>
+                <a href="/Anunturi" class="btn btn-secondary">Înapoi</a>
+            </div>
+
+        </div>
+    </form>
+</div>

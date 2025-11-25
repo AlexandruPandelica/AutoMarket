@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Platforma pentru tranzactii auto.props" />
+</Project>

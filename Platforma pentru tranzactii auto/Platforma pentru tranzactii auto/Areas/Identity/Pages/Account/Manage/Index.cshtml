@@ -1,0 +1,120 @@
+﻿@page
+@model Platforma_pentru_tranzactii_auto.Areas.Identity.Pages.Account.Manage.IndexModel
+@{
+    ViewData["Title"] = "Profilul meu";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<style>
+    body {
+        background: #f2f6fc;
+    }
+
+    .profile-container {
+        max-width: 900px;
+        margin: 40px auto;
+    }
+
+    .profile-card {
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }
+
+    .avatar-wrapper {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .avatar-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #0d6efd;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .profile-name {
+        text-align: center;
+        font-size: 28px;
+        font-weight: 700;
+        margin-top: 15px;
+    }
+
+    .profile-email {
+        text-align: center;
+        color: #6c757d;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .section-title {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #0d6efd;
+        letter-spacing: 0.5px;
+    }
+
+    .btn-save {
+        border-radius: 50px;
+        padding: 12px;
+        font-weight: 600;
+        font-size: 16px;
+    }
+</style>
+
+<div class="profile-container">
+    <div class="profile-card">
+
+        <!-- Poza de profil + nume -->
+        <div class="avatar-wrapper">
+            <img class="avatar-img" src="@Model.UserImage" alt="Poza profil" />
+
+            <div class="profile-name">@Model.Input.Nume @Model.Input.Prenume</div>
+            <div class="profile-email">@Model.Username</div>
+        </div>
+
+        <partial name="_StatusMessage" for="StatusMessage" />
+
+        <form method="post" enctype="multipart/form-data">
+
+            <h4 class="section-title">Actualizează informațiile</h4>
+
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="mb-3">
+                <label asp-for="Input.ImagineProfilFile" class="form-label fw-semibold">Schimbă poza de profil</label>
+                <input asp-for="Input.ImagineProfilFile" type="file" accept="image/*" class="form-control" />
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Nume" class="form-control" placeholder="Nume" />
+                <label asp-for="Input.Nume"></label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Prenume" class="form-control" placeholder="Prenume" />
+                <label asp-for="Input.Prenume"></label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Telefon" class="form-control" placeholder="Telefon" />
+                <label asp-for="Input.Telefon"></label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Adresa" class="form-control" placeholder="Adresa" />
+                <label asp-for="Input.Adresa"></label>
+            </div>
+
+            <button class="btn btn-primary btn-save w-100 mt-3">Salvează modificările</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
