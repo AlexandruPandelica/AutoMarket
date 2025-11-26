@@ -1,243 +1,306 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Platforma_pentru_tranzactii_auto.Models;
+using Microsoft.AspNetCore.Identity; // NECESAR
+// Adaugam acest namespace pentru manipularea fisierelor
+using System.IO;
+using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
-namespace Platforma_pentru_tranzactii_auto.Controllers
+namespace Platforma_pentru_tranzactii_auto.Views
 {
     public class AnunturiController : Controller
     {
         private readonly PlatformaDbContext _context;
         private readonly UserManager<Utilizator> _userManager;
-        private readonly IWebHostEnvironment _environment;
 
-        public AnunturiController(PlatformaDbContext context, UserManager<Utilizator> userManager, IWebHostEnvironment env)
+        public AnunturiController(PlatformaDbContext context, UserManager<Utilizator> userManager)
         {
             _context = context;
+
+            // 3. Aici facem legătura corectă
+            // Luăm "userManager" primit ca parametru și îl punem în variabila clasei "_userManager"
             _userManager = userManager;
-            _environment = env;
         }
 
-        // ======================================================
-        // LISTĂ ANUNȚURI + FILTRARE
-        // ======================================================
-        public async Task<IActionResult> Index(string marca, string model, int? pretMin, int? pretMax)
+        // GET: Anunturi
+        // Adaugam parametrul "searchString"
+        public async Task<IActionResult> Index(string searchString)
         {
-            var anunturi = _context.Anunt
-                .Include(a => a.Imagine)
+            var anunturiQuery = _context.Anunt
                 .Include(a => a.User)
                 .AsQueryable();
 
-            if (!string.IsNullOrEmpty(marca))
-                anunturi = anunturi.Where(a => a.Marca.Contains(marca));
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                searchString = searchString.ToLower();
 
-            if (!string.IsNullOrEmpty(model))
-                anunturi = anunturi.Where(a => a.Model.Contains(model));
+                anunturiQuery = anunturiQuery.Where(s =>
+                    s.Marca.ToLower().Contains(searchString) ||
+                    s.Model.ToLower().Contains(searchString) ||
+                    (s.Descriere != null && s.Descriere.ToLower().Contains(searchString)) ||
+                    s.Locatie.ToLower().Contains(searchString)
+                );
+            }
 
-            if (pretMin.HasValue)
-                anunturi = anunturi.Where(a => a.Pret >= pretMin.Value);
+            ViewData["CurrentFilter"] = searchString;
 
-            if (pretMax.HasValue)
-                anunturi = anunturi.Where(a => a.Pret <= pretMax.Value);
+            // 🔥🔥🔥 CODUL NOU — se adaugă AICI 🔥🔥🔥
+            if (User.Identity.IsAuthenticated)
+            {
+                int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-            return View(await anunturi.ToListAsync());
+                var favoriteIds = await _context.Favorite
+                    .Where(f => f.UserId == userId)
+                    .Select(f => f.ID_Anunt)
+                    .ToListAsync();
+
+                ViewBag.FavoriteIds = favoriteIds;
+            }
+            else
+            {
+                ViewBag.FavoriteIds = new List<int>();
+            }
+            // 🔥🔥🔥 SFÂRȘIT COD NOU 🔥🔥🔥
+
+            return View(await anunturiQuery.ToListAsync());
         }
 
-        // ======================================================
-        // DETALII ANUNȚ + INCREMENTARE VIZUALIZĂRI
-        // ======================================================
-        public async Task<IActionResult> Details(int id)
+
+        // GET: Anunturi/Details/5
+        public async Task<IActionResult> Details(int? id)
         {
-            var anunt = await _context.Anunt
-                .Include(a => a.Imagine)
+            if (id == null) return NotFound();
+
+            var anunturi = await _context.Anunt
                 .Include(a => a.User)
+                // 2. IMPORTANT: Încărcăm comentariile și autorii lor
                 .Include(a => a.Comentari)
-                .FirstOrDefaultAsync(a => a.ID_Anunt == id);
+                    .ThenInclude(c => c.User)
+                .FirstOrDefaultAsync(m => m.ID_Anunt == id);
 
-            if (anunt == null)
-                return NotFound();
+            if (anunturi == null) return NotFound();
 
-            anunt.Nr_Vizualizari++;
+            // Incrementăm vizualizările
+            anunturi.Nr_Vizualizari++;
+            _context.Update(anunturi);
             await _context.SaveChangesAsync();
 
-            return View(anunt);
+            return View(anunturi);
         }
 
-        // ======================================================
-        // CREATE
-        // ======================================================
-        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AdaugaComentariu(int idAnunt, string textComentariu, int recenzie)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return Unauthorized(); // Sau un status code de eroare
+
+            if (!string.IsNullOrWhiteSpace(textComentariu))
+            {
+                var comentariuNou = new Comentarii
+                {
+                    ID_Anunt = idAnunt,
+                    UserId = user.Id,
+                    User = user, // 🔥 IMPORTANT: Setăm userul ca să-i putem afișa email-ul imediat
+                    Text_Comentariu = textComentariu,
+                    Recenzie = recenzie,
+                    DataComentariu = DateTime.UtcNow
+                };
+
+                _context.Commentarii.Add(comentariuNou);
+                await _context.SaveChangesAsync();
+
+                // 🔥 SCHIMBARE: Nu facem Redirect, ci returnăm HTML-ul comentariului nou
+                return PartialView("_Comentariu", comentariuNou);
+            }
+
+            return BadRequest();
+        }
+
+        // GET: Anunturi/Create
         public IActionResult Create()
         {
+            ViewData["UserId"] = new SelectList(_context.Utilizatori, "Id", "Id");
             return View();
         }
 
+        // POST: Anunturi/Create
         [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> Create(Anunturi anunt, List<IFormFile> poze)
+        [ValidateAntiForgeryToken]
+        // Am adaugat "IFormFile? imagineUpload" in parametrii metodei
+        public async Task<IActionResult> Create([Bind("ID_Anunt,Marca,Model,Pret,An_Fabricatie,Kilometraj,Descriere,Locatie,UserId")] Anunturi anunturi, IFormFile? imagineUpload)
         {
-            if (!ModelState.IsValid)
-                return View(anunt);
+            // 1. Eliminam validarile automate care ne incurca
+            ModelState.Remove("User");
+            ModelState.Remove("Imagine_Anunt");
 
-            var user = await _userManager.GetUserAsync(User);
-            anunt.UserId = user.Id;
-            anunt.Data_Postarii = DateTime.Now;
+            // 2. Setam valorile automate
+            anunturi.Data_Postarii = DateTime.UtcNow; // Folosim UTC pentru PostgreSQL
+            anunturi.Nr_Vizualizari = 0;
 
-            _context.Anunt.Add(anunt);
-            await _context.SaveChangesAsync(); // SALVĂM ANUNȚUL ÎNAINTE DE IMAGINI
-
-            // DEBUG — verificăm dacă avem poze
-            Console.WriteLine("Numar poze: " + (poze?.Count ?? 0));
-
-            // Dacă sunt poze => le salvăm
-            if (poze != null && poze.Count > 0)
+            // 3. Procesam IMAGINEA
+            if (imagineUpload != null && imagineUpload.Length > 0)
             {
-                foreach (var poza in poze)
+                using (var memoryStream = new MemoryStream())
                 {
-                    var folder = Path.Combine(_environment.WebRootPath, "imagini");
-                    if (!Directory.Exists(folder))
-                        Directory.CreateDirectory(folder);
+                    await imagineUpload.CopyToAsync(memoryStream);
+                    // Convertim in byte array si stocam in model
+                    anunturi.Imagine_Anunt = memoryStream.ToArray();
+                }
+            }
 
-                    var fileName = Guid.NewGuid() + Path.GetExtension(poza.FileName);
-                    var filePath = Path.Combine(folder, fileName);
+            if (ModelState.IsValid)
+            {
+                _context.Add(anunturi);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
 
-                    using (var stream = new FileStream(filePath, FileMode.Create))
+            // Debugging: Daca validarea esueaza, poti vedea erorile aici
+            // var errors = ModelState.Values.SelectMany(v => v.Errors);
+
+            ViewData["UserId"] = new SelectList(_context.Utilizatori, "Id", "Id", anunturi.UserId);
+            return View(anunturi);
+        }
+
+        // GET: Anunturi/Edit/5
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null) return NotFound();
+
+            var anunturi = await _context.Anunt.FindAsync(id);
+            if (anunturi == null) return NotFound();
+
+            ViewData["UserId"] = new SelectList(_context.Utilizatori, "Id", "Id", anunturi.UserId);
+            return View(anunturi);
+        }
+
+        // POST: Anunturi/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        // 1. Adaugam parametrul IFormFile? imagineUpload
+        public async Task<IActionResult> Edit(int id, [Bind("ID_Anunt,Marca,Model,Pret,An_Fabricatie,Kilometraj,Descriere,Data_Postarii,Nr_Vizualizari,Locatie,UserId")] Anunturi anunturi, IFormFile? imagineUpload)
+        {
+            if (id != anunturi.ID_Anunt)
+            {
+                return NotFound();
+            }
+
+            ModelState.Remove("User");
+            ModelState.Remove("Imagine_Anunt"); // Nu validam imaginea ca obligatorie
+
+            // Fix pentru PostgreSQL - Data trebuie sa fie UTC
+            anunturi.Data_Postarii = DateTime.SpecifyKind(anunturi.Data_Postarii, DateTimeKind.Utc);
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    // 2. LOGICA CRITICĂ PENTRU IMAGINE
+                    if (imagineUpload != null && imagineUpload.Length > 0)
                     {
-                        await poza.CopyToAsync(stream);
+                        // CAZUL A: Utilizatorul a încărcat o poză nouă -> O înlocuim pe cea veche
+                        using (var memoryStream = new MemoryStream())
+                        {
+                            await imagineUpload.CopyToAsync(memoryStream);
+                            anunturi.Imagine_Anunt = memoryStream.ToArray();
+                        }
+                    }
+                    else
+                    {
+                        // CAZUL B: Utilizatorul NU a încărcat nimic -> Păstrăm poza veche
+                        // Trebuie să citim din baza de date cum era anunțul înainte
+                        // Folosim AsNoTracking() pentru a evita conflictele de tracking cu _context.Update
+                        var anuntVechi = await _context.Anunt
+                                                       .AsNoTracking()
+                                                       .FirstOrDefaultAsync(a => a.ID_Anunt == id);
+
+                        if (anuntVechi != null)
+                        {
+                            // Copiem imaginea veche în obiectul nou
+                            anunturi.Imagine_Anunt = anuntVechi.Imagine_Anunt;
+                        }
                     }
 
-                    var imagine = new ImagineMasina
-                    {
-                        ID_Anunt = anunt.ID_Anunt,
-                        Cale_Imagine = "/imagini/" + fileName
-                    };
-
-                    _context.Imagine.Add(imagine);
+                    _context.Update(anunturi);
+                    await _context.SaveChangesAsync();
                 }
-
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToAction(nameof(Index));
-        }
-
-
-        // ======================================================
-        // EDIT — doar dacă utilizatorul este proprietar
-        // ======================================================
-        [Authorize]
-        public async Task<IActionResult> Edit(int id)
-        {
-            var anunt = await _context.Anunt
-                .Include(a => a.Imagine)
-                .FirstOrDefaultAsync(a => a.ID_Anunt == id);
-
-            if (anunt == null)
-                return NotFound();
-
-            if (anunt.UserId != int.Parse(_userManager.GetUserId(User)))
-                return Unauthorized();
-
-            return View(anunt);
-        }
-
-        [HttpPost]
-        [Authorize]
-        public async Task<IActionResult> Edit(Anunturi anunt, List<IFormFile> noiPoze)
-        {
-            var original = await _context.Anunt.FindAsync(anunt.ID_Anunt);
-
-            if (original == null)
-                return NotFound();
-
-            if (original.UserId != int.Parse(_userManager.GetUserId(User)))
-                return Unauthorized();
-
-            // Actualizare câmpuri
-            original.Marca = anunt.Marca;
-            original.Model = anunt.Model;
-            original.Pret = anunt.Pret;
-            original.Kilometraj = anunt.Kilometraj;
-            original.An_Fabricatie = anunt.An_Fabricatie;
-            original.Descriere = anunt.Descriere;
-            original.Locatie = anunt.Locatie;
-
-            await _context.SaveChangesAsync();
-
-            // Upload noi poze
-            if (noiPoze != null && noiPoze.Count > 0)
-            {
-                foreach (var poza in noiPoze)
+                catch (DbUpdateConcurrencyException)
                 {
-                    string folder = Path.Combine(_environment.WebRootPath, "imagini");
-                    if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
-
-                    string fileName = Guid.NewGuid() + Path.GetExtension(poza.FileName);
-                    string filePath = Path.Combine(folder, fileName);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                        await poza.CopyToAsync(stream);
-
-                    var imagine = new ImagineMasina
+                    if (!AnunturiExists(anunturi.ID_Anunt))
                     {
-                        ID_Anunt = original.ID_Anunt,
-                        Cale_Imagine = "/imagini/" + fileName
-                    };
-
-                    _context.Imagine.Add(imagine);
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
-                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
 
-            return RedirectToAction(nameof(Index));
+            ViewData["UserId"] = new SelectList(_context.Utilizatori, "Id", "Id", anunturi.UserId);
+            return View(anunturi);
         }
 
-        // ======================================================
-        // DELETE — doar dacă utilizatorul este proprietar
-        // ======================================================
-        [Authorize]
-        public async Task<IActionResult> Delete(int id)
+        // GET: Anunturi/Delete/5
+        public async Task<IActionResult> Delete(int? id)
         {
-            var anunt = await _context.Anunt
-                .Include(a => a.Imagine)
-                .FirstOrDefaultAsync(a => a.ID_Anunt == id);
+            if (id == null) return NotFound();
 
-            if (anunt == null)
-                return NotFound();
+            var anunturi = await _context.Anunt
+                .Include(a => a.User)
+                .FirstOrDefaultAsync(m => m.ID_Anunt == id);
 
-            if (anunt.UserId != int.Parse(_userManager.GetUserId(User)))
-                return Unauthorized();
+            if (anunturi == null) return NotFound();
 
-            return View(anunt);
+            return View(anunturi);
         }
 
+        // POST: Anunturi/Delete/5
         [HttpPost, ActionName("Delete")]
-        [Authorize]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var anunt = await _context.Anunt
-                .Include(a => a.Imagine)
-                .FirstOrDefaultAsync(a => a.ID_Anunt == id);
-
-            if (anunt == null)
-                return NotFound();
-
-            // Ștergere poze din wwwroot
-            if (anunt.Imagine != null)
+            var anunturi = await _context.Anunt.FindAsync(id);
+            if (anunturi != null)
             {
-                foreach (var img in anunt.Imagine)
-                {
-                    string path = Path.Combine(_environment.WebRootPath, img.Cale_Imagine.TrimStart('/'));
-                    if (System.IO.File.Exists(path))
-                        System.IO.File.Delete(path);
-                }
+                _context.Anunt.Remove(anunturi);
             }
 
-            _context.Anunt.Remove(anunt);
             await _context.SaveChangesAsync();
-
             return RedirectToAction(nameof(Index));
         }
+
+        private bool AnunturiExists(int id)
+        {
+            return _context.Anunt.Any(e => e.ID_Anunt == id);
+        }
+
+        // POST: StergeComentariu
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> StergeComentariu(int id)
+        {
+            var comentariu = await _context.Commentarii.FindAsync(id);
+
+            if (comentariu == null) return NotFound();
+
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null || comentariu.UserId != user.Id) return Forbid();
+
+            _context.Commentarii.Remove(comentariu);
+            await _context.SaveChangesAsync();
+
+            // 🔥 MODIFICARE: Returnăm un status 200 OK, nu Redirect
+            return Ok();
+        }
+
     }
 }

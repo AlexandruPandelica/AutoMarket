@@ -175,6 +175,9 @@ namespace Platforma_pentru_tranzactii_auto.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<byte[]>("Imagine_Anunt")
+                        .HasColumnType("bytea");
+
                     b.Property<int>("Kilometraj")
                         .HasColumnType("integer");
 
@@ -260,28 +263,6 @@ namespace Platforma_pentru_tranzactii_auto.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Favorite");
-                });
-
-            modelBuilder.Entity("Platforma_pentru_tranzactii_auto.Models.ImagineMasina", b =>
-                {
-                    b.Property<int>("ID_ImagineMasina")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ID_ImagineMasina"));
-
-                    b.Property<string>("Cale_Imagine")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("ID_Anunt")
-                        .HasColumnType("integer");
-
-                    b.HasKey("ID_ImagineMasina");
-
-                    b.HasIndex("ID_Anunt");
-
-                    b.ToTable("Imagine");
                 });
 
             modelBuilder.Entity("Utilizator", b =>
@@ -470,24 +451,11 @@ namespace Platforma_pentru_tranzactii_auto.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Platforma_pentru_tranzactii_auto.Models.ImagineMasina", b =>
-                {
-                    b.HasOne("Platforma_pentru_tranzactii_auto.Models.Anunturi", "Anunt")
-                        .WithMany("Imagine")
-                        .HasForeignKey("ID_Anunt")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Anunt");
-                });
-
             modelBuilder.Entity("Platforma_pentru_tranzactii_auto.Models.Anunturi", b =>
                 {
                     b.Navigation("Comentari");
 
                     b.Navigation("Favorite");
-
-                    b.Navigation("Imagine");
                 });
 
             modelBuilder.Entity("Utilizator", b =>

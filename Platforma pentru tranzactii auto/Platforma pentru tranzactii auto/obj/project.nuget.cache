@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/I6qT3fkBro=",
+  "dgSpecHash": "VWNobHyxMhA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Asus\\Desktop\\Proiect III\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj",
+  "projectFilePath": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Asus\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Asus\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",

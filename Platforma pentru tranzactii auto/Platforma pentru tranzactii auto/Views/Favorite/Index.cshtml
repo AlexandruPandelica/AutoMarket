@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Platforma_pentru_tranzactii_auto.Models.Favorite>
+
+@{
+    ViewData["Title"] = "Favoritele mele";
+}
+
+<div class="container py-5">
+
+    <h1 class="mb-4 fw-bold">Favoritele mele ❤️</h1>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            Nu ai adăugat încă anunțuri la favorite.
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var fav in Model)
+            {
+                var item = fav.Anunt;
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="card shadow-sm border-0 h-100">
+
+                        <img src="data:image/*;base64,@Convert.ToBase64String(item.Imagine_Anunt)"
+                             class="card-img-top card-img-fixed"
+                             alt="Imagine @item.Marca @item.Model" />
+
+                        <div class="card-body">
+                            <h5 class="card-title">@item.Marca @item.Model</h5>
+                            <p class="text-muted small">
+                                @item.An_Fabricatie · @item.Kilometraj.ToString("N0") km
+                            </p>
+                        </div>
+
+                        <div class="card-footer bg-white border-0">
+                            <a asp-controller="Anunturi"
+                               asp-action="Details"
+                               asp-route-id="@item.ID_Anunt"
+                               class="btn btn-primary btn-sm">
+                                Detalii
+                            </a>
+
+                            <form asp-controller="Favorite"
+                                  asp-action="Toggle"
+                                  method="post"
+                                  class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="anuntId" value="@item.ID_Anunt" />
+                                <button class="btn btn-outline-danger btn-sm">
+                                    Șterge
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

@@ -22,14 +22,15 @@ namespace Platforma_pentru_tranzactii_auto.Models
         public int Nr_Vizualizari { get; set; }
         public string Locatie { get; set; }
 
+        public byte[]? Imagine_Anunt { get; set; }
+
         // FK către utilizator (proprietar)
         public int UserId { get; set; }
 
         [ForeignKey("UserId")]
-        public Utilizator User { get; set; }
+        public Utilizator? User { get; set; }
 
         // Relații multiple
-        public ICollection<ImagineMasina>? Imagine { get; set; }
         public ICollection<Comentarii>? Comentari { get; set; }
         public ICollection<Favorite>? Favorite { get; set; }
 

@@ -1,16 +1,16 @@
 ﻿<Project>
   <ItemGroup>
-    <StaticWebAssetEndpoint Include="_content/Platforma pentru tranzactii auto/css/site.b9sayid5wm.css">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"b9sayid5wm"},{"Name":"integrity","Value":"sha256-j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg="},{"Name":"label","Value":"_content/Platforma pentru tranzactii auto/css/site.css"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"667"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=\u0022"},{"Name":"Last-Modified","Value":"Mon, 24 Nov 2025 09:04:55 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Platforma pentru tranzactii auto/css/site.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"667"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022j6fhJSuuyLpOSLuPJU0TsDV0iNjor5S3rDnvxJrt4bg=\u0022"},{"Name":"Last-Modified","Value":"Mon, 24 Nov 2025 09:04:55 GMT"}]]]></ResponseHeaders>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-\u002BK9DIbHTAUW3gnkbHcEegyHKFht7bnWwadE6xuoaaB0="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"3313"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022\u002BK9DIbHTAUW3gnkbHcEegyHKFht7bnWwadE6xuoaaB0=\u0022"},{"Name":"Last-Modified","Value":"Wed, 26 Nov 2025 12:56:32 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Platforma pentru tranzactii auto/css/site.sj0dg3p6ze.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"sj0dg3p6ze"},{"Name":"integrity","Value":"sha256-\u002BK9DIbHTAUW3gnkbHcEegyHKFht7bnWwadE6xuoaaB0="},{"Name":"label","Value":"_content/Platforma pentru tranzactii auto/css/site.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"3313"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022\u002BK9DIbHTAUW3gnkbHcEegyHKFht7bnWwadE6xuoaaB0=\u0022"},{"Name":"Last-Modified","Value":"Wed, 26 Nov 2025 12:56:32 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Platforma pentru tranzactii auto/favicon.61n19gt1b8.ico">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\favicon.ico'))</AssetFile>
@@ -23,18 +23,6 @@
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-Jtxf9L\u002B5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"5430"},{"Name":"Content-Type","Value":"image/x-icon"},{"Name":"ETag","Value":"\u0022Jtxf9L\u002B5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=\u0022"},{"Name":"Last-Modified","Value":"Mon, 24 Nov 2025 09:04:55 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/Platforma pentru tranzactii auto/imagini/audi.m3xham10o0.png">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\imagini\audi.png'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"m3xham10o0"},{"Name":"integrity","Value":"sha256-LsyRpmat3zDefPfZTLw5j0yG93UVmVWaiawsJvNm12E="},{"Name":"label","Value":"_content/Platforma pentru tranzactii auto/imagini/audi.png"}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"54260"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022LsyRpmat3zDefPfZTLw5j0yG93UVmVWaiawsJvNm12E=\u0022"},{"Name":"Last-Modified","Value":"Thu, 23 Oct 2025 17:55:13 GMT"}]]]></ResponseHeaders>
-    </StaticWebAssetEndpoint>
-    <StaticWebAssetEndpoint Include="_content/Platforma pentru tranzactii auto/imagini/audi.png">
-      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\imagini\audi.png'))</AssetFile>
-      <Selectors><![CDATA[[]]]></Selectors>
-      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-LsyRpmat3zDefPfZTLw5j0yG93UVmVWaiawsJvNm12E="}]]]></EndpointProperties>
-      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"54260"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022LsyRpmat3zDefPfZTLw5j0yG93UVmVWaiawsJvNm12E=\u0022"},{"Name":"Last-Modified","Value":"Thu, 23 Oct 2025 17:55:13 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/Platforma pentru tranzactii auto/js/site.js">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\js\site.js'))</AssetFile>
@@ -779,6 +767,42 @@
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"sz1uht1gap"},{"Name":"integrity","Value":"sha256-mLoOYWWI60kPH6sbPMQbk9QP4clfZylXHEJ288fCiJk="},{"Name":"label","Value":"_content/Platforma pentru tranzactii auto/Platforma pentru tranzactii auto.bundle.scp.css"}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"1150"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022mLoOYWWI60kPH6sbPMQbk9QP4clfZylXHEJ288fCiJk=\u0022"},{"Name":"Last-Modified","Value":"Mon, 24 Nov 2025 11:30:02 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Platforma pentru tranzactii auto/videos/audi.gif">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\videos\audi.gif'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-AHDJvxrIHcByeaef9uHjf3SU4H8Vf7dFPT7NOd/yhxs="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"825513"},{"Name":"Content-Type","Value":"image/gif"},{"Name":"ETag","Value":"\u0022AHDJvxrIHcByeaef9uHjf3SU4H8Vf7dFPT7NOd/yhxs=\u0022"},{"Name":"Last-Modified","Value":"Wed, 26 Nov 2025 09:22:16 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Platforma pentru tranzactii auto/videos/audi.o6xkfbxkbr.gif">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\videos\audi.gif'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"o6xkfbxkbr"},{"Name":"integrity","Value":"sha256-AHDJvxrIHcByeaef9uHjf3SU4H8Vf7dFPT7NOd/yhxs="},{"Name":"label","Value":"_content/Platforma pentru tranzactii auto/videos/audi.gif"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"825513"},{"Name":"Content-Type","Value":"image/gif"},{"Name":"ETag","Value":"\u0022AHDJvxrIHcByeaef9uHjf3SU4H8Vf7dFPT7NOd/yhxs=\u0022"},{"Name":"Last-Modified","Value":"Wed, 26 Nov 2025 09:22:16 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Platforma pentru tranzactii auto/videos/audiR8.gif">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\videos\audiR8.gif'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-Y6rEqZy05V7cvnUbAX0a55hnJJfDEnSZRNAvcv4KQyI="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"4199520"},{"Name":"Content-Type","Value":"image/gif"},{"Name":"ETag","Value":"\u0022Y6rEqZy05V7cvnUbAX0a55hnJJfDEnSZRNAvcv4KQyI=\u0022"},{"Name":"Last-Modified","Value":"Wed, 26 Nov 2025 09:29:59 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Platforma pentru tranzactii auto/videos/audiR8.x7ga9z9hnq.gif">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\videos\audiR8.gif'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"x7ga9z9hnq"},{"Name":"integrity","Value":"sha256-Y6rEqZy05V7cvnUbAX0a55hnJJfDEnSZRNAvcv4KQyI="},{"Name":"label","Value":"_content/Platforma pentru tranzactii auto/videos/audiR8.gif"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"4199520"},{"Name":"Content-Type","Value":"image/gif"},{"Name":"ETag","Value":"\u0022Y6rEqZy05V7cvnUbAX0a55hnJJfDEnSZRNAvcv4KQyI=\u0022"},{"Name":"Last-Modified","Value":"Wed, 26 Nov 2025 09:29:59 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Platforma pentru tranzactii auto/videos/audiRS7.gif">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\videos\audiRS7.gif'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-oNYjD8CCtnhGjDFkqmhHrKo16DlApTDlpRKBofspYqU="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"13316936"},{"Name":"Content-Type","Value":"image/gif"},{"Name":"ETag","Value":"\u0022oNYjD8CCtnhGjDFkqmhHrKo16DlApTDlpRKBofspYqU=\u0022"},{"Name":"Last-Modified","Value":"Wed, 26 Nov 2025 10:06:29 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/Platforma pentru tranzactii auto/videos/audiRS7.krc8ghz7sc.gif">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\videos\audiRS7.gif'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"krc8ghz7sc"},{"Name":"integrity","Value":"sha256-oNYjD8CCtnhGjDFkqmhHrKo16DlApTDlpRKBofspYqU="},{"Name":"label","Value":"_content/Platforma pentru tranzactii auto/videos/audiRS7.gif"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"13316936"},{"Name":"Content-Type","Value":"image/gif"},{"Name":"ETag","Value":"\u0022oNYjD8CCtnhGjDFkqmhHrKo16DlApTDlpRKBofspYqU=\u0022"},{"Name":"Last-Modified","Value":"Wed, 26 Nov 2025 10:06:29 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
   </ItemGroup>
 </Project>

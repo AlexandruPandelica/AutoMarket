@@ -1,16 +1,101 @@
 ﻿@model Platforma_pentru_tranzactii_auto.Models.Anunturi
 
-<div class="container mt-4">
+@{
+    ViewData["Title"] = "Delete Anunt";
+}
 
-    <h2>Ștergere Anunț</h2>
-    <p>Ești sigur că vrei să ștergi acest anunț?</p>
+<div class="container mt-5 mb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
 
-    <h4>@Model.Marca @Model.Model</h4>
+            <div class="alert alert-danger text-center shadow-sm" role="alert">
+                <h4 class="alert-heading mb-0"><i class="bi bi-exclamation-triangle-fill"></i> Atenție! Ești sigur că vrei să ștergi acest anunț?</h4>
+                <p class="mb-0">Această acțiune este ireversibilă.</p>
+            </div>
 
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="ID_Anunt" />
-        <button class="btn btn-danger">Da, șterge</button>
-        <a href="/Anunturi" class="btn btn-secondary">Înapoi</a>
-    </form>
+            <div class="card shadow-lg border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0">Ștergere Anunț #@Model.ID_Anunt</h5>
+                </div>
 
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-5 mb-4 mb-md-0 text-center">
+                            @if (Model.Imagine_Anunt != null && Model.Imagine_Anunt.Length > 0)
+                            {
+
+                                <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Imagine_Anunt))"
+                                     class="img-fluid rounded shadow-sm"
+                                     style="max-height: 300px; object-fit: cover; width: 100%;"
+                                     alt="Imagine @Model.Marca @Model.Model" />
+                            }
+                            else
+                            {
+                                <div class="d-flex align-items-center justify-content-center bg-light rounded text-muted" style="height: 250px; border: 2px dashed #ccc;">
+                                    <div>
+                                        <i class="bi bi-camera" style="font-size: 2rem;"></i>
+                                        <p class="mt-2">Fără imagine</p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-md-7">
+                            <h2 class="card-title text-dark">@Model.Marca @Model.Model</h2>
+                            <h3 class="text-primary font-weight-bold mb-3">@Model.Pret.ToString("N0") EUR</h3>
+
+                            <hr />
+
+                            <div class="row">
+                                <div class="col-sm-6 mb-2">
+                                    <small class="text-muted">An Fabricație</small>
+                                    <p class="h6">@Model.An_Fabricatie</p>
+                                </div>
+                                <div class="col-sm-6 mb-2">
+                                    <small class="text-muted">Kilometraj</small>
+                                    <p class="h6">@Model.Kilometraj km</p>
+                                </div>
+                                <div class="col-sm-6 mb-2">
+                                    <small class="text-muted">Locație</small>
+                                    <p class="h6">@Model.Locatie</p>
+                                </div>
+                                <div class="col-sm-6 mb-2">
+                                    <small class="text-muted">Vizualizări</small>
+                                    <p class="h6">@Model.Nr_Vizualizari</p>
+                                </div>
+                                <div class="col-sm-6 mb-2">
+                                    <small class="text-muted">Data Postării</small>
+                                    <p class="h6">@Model.Data_Postarii.ToString("dd.MM.yyyy")</p>
+                                </div>
+                                <div class="col-sm-6 mb-2">
+                                    <small class="text-muted">Proprietar (User ID)</small>
+                                    <p class="h6">@Model.User?.Id</p>
+                                </div>
+                            </div>
+
+                            <div class="mt-3">
+                                <small class="text-muted">Descriere</small>
+                                <div class="p-2 bg-light rounded border">
+                                    <p class="mb-0" style="white-space: pre-wrap;">@Model.Descriere</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer bg-light d-flex justify-content-between align-items-center">
+                    <a asp-action="Index" class="btn btn-outline-secondary">
+                        &larr; Înapoi la Listă
+                    </a>
+
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="ID_Anunt" />
+                        <button type="submit" class="btn btn-danger btn-lg px-4">
+                            Șterge Anunțul
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
