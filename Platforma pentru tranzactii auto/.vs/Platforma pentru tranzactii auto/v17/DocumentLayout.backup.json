@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\views\\shared\\_loginpartial.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\models\\comentarii.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\models\\comentarii.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -39,19 +43,32 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "_LoginPartial.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Views\\Shared\\_LoginPartial.cshtml",
+              "ToolTip": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Shared\\_LoginPartial.cshtml",
+              "RelativeToolTip": "Platforma pentru tranzactii auto\\Views\\Shared\\_LoginPartial.cshtml",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAACRAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-27T09:13:07.254Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Comentarii.cs",
               "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Models\\Comentarii.cs",
               "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Models\\Comentarii.cs",
               "ToolTip": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Models\\Comentarii.cs",
               "RelativeToolTip": "Platforma pentru tranzactii auto\\Models\\Comentarii.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAiwAoAAAASAAAAAAAAAA==",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAiwAsAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-26T13:09:25.765Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Details.cshtml",
               "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\Details.cshtml",
               "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Views\\Anunturi\\Details.cshtml",
@@ -59,12 +76,11 @@
               "RelativeToolTip": "Platforma pentru tranzactii auto\\Views\\Anunturi\\Details.cshtml",
               "ViewState": "AgIAABMBAAAAAAAAAAAUwBsBAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-26T13:08:48.436Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-26T13:08:48.436Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\Index.cshtml",
               "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Views\\Anunturi\\Index.cshtml",
@@ -72,12 +88,11 @@
               "RelativeToolTip": "Platforma pentru tranzactii auto\\Views\\Anunturi\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-25T15:18:27.768Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-25T15:18:27.768Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "AnunturiController.cs",
               "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Controllers\\AnunturiController.cs",
               "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Controllers\\AnunturiController.cs",
@@ -85,8 +100,7 @@
               "RelativeToolTip": "Platforma pentru tranzactii auto\\Controllers\\AnunturiController.cs",
               "ViewState": "AgIAABoBAAAAAAAAAAAAAC4BAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T13:51:12.092Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-25T13:51:12.092Z"
             }
           ]
         }

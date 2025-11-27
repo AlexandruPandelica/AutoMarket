@@ -7,8 +7,11 @@
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
 {
+    var user = await UserManager.GetUserAsync(User);
+    var userDisplayPrenume = user?.Prenume ?? UserManager.GetUserName(User);
+    var userDisplayNume = user?.Nume ?? UserManager.GetUserName(User);
     <li class="nav-item">
-        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+        <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Salut, @userDisplayPrenume @userDisplayNume!</a>
     </li>
     <li class="nav-item">
         <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
