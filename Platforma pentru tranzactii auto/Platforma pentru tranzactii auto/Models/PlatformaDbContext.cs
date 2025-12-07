@@ -16,7 +16,7 @@ public class PlatformaDbContext : IdentityDbContext<Utilizator, IdentityRole<int
     // === DbSet-urile tale ===
     public DbSet<Anunturi>? Anunt { get; set; }
     public DbSet<Favorite>? Favorite { get; set; }
-    public DbSet<Comentarii>? Commentarii { get; set; }
+    public DbSet<Comentarii>? Comentarii { get; set; }
     public DbSet<Utilizator>? Utilizatori { get; set; }
 
 

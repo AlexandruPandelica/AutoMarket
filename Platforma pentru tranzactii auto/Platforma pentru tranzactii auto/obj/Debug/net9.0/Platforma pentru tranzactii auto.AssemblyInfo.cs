@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Platforma pentru tranzactii auto")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+91bf7668ff36fc6eb667831e62eb6e01a5ce23e3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+64805efe9c722734b4c3b0bfcaf49baa22694a4a")]
 [assembly: System.Reflection.AssemblyProductAttribute("Platforma pentru tranzactii auto")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Platforma pentru tranzactii auto")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

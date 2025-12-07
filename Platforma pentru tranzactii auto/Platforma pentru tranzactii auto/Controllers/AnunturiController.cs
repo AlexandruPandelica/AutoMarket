@@ -113,7 +113,7 @@ namespace Platforma_pentru_tranzactii_auto.Views
                     DataComentariu = DateTime.UtcNow
                 };
 
-                _context.Commentarii.Add(comentariuNou);
+                _context.Comentarii.Add(comentariuNou);
                 await _context.SaveChangesAsync();
 
                 // 🔥 SCHIMBARE: Nu facem Redirect, ci returnăm HTML-ul comentariului nou
@@ -288,14 +288,14 @@ namespace Platforma_pentru_tranzactii_auto.Views
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> StergeComentariu(int id)
         {
-            var comentariu = await _context.Commentarii.FindAsync(id);
+            var comentariu = await _context.Comentarii.FindAsync(id);
 
             if (comentariu == null) return NotFound();
 
             var user = await _userManager.GetUserAsync(User);
             if (user == null || comentariu.UserId != user.Id) return Forbid();
 
-            _context.Commentarii.Remove(comentariu);
+            _context.Comentarii.Remove(comentariu);
             await _context.SaveChangesAsync();
 
             // 🔥 MODIFICARE: Returnăm un status 200 OK, nu Redirect
