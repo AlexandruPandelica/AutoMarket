@@ -1,0 +1,183 @@
+﻿@model IEnumerable<Platforma_pentru_tranzactii_auto.Models.Mesaje>
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<Utilizator> UserManager
+
+@{
+    ViewData["Title"] = "Mesajele mele";
+    var currentUserId = UserManager.GetUserId(User);
+}
+
+<div class="container py-5">
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-check-circle-fill me-2"></i> @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Inbox <span class="badge bg-primary rounded-pill fs-6 align-middle">@Model.Count()</span></h2>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info py-4 text-center">
+            <i class="bi bi-inbox fs-1 d-block mb-2"></i>
+            Nu ai niciun mesaj momentan.
+        </div>
+    }
+    else
+    {
+        <div class="list-group shadow-sm gap-3">
+            @foreach (var mesaj in Model)
+            {
+                // Verificăm dacă mesajul este trimis de utilizatorul curent
+                bool isSentByMe = mesaj.ExpeditorId.ToString() == currentUserId;
+
+                // Pregătim titlul anunțului (safe navigation)
+                string titluAnunt = (mesaj.Anunt != null) ? $"{mesaj.Anunt.Marca} {mesaj.Anunt.Model}" : "Anunț șters";
+
+                <div class="list-group-item p-4 border rounded-3 position-relative @(isSentByMe ? "bg-light border-primary border-opacity-25" : "bg-white border-0 shadow-sm")">
+
+                    <div class="d-flex w-100 justify-content-between align-items-center mb-2">
+                        <h5 class="mb-1 fw-bold @(isSentByMe ? "text-primary" : "text-dark")">
+                            @if (isSentByMe)
+                            {
+                                <span><i class="bi bi-send-fill me-2"></i> Către: @(mesaj.Destinatar?.Email ?? "Utilizator șters")</span>
+                            }
+                            else
+                            {
+                                <span><i class="bi bi-person-circle me-2 text-secondary"></i> De la: @(mesaj.Expeditor?.Email ?? "Utilizator șters")</span>
+                            }
+                        </h5>
+                        <small class="text-muted">@mesaj.DataTrimiterii.ToLocalTime().ToString("dd MMM HH:mm")</small>
+                    </div>
+
+                    <p class="mb-2 text-muted small">
+                        Referitor la anunțul:
+                        <strong>
+                            @if (mesaj.Anunt != null)
+                            {
+                                <a asp-controller="Anunturi" asp-action="Details" asp-route-id="@mesaj.ID_Anunt" class="text-decoration-none">
+                                    @titluAnunt
+                                </a>
+                            }
+                            else
+                            {
+                                <span>@titluAnunt</span>
+                            }
+                        </strong>
+                    </p>
+
+                    <div class="p-3 rounded-3 border mb-3 @(isSentByMe ? "bg-white" : "bg-light")">
+                        @mesaj.Continut
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        @if (!isSentByMe)
+                        {
+                            <button type="button" class="btn btn-primary btn-sm"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#replyModal"
+                                    data-recipient-id="@mesaj.ExpeditorId"
+                                    data-recipient-name="@(mesaj.Expeditor?.Email ?? "Necunoscut")"
+                                    data-anunt-id="@mesaj.ID_Anunt"
+                                    data-anunt-title="@titluAnunt">
+                                <i class="bi bi-reply-fill"></i> Răspunde
+                            </button>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary d-flex align-items-center">Mesaj trimis</span>
+                        }
+
+                        <form asp-controller="Mesaje" asp-action="Sterge" asp-route-id="@mesaj.ID_Mesaj" method="post"
+                              onsubmit="return confirm('Sigur vrei să ștergi acest mesaj?');">
+                            <button type="submit" class="btn btn-outline-danger btn-sm">
+                                <i class="bi bi-trash"></i> Șterge
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<div class="modal fade" id="replyModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Trimite un răspuns</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form asp-controller="Mesaje" asp-action="Raspunde" method="post">
+                <div class="modal-body p-4">
+                    <input type="hidden" name="destinatarId" id="modalDestinatarId" />
+                    <input type="hidden" name="anuntId" id="modalAnuntId" />
+
+                    <div class="mb-3">
+                        <label class="form-label text-muted small fw-bold">Către:</label>
+                        <input type="text" class="form-control-plaintext fw-bold border-bottom" id="modalDestinatarNume" readonly />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label text-muted small fw-bold">Referitor la:</label>
+                        <input type="text" class="form-control-plaintext fw-bold border-bottom" id="modalAnuntTitlu" readonly />
+                    </div>
+
+                    <div class="mb-3 mt-3">
+                        <label class="form-label">Mesajul tău:</label>
+                        <textarea name="continut" class="form-control" rows="4" required placeholder="Scrie răspunsul tău aici..."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer border-0 pt-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulează</button>
+                    <button type="submit" class="btn btn-primary px-4">
+                        <i class="bi bi-send-fill"></i> Trimite Răspuns
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        var replyModal = document.getElementById('replyModal');
+        replyModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+
+            var recipientId = button.getAttribute('data-recipient-id');
+            var recipientName = button.getAttribute('data-recipient-name');
+            var anuntId = button.getAttribute('data-anunt-id');
+            var anuntTitle = button.getAttribute('data-anunt-title');
+
+            document.getElementById('modalDestinatarId').value = recipientId;
+            document.getElementById('modalAnuntId').value = anuntId;
+            document.getElementById('modalDestinatarNume').value = recipientName;
+            document.getElementById('modalAnuntTitlu').value = anuntTitle;
+        });
+    </script>
+
+    <style>
+        .fade-in-animation {
+            animation: slideDownFade 0.5s ease-out forwards;
+        }
+
+        /* Am schimbat "from/to" cu "0%/100%" pentru a nu confunda Razor */
+        @@keyframes slideDownFade {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+}

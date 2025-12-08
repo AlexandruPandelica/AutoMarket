@@ -19,5 +19,27 @@ public class PlatformaDbContext : IdentityDbContext<Utilizator, IdentityRole<int
     public DbSet<Comentarii>? Comentarii { get; set; }
     public DbSet<Utilizator>? Utilizatori { get; set; }
 
+    // 🆕 TABELUL NOU
+    public DbSet<Mesaje>? Mesaje { get; set; }
+
+    // 🆕 CONFIGURARE SPECIALĂ (Foarte Important!)
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        base.OnModelCreating(builder);
+
+        // Configurare relație Expeditor -> Mesaje
+        builder.Entity<Mesaje>()
+            .HasOne(m => m.Expeditor)
+            .WithMany()
+            .HasForeignKey(m => m.ExpeditorId)
+            .OnDelete(DeleteBehavior.Restrict); // Evităm ștergerea în cascadă
+
+        // Configurare relație Destinatar -> Mesaje
+        builder.Entity<Mesaje>()
+            .HasOne(m => m.Destinatar)
+            .WithMany()
+            .HasForeignKey(m => m.DestinatarId)
+            .OnDelete(DeleteBehavior.Restrict); // Evităm ștergerea în cascadă
+    }
 
 }

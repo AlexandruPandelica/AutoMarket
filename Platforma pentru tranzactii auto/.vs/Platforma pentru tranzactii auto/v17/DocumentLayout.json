@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\models\\platformadbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\models\\platformadbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\controllers\\anunturicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\controllers\\anunturicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\models\\platformadbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\models\\platformadbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,26 +30,25 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "PlatformaDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Models\\PlatformaDbContext.cs",
               "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Models\\PlatformaDbContext.cs",
               "ToolTip": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Models\\PlatformaDbContext.cs",
               "RelativeToolTip": "Platforma pentru tranzactii auto\\Models\\PlatformaDbContext.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBMAAAA3AAAAAAAAAA==",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAwBkAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-07T13:03:57.047Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-07T13:03:57.047Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "AnunturiController.cs",
               "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Controllers\\AnunturiController.cs",
               "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Controllers\\AnunturiController.cs",
               "ToolTip": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Controllers\\AnunturiController.cs",
               "RelativeToolTip": "Platforma pentru tranzactii auto\\Controllers\\AnunturiController.cs",
-              "ViewState": "AgIAABgBAAAAAAAAAADwvykBAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAACgAAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-25T13:51:12.092Z",
               "EditorCaption": ""
