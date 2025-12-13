@@ -79,9 +79,10 @@ namespace Platforma_pentru_tranzactii_auto.Views
 
             var anunturi = await _context.Anunt
                 .Include(a => a.User)
-                // 2. IMPORTANT: Încărcăm comentariile și autorii lor
-                .Include(a => a.Comentari)
-                    .ThenInclude(c => c.User)
+                // Includem comentariile și autorii lor
+                .Include(a => a.Comentari).ThenInclude(c => c.User)
+                // 🔥 INCLUDEM GALERIA DE IMAGINI 🔥
+                .Include(a => a.GalerieImagini)
                 .FirstOrDefaultAsync(m => m.ID_Anunt == id);
 
             if (anunturi == null) return NotFound();
@@ -133,37 +134,59 @@ namespace Platforma_pentru_tranzactii_auto.Views
         // POST: Anunturi/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // Am adaugat "IFormFile? imagineUpload" in parametrii metodei
-        public async Task<IActionResult> Create([Bind("ID_Anunt,Marca,Model,Pret,An_Fabricatie,Kilometraj,Descriere,Locatie,UserId")] Anunturi anunturi, IFormFile? imagineUpload)
+        public async Task<IActionResult> Create([Bind("ID_Anunt,Marca,Model,Pret,An_Fabricatie,Kilometraj,Descriere,Locatie,UserId")] Anunturi anunturi, IEnumerable<IFormFile>? imaginiUpload)
         {
-            // 1. Eliminam validarile automate care ne incurca
+            // 1. Curățăm validarea pentru câmpurile automate
             ModelState.Remove("User");
             ModelState.Remove("Imagine_Anunt");
+            ModelState.Remove("GalerieImagini"); // Nu validăm lista, că o populăm noi
 
-            // 2. Setam valorile automate
-            anunturi.Data_Postarii = DateTime.UtcNow; // Folosim UTC pentru PostgreSQL
+            // 2. Setări automate
+            anunturi.Data_Postarii = DateTime.UtcNow;
             anunturi.Nr_Vizualizari = 0;
 
-            // 3. Procesam IMAGINEA
-            if (imagineUpload != null && imagineUpload.Length > 0)
+            // 3. Procesăm IMAGINEA DE COPERTĂ (Pentru lista de anunțuri)
+            // Luăm prima imagine din listă și o punem ca "Thumbnail"
+            if (imaginiUpload != null && imaginiUpload.Any())
             {
+                var primaImagine = imaginiUpload.First();
                 using (var memoryStream = new MemoryStream())
                 {
-                    await imagineUpload.CopyToAsync(memoryStream);
-                    // Convertim in byte array si stocam in model
+                    await primaImagine.CopyToAsync(memoryStream);
                     anunturi.Imagine_Anunt = memoryStream.ToArray();
                 }
             }
 
             if (ModelState.IsValid)
             {
+                // A. Salvăm Anunțul ÎNTÂI (pentru a se genera ID_Anunt)
                 _context.Add(anunturi);
                 await _context.SaveChangesAsync();
+
+                // B. Acum salvăm GALERIA DE IMAGINI
+                if (imaginiUpload != null && imaginiUpload.Count() > 0)
+                {
+                    foreach (var img in imaginiUpload)
+                    {
+                        using (var stream = new MemoryStream())
+                        {
+                            await img.CopyToAsync(stream);
+
+                            var imagineNoua = new ImaginiAnunt
+                            {
+                                ID_Anunt = anunturi.ID_Anunt, // Aici folosim ID-ul generat mai sus
+                                Imagine = stream.ToArray()    // ✅ Aici folosim proprietatea ta "Imagine"
+                            };
+
+                            _context.ImaginiAnunt.Add(imagineNoua);
+                        }
+                    }
+                    // Salvăm din nou pentru a scrie imaginile în tabelul lor
+                    await _context.SaveChangesAsync();
+                }
+
                 return RedirectToAction(nameof(Index));
             }
-
-            // Debugging: Daca validarea esueaza, poti vedea erorile aici
-            // var errors = ModelState.Values.SelectMany(v => v.Errors);
 
             ViewData["UserId"] = new SelectList(_context.Utilizatori, "Id", "Id", anunturi.UserId);
             return View(anunturi);
@@ -174,79 +197,97 @@ namespace Platforma_pentru_tranzactii_auto.Views
         {
             if (id == null) return NotFound();
 
-            var anunturi = await _context.Anunt.FindAsync(id);
+            // 🔥 MODIFICARE: Folosim Include pentru a aduce și galeria
+            var anunturi = await _context.Anunt
+                .Include(a => a.GalerieImagini)
+                .FirstOrDefaultAsync(m => m.ID_Anunt == id);
+
             if (anunturi == null) return NotFound();
+
+            // Verificare securitate: Doar proprietarul poate edita
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null || anunturi.UserId != user.Id) return Forbid();
 
             ViewData["UserId"] = new SelectList(_context.Utilizatori, "Id", "Id", anunturi.UserId);
             return View(anunturi);
         }
 
+        // 1. Adaugam parametrul IFormFile? imagineUpload
         // POST: Anunturi/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        // 1. Adaugam parametrul IFormFile? imagineUpload
-        public async Task<IActionResult> Edit(int id, [Bind("ID_Anunt,Marca,Model,Pret,An_Fabricatie,Kilometraj,Descriere,Data_Postarii,Nr_Vizualizari,Locatie,UserId")] Anunturi anunturi, IFormFile? imagineUpload)
+        public async Task<IActionResult> Edit(int id, Anunturi anunturiForm, IEnumerable<IFormFile>? imaginiUpload)
         {
-            if (id != anunturi.ID_Anunt)
+            if (id != anunturiForm.ID_Anunt)
             {
                 return NotFound();
             }
 
-            ModelState.Remove("User");
-            ModelState.Remove("Imagine_Anunt"); // Nu validam imaginea ca obligatorie
+            // 1. Căutăm anunțul REAL din baza de date
+            var anuntDinDb = await _context.Anunt
+                                           .Include(a => a.GalerieImagini)
+                                           .FirstOrDefaultAsync(a => a.ID_Anunt == id);
 
-            // Fix pentru PostgreSQL - Data trebuie sa fie UTC
-            anunturi.Data_Postarii = DateTime.SpecifyKind(anunturi.Data_Postarii, DateTimeKind.Utc);
-
-            if (ModelState.IsValid)
+            if (anuntDinDb == null)
             {
-                try
-                {
-                    // 2. LOGICA CRITICĂ PENTRU IMAGINE
-                    if (imagineUpload != null && imagineUpload.Length > 0)
-                    {
-                        // CAZUL A: Utilizatorul a încărcat o poză nouă -> O înlocuim pe cea veche
-                        using (var memoryStream = new MemoryStream())
-                        {
-                            await imagineUpload.CopyToAsync(memoryStream);
-                            anunturi.Imagine_Anunt = memoryStream.ToArray();
-                        }
-                    }
-                    else
-                    {
-                        // CAZUL B: Utilizatorul NU a încărcat nimic -> Păstrăm poza veche
-                        // Trebuie să citim din baza de date cum era anunțul înainte
-                        // Folosim AsNoTracking() pentru a evita conflictele de tracking cu _context.Update
-                        var anuntVechi = await _context.Anunt
-                                                       .AsNoTracking()
-                                                       .FirstOrDefaultAsync(a => a.ID_Anunt == id);
-
-                        if (anuntVechi != null)
-                        {
-                            // Copiem imaginea veche în obiectul nou
-                            anunturi.Imagine_Anunt = anuntVechi.Imagine_Anunt;
-                        }
-                    }
-
-                    _context.Update(anunturi);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!AnunturiExists(anunturi.ID_Anunt))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
 
-            ViewData["UserId"] = new SelectList(_context.Utilizatori, "Id", "Id", anunturi.UserId);
-            return View(anunturi);
+            // 2. Verificăm permisiunile
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null || anuntDinDb.UserId != user.Id)
+            {
+                return Forbid();
+            }
+
+            // 3. Actualizăm MANUAL datele
+            // Asta garantează că nu ne blocăm în validări inutile
+            anuntDinDb.Marca = anunturiForm.Marca;
+            anuntDinDb.Model = anunturiForm.Model;
+            anuntDinDb.Pret = anunturiForm.Pret;
+            anuntDinDb.An_Fabricatie = anunturiForm.An_Fabricatie;
+            anuntDinDb.Kilometraj = anunturiForm.Kilometraj;
+            anuntDinDb.Locatie = anunturiForm.Locatie;
+            anuntDinDb.Descriere = anunturiForm.Descriere;
+
+            // 4. Gestionăm imaginile noi (dacă există)
+            if (imaginiUpload != null && imaginiUpload.Any())
+            {
+                foreach (var img in imaginiUpload)
+                {
+                    if (img.Length > 0)
+                    {
+                        using (var stream = new MemoryStream())
+                        {
+                            await img.CopyToAsync(stream);
+
+                            var imagineNoua = new ImaginiAnunt
+                            {
+                                ID_Anunt = anuntDinDb.ID_Anunt,
+                                Imagine = stream.ToArray()
+                            };
+
+                            _context.ImaginiAnunt.Add(imagineNoua);
+                        }
+                    }
+                }
+            }
+
+            // 5. Salvăm și redirecționăm
+            try
+            {
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index)); // <--- Aici te trimite înapoi la listă
+            }
+            catch (Exception ex)
+            {
+                // Dacă apare o eroare tehnică la scriere, o afișăm în pagină
+                ModelState.AddModelError("", "Eroare la salvare: " + ex.Message);
+            }
+
+            // Reîncărcare date necesare pentru View în caz de eroare
+            ViewData["UserId"] = new SelectList(_context.Utilizatori, "Id", "Id", anuntDinDb.UserId);
+            return View(anuntDinDb);
         }
 
         // GET: Anunturi/Delete/5
@@ -300,6 +341,32 @@ namespace Platforma_pentru_tranzactii_auto.Views
 
             // 🔥 MODIFICARE: Returnăm un status 200 OK, nu Redirect
             return Ok();
+        }
+
+
+        // POST: Șterge o singură imagine din galerie
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> StergeImagine(int id)
+        {
+            var imagine = await _context.ImaginiAnunt.FindAsync(id);
+            if (imagine == null) return NotFound();
+
+            // Verificare securitate (găsim anunțul părintesc)
+            var anunt = await _context.Anunt.FindAsync(imagine.ID_Anunt);
+            var user = await _userManager.GetUserAsync(User);
+
+            if (anunt == null || user == null || anunt.UserId != user.Id)
+            {
+                return Forbid();
+            }
+
+            // Ștergem imaginea
+            _context.ImaginiAnunt.Remove(imagine);
+            await _context.SaveChangesAsync();
+
+            // Ne întoarcem la pagina de Editare a acelui anunț
+            return RedirectToAction(nameof(Edit), new { id = anunt.ID_Anunt });
         }
 
     }

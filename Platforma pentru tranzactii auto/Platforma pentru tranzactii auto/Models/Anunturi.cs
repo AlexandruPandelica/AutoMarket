@@ -23,6 +23,7 @@ namespace Platforma_pentru_tranzactii_auto.Models
         public string Locatie { get; set; }
 
         public byte[]? Imagine_Anunt { get; set; }
+        public List<ImaginiAnunt>? GalerieImagini { get; set; }
 
         // FK către utilizator (proprietar)
         public int UserId { get; set; }

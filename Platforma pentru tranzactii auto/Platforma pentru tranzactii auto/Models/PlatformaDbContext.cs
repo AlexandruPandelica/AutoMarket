@@ -18,6 +18,7 @@ public class PlatformaDbContext : IdentityDbContext<Utilizator, IdentityRole<int
     public DbSet<Favorite>? Favorite { get; set; }
     public DbSet<Comentarii>? Comentarii { get; set; }
     public DbSet<Utilizator>? Utilizatori { get; set; }
+    public DbSet<ImaginiAnunt> ImaginiAnunt { get; set; }
 
     // 🆕 TABELUL NOU
     public DbSet<Mesaje>? Mesaje { get; set; }

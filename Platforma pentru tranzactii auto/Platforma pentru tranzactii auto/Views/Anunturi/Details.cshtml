@@ -19,23 +19,58 @@
 
             <div class="col-lg-5">
                 <div class="position-relative h-100">
-                    @if (Model.Imagine_Anunt != null && Model.Imagine_Anunt.Length > 0)
+
+                    @if (Model.GalerieImagini != null && Model.GalerieImagini.Any())
+                    {
+                        <div id="carouselAnunt" class="carousel slide h-100" data-bs-ride="carousel">
+
+                            <div class="carousel-indicators">
+                                @for (int i = 0; i < Model.GalerieImagini.Count; i++)
+                                {
+                                    <button type="button" data-bs-target="#carouselAnunt" data-bs-slide-to="@i" class="@(i==0 ? "active" : "")"></button>
+                                }
+                            </div>
+
+                            <div class="carousel-inner h-100" style="border-radius: 1.25rem 0 0 1.25rem; overflow: hidden;">
+                                @for (int i = 0; i < Model.GalerieImagini.Count; i++)
+                                {
+                                    var img = Model.GalerieImagini[i];
+                                    <div class="carousel-item h-100 @(i==0 ? "active" : "")">
+                                        <img src="data:image/*;base64,@(Convert.ToBase64String(img.Imagine))"
+                                             class="d-block w-100 h-100"
+                                             style="object-fit: cover; min-height: 400px;"
+                                             alt="Imagine @i">
+                                    </div>
+                                }
+                            </div>
+
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselAnunt" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselAnunt" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    }
+                    else if (Model.Imagine_Anunt != null && Model.Imagine_Anunt.Length > 0)
                     {
                         <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Imagine_Anunt))"
-                             alt="Imagine @Model.Marca @Model.Model"
                              class="img-fluid w-100 h-100"
-                             style="object-fit: cover; border-radius: 1.25rem 0 0 1.25rem; min-height: 300px;" />
+                             style="object-fit: cover; border-radius: 1.25rem 0 0 1.25rem; min-height: 300px;"
+                             alt="Imagine principală" />
                     }
                     else
                     {
                         <div class="d-flex align-items-center justify-content-center h-100 w-100 bg-light text-muted"
-                             style="min-height: 260px; border-radius: 1.25rem 0 0 1.25rem;">
+                             style="min-height: 300px; border-radius: 1.25rem 0 0 1.25rem;">
                             Fără imagine
                         </div>
                     }
 
                     <span class="badge bg-primary position-absolute"
-                          style="bottom: 16px; left: 16px; padding: 0.6rem 1.1rem; border-radius: 999px; font-size: 0.95rem;">
+                          style="bottom: 16px; left: 16px; padding: 0.6rem 1.1rem; border-radius: 999px; font-size: 0.95rem; z-index: 10;">
                         @Model.Pret.ToString("N0") €
                     </span>
                 </div>

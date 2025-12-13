@@ -7,14 +7,13 @@
 <div class="container mt-5 mb-5">
     <div class="row justify-content-center">
         <div class="col-lg-10">
-
             <div class="card shadow-lg border-0">
                 <div class="card-header bg-primary text-white">
                     <h4 class="mb-0"><i class="bi bi-pencil-square"></i> Editare Anunț</h4>
                 </div>
 
                 <div class="card-body p-4">
-                    <form asp-action="Edit" enctype="multipart/form-data">
+                    <form asp-action="Edit" enctype="multipart/form-data" id="editForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                         <input type="hidden" asp-for="ID_Anunt" />
@@ -68,37 +67,43 @@
 
                         <div class="mb-4">
                             <label asp-for="Descriere" class="form-label fw-bold">Descriere Detaliată</label>
-                            <textarea asp-for="Descriere" class="form-control" rows="4" placeholder="Descrie starea mașinii, dotări, etc."></textarea>
+                            <textarea asp-for="Descriere" class="form-control" rows="4"></textarea>
                             <span asp-validation-for="Descriere" class="text-danger"></span>
                         </div>
 
                         <div class="card bg-light border-0 mb-4">
                             <div class="card-body">
-                                <h5 class="card-title text-secondary border-bottom pb-2">Gestionează Imaginea</h5>
-                                <div class="row align-items-center">
-                                    <div class="col-md-4 text-center mb-3 mb-md-0">
-                                        <p class="mb-1 text-muted small">Imagine Curentă</p>
-                                        @if (Model.Imagine_Anunt != null && Model.Imagine_Anunt.Length > 0)
-                                        {
+                                <h5 class="card-title text-secondary border-bottom pb-2">Gestionează Galeria Foto</h5>
 
-                                            <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Imagine_Anunt))"
-                                                 class="img-thumbnail shadow-sm"
-                                                 style="max-height: 150px; object-fit: cover;"
-                                                 alt="Imagine curentă" />
-                                        }
-                                        else
+                                @if (Model.GalerieImagini != null && Model.GalerieImagini.Any())
+                                {
+                                    <div class="row g-2 mb-3">
+                                        @foreach (var img in Model.GalerieImagini)
                                         {
-                                            <div class="border rounded bg-white py-4 text-muted">
-                                                <i class="bi bi-image" style="font-size: 2rem;"></i><br>
-                                                Fără imagine
+                                            <div class="col-4 col-md-3 position-relative">
+                                                <img src="data:image/*;base64,@(Convert.ToBase64String(img.Imagine))"
+                                                     class="img-thumbnail w-100"
+                                                     style="height: 100px; object-fit: cover;" />
+
+                                                <button type="button"
+                                                        class="btn btn-danger btn-sm position-absolute top-0 end-0 m-1 p-0 d-flex justify-content-center align-items-center"
+                                                        style="width: 20px; height: 20px; border-radius: 50%;"
+                                                        onclick="stergeImagine(@img.ID_Imagine)">
+                                                    <span style="font-size: 12px;">&times;</span>
+                                                </button>
                                             </div>
                                         }
                                     </div>
-                                    <div class="col-md-8">
-                                        <label class="form-label">Încarcă o imagine nouă (înlocuiește imaginea veche)</label>
-                                        <input type="file" name="imagineUpload" class="form-control form-control-lg" accept="image/*" />
-                                        <div class="form-text">Fișiere acceptate: .jpg, .jpeg, .png</div>
-                                    </div>
+                                }
+                                else
+                                {
+                                    <p class="text-muted small">Nu există imagini suplimentare în galerie.</p>
+                                }
+
+                                <div class="mt-3">
+                                    <label class="form-label fw-bold">Adaugă imagini noi</label>
+                                    <input type="file" name="imaginiUpload" class="form-control" multiple accept="image/*" />
+                                    <div class="form-text">Poți selecta mai multe. Ele se vor adăuga la cele existente.</div>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +122,6 @@
                                 <i class="bi bi-save"></i> Salvează Modificările
                             </button>
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -125,8 +129,22 @@
     </div>
 </div>
 
+<form id="formStergeImagine" asp-action="StergeImagine" method="post">
+    <input type="hidden" name="id" id="idImagineDeSters" />
+</form>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+
+    <script>
+        // Funcția care pune ID-ul în formularul ascuns și îl trimite
+        function stergeImagine(id) {
+            if (confirm('Ești sigur că vrei să ștergi această imagine?')) {
+                document.getElementById('idImagineDeSters').value = id;
+                document.getElementById('formStergeImagine').submit();
+            }
+        }
+    </script>
 }
