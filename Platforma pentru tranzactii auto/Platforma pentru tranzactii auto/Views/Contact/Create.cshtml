@@ -1,0 +1,178 @@
+﻿@model Platforma_pentru_tranzactii_auto.Models.Contact
+
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<style>
+    .contact-gradient {
+        background: linear-gradient(135deg, #0d6efd 0%, #000000 100%);
+    }
+
+    .form-control:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.15);
+    }
+
+    .btn-hover-effect:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .social-link {
+        width: 40px;
+        height: 40px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,0.1);
+        border-radius: 50%;
+        transition: all 0.3s;
+        text-decoration: none;
+        color: white;
+    }
+
+        .social-link:hover {
+            background: white;
+            color: #0d6efd;
+            transform: scale(1.1);
+        }
+</style>
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <span class="badge bg-light text-primary mb-2 px-3 py-2 rounded-pill border">Suport Clienți</span>
+        <h1 class="display-4 fw-bold">Suntem aici pentru tine</h1>
+        <p class="lead text-muted">Ai întrebări despre un anunț sau platformă? Scrie-ne!</p>
+    </div>
+
+    <div class="row g-0 shadow-lg rounded-4 overflow-hidden">
+
+        <div class="col-lg-5 contact-gradient text-white p-5 d-flex flex-column justify-content-between">
+            <div>
+                <h3 class="mb-4 fw-bold"><i class="bi bi-headset me-2"></i> Date de Contact</h3>
+                <p class="text-white-50 mb-4">Echipa noastră AutoMarket îți stă la dispoziție pentru orice nelămurire.</p>
+
+                <div class="d-flex align-items-start mb-4">
+                    <div class="bg-white bg-opacity-10 p-2 rounded me-3">
+                        <i class="bi bi-geo-alt-fill fs-5"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-1">Sediu Central</h6>
+                        <p class="mb-0 text-white-50 small">Strada Auto nr. 10, Sector 1<br>București, România</p>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-start mb-4">
+                    <div class="bg-white bg-opacity-10 p-2 rounded me-3">
+                        <i class="bi bi-envelope-fill fs-5"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-1">Email Suport</h6>
+                        <p class="mb-0 text-white-50 small">suport@automarket.ro</p>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-start mb-4">
+                    <div class="bg-white bg-opacity-10 p-2 rounded me-3">
+                        <i class="bi bi-telephone-fill fs-5"></i>
+                    </div>
+                    <div>
+                        <h6 class="fw-bold mb-1">Telefon</h6>
+                        <p class="mb-0 text-white-50 small">+40 700 123 456</p>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <h6 class="fw-bold mb-3">Urmărește-ne</h6>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="social-link"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5 rounded-3 overflow-hidden border border-white border-opacity-25" style="height: 150px;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d182349.9863486036!2d25.95455246714083!3d44.43792694772186!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1f93abf3cad4f%3A0ac0d6d67f7391eb!2sBucharest!5e0!3m2!1sen!2sro!4v1715000000000!5m2!1sen!2sro"
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <div class="col-lg-7 bg-white p-5">
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-check-circle-fill fs-4 me-2"></i>
+                        <div><strong>Succes!</strong> @ViewBag.Message</div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+
+            <h4 class="fw-bold mb-4 text-dark">Trimite-ne un mesaj</h4>
+
+            <form asp-action="Create" method="post">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input asp-for="Nume" class="form-control bg-light border-0" placeholder="Nume" />
+                            <label asp-for="Nume" class="text-muted">Numele tău</label>
+                        </div>
+                        <span asp-validation-for="Nume" class="text-danger small ms-1"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input asp-for="Email" class="form-control bg-light border-0" placeholder="name@example.com" />
+                            <label asp-for="Email" class="text-muted">Adresa de Email</label>
+                        </div>
+                        <span asp-validation-for="Email" class="text-danger small ms-1"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <input asp-for="Subiect" class="form-control bg-light border-0" placeholder="Subiect" />
+                            <label asp-for="Subiect" class="text-muted">Subiect</label>
+                        </div>
+                        <span asp-validation-for="Subiect" class="text-danger small ms-1"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <textarea asp-for="Mesaj" class="form-control bg-light border-0" placeholder="Mesaj" style="height: 150px"></textarea>
+                            <label asp-for="Mesaj" class="text-muted">Cu ce te putem ajuta?</label>
+                        </div>
+                        <span asp-validation-for="Mesaj" class="text-danger small ms-1"></span>
+                    </div>
+
+                    <div class="col-12 mt-4 pt-2 d-flex justify-content-between align-items-center flex-wrap gap-3">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-controller="Contact" asp-action="Index" class="btn btn-outline-secondary px-4 rounded-pill">
+                                <i class="bi bi-arrow-left me-1"></i> Înapoi la Listă
+                            </a>
+                        }
+                        else
+                        {
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary px-4 rounded-pill">
+                                <i class="bi bi-house me-1"></i> Acasă
+                            </a>
+                        }
+
+                        <button type="submit" class="btn btn-primary btn-lg px-5 rounded-pill btn-hover-effect fw-bold shadow-sm flex-grow-1 flex-md-grow-0">
+                            Trimite Mesajul <i class="bi bi-send-fill ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

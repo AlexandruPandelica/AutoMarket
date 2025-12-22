@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Platforma_pentru_tranzactii_auto.Models.Contact>
+
+@{
+    ViewData["Title"] = "Listă Mesaje";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Gestionare Mesaje</h2>
+
+    <a asp-action="Create" class="btn btn-primary mb-3">
+        <i class="bi bi-plus-circle"></i> Scrie un mesaj nou (Test)
+    </a>
+
+    <table class="table table-bordered table-hover shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Data</th>
+                <th>Nume</th>
+                <th>Subiect</th>
+                <th>Status</th>
+                <th>Acțiuni</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.DataTrimiterii.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@item.Nume <br> <small class="text-muted">@item.Email</small></td>
+                    <td>@item.Subiect</td>
+                    <td>
+                        @if (item.EsteCitit)
+                        {
+                            <span class="badge bg-success">Citit</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-warning text-dark">Nou</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary">
+                            <i class="bi bi-pencil"></i>
+                        </a>
+
+                        <form asp-action="Delete" asp-route-id="@item.Id" method="post" style="display:inline;"
+                              onsubmit="return confirm('Sigur ștergi acest mesaj?');">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

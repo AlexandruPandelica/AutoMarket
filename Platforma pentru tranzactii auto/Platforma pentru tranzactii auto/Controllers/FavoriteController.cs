@@ -21,7 +21,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
 
         
 
-[HttpPost]
+    [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Toggle(int anuntId)
     {
@@ -52,11 +52,28 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
     }
 
 
-    // GET: Favorite
-    public async Task<IActionResult> Index()
+        // GET: Favorite
+        public async Task<IActionResult> Index()
         {
-            var platformaDbContext = _context.Favorite.Include(f => f.Anunt).Include(f => f.User);
-            return View(await platformaDbContext.ToListAsync());
+            // 1. Obținem ID-ul utilizatorului logat curent
+            var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userIdString))
+            {
+                // Dacă nu e logat, redirecționăm sau returnăm o listă goală
+                return RedirectToAction("Login", "Account");
+            }
+
+            int userId = int.Parse(userIdString);
+
+            // 2. Filtrăm lista de favorite: aducem doar rândurile unde UserId coincide cu cel logat
+            var favoriteUtilizator = await _context.Favorite
+                .Include(f => f.Anunt)
+                .Include(f => f.User)
+                .Where(f => f.UserId == userId) // Aceasta este linia care rezolvă problema
+                .ToListAsync();
+
+            return View(favoriteUtilizator);
         }
 
         // GET: Favorite/Details/5
