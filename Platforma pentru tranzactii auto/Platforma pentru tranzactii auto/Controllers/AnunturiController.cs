@@ -309,13 +309,27 @@ namespace Platforma_pentru_tranzactii_auto.Views
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            // 1. Căutăm anunțul în baza de date
             var anunturi = await _context.Anunt.FindAsync(id);
-            if (anunturi != null)
+
+            if (anunturi == null)
             {
-                _context.Anunt.Remove(anunturi);
+                return NotFound();
             }
 
+            // 2. Verificăm dacă utilizatorul curent este proprietarul
+            var user = await _userManager.GetUserAsync(User);
+
+            // Dacă nu este logat sau ID-ul utilizatorului nu corespunde cu cel de pe anunț
+            if (user == null || anunturi.UserId != user.Id)
+            {
+                return Forbid(); // Aceasta va genera eroarea "Access Denied" (403)
+            }
+
+            // 3. Dacă verificarea a trecut, ștergem anunțul
+            _context.Anunt.Remove(anunturi);
             await _context.SaveChangesAsync();
+
             return RedirectToAction(nameof(Index));
         }
 

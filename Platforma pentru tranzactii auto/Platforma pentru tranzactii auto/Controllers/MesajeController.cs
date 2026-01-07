@@ -3,10 +3,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Platforma_pentru_tranzactii_auto.Models;
+using System.Security.Claims;
 
 namespace Platforma_pentru_tranzactii_auto.Controllers
 {
-    [Authorize] // Doar utilizatorii logați pot folosi mesageria
+    [Authorize]
     public class MesajeController : Controller
     {
         private readonly PlatformaDbContext _context;
@@ -18,113 +19,177 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
             _userManager = userManager;
         }
 
-        // 1. INBOX: Afișează mesajele primite de utilizatorul curent
-        // 1. INBOX: Afișează TOATE mesajele (primite + trimise)
-        public async Task<IActionResult> Index()
+        // GET: Mesaje
+        public async Task<IActionResult> Index(int? conversatieId)
         {
             var user = await _userManager.GetUserAsync(User);
+            if (user == null) return RedirectToAction("Login", "Account");
 
-            var mesaje = await _context.Mesaje
-                .Include(m => m.Expeditor)  // Ca să vedem cine a trimis
-                .Include(m => m.Destinatar) // 🔥 NOU: Ca să vedem cui i-am trimis noi
-                .Include(m => m.Anunt)      // Ca să vedem despre ce mașină e vorba
-                                            // 🔥 MODIFICARE AICI: Luăm mesajele unde suntem destinatar SAU expeditor
+            // 1. Preluăm toate mesajele unde utilizatorul este implicat
+            var toateMesajele = await _context.Mesaje
+                .Include(m => m.Expeditor)
+                .Include(m => m.Destinatar)
+                .Include(m => m.Anunt)
                 .Where(m => m.DestinatarId == user.Id || m.ExpeditorId == user.Id)
                 .OrderByDescending(m => m.DataTrimiterii)
                 .ToListAsync();
 
-            return View(mesaje);
-        }
+            // 2. Grupăm mesajele pentru a crea lista de conversații (stânga)
+            var conversatii = toateMesajele
+                .GroupBy(m => new {
+                    PartnerId = m.ExpeditorId == user.Id ? m.DestinatarId : m.ExpeditorId,
+                    AnuntId = m.ID_Anunt
+                })
+                .Select(g => g.First())
+                .ToList();
 
-        // 2. TRIMITE: Acțiunea apelată din Modal-ul de pe pagina de Detalii
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Trimite(int anuntId, int destinatarId, string continut)
-        {
-            var expeditor = await _userManager.GetUserAsync(User);
+            ViewBag.Conversatii = conversatii;
+            ViewBag.CurrentUserId = user.Id;
 
-            if (expeditor == null) return RedirectToAction("Login", "Account");
-
-            // Validare: Nu îți poți trimite mesaje singur
-            if (expeditor.Id == destinatarId)
+            // 3. Dacă o conversație este selectată, încărcăm tot istoricul (dreapta)
+            if (conversatieId.HasValue)
             {
-                // Întoarcem utilizatorul la anunț cu un mesaj de eroare (opțional prin TempData)
-                return RedirectToAction("Details", "Anunturi", new { id = anuntId });
-            }
-
-            if (!string.IsNullOrWhiteSpace(continut))
-            {
-                var mesajNou = new Mesaje
+                var msgReferinta = toateMesajele.FirstOrDefault(m => m.ID_Mesaj == conversatieId.Value);
+                if (msgReferinta != null)
                 {
-                    ExpeditorId = expeditor.Id,
-                    DestinatarId = destinatarId,
-                    ID_Anunt = anuntId,
-                    Continut = continut,
-                    DataTrimiterii = DateTime.UtcNow
-                };
+                    int partnerId = msgReferinta.ExpeditorId == user.Id ? msgReferinta.DestinatarId : msgReferinta.ExpeditorId;
 
-                _context.Mesaje.Add(mesajNou);
-                await _context.SaveChangesAsync();
+                    var chatActiv = toateMesajele
+                        .Where(m => m.ID_Anunt == msgReferinta.ID_Anunt &&
+                                   ((m.ExpeditorId == user.Id && m.DestinatarId == partnerId) ||
+                                    (m.ExpeditorId == partnerId && m.DestinatarId == user.Id)))
+                        .OrderBy(m => m.DataTrimiterii)
+                        .ToList();
 
-                TempData["SuccessMessage"] = "Mesajul a fost trimis cu succes!";
+                    ViewBag.ChatActiv = chatActiv;
+                    ViewBag.SelectedPartner = msgReferinta.ExpeditorId == user.Id ? msgReferinta.Destinatar : msgReferinta.Expeditor;
+                    ViewBag.SelectedAnunt = msgReferinta.Anunt;
+                }
             }
 
-            // Ne întoarcem la pagina anunțului
-            return RedirectToAction("Details", "Anunturi", new { id = anuntId });
+            return View();
         }
 
-        // 3. RASPUNDE: Acțiunea apelată din Inbox (Modal)
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Raspunde(int anuntId, int destinatarId, string continut)
         {
             var expeditor = await _userManager.GetUserAsync(User);
-            if (expeditor == null) return RedirectToAction("Login", "Account");
+            if (expeditor == null || string.IsNullOrWhiteSpace(continut)) return BadRequest();
 
-            if (!string.IsNullOrWhiteSpace(continut))
+            var mesajNou = new Mesaje
             {
-                var mesajNou = new Mesaje
-                {
-                    ExpeditorId = expeditor.Id,
-                    DestinatarId = destinatarId,
-                    ID_Anunt = anuntId,
-                    Continut = continut,
-                    DataTrimiterii = DateTime.UtcNow
-                };
+                ExpeditorId = expeditor.Id,
+                DestinatarId = destinatarId,
+                ID_Anunt = anuntId,
+                Continut = continut,
+                DataTrimiterii = DateTime.UtcNow
+            };
 
-                _context.Mesaje.Add(mesajNou);
-                await _context.SaveChangesAsync();
-                TempData["SuccessMessage"] = "Răspunsul a fost trimis!";
-            }
-
-            // Rămânem în Inbox
-            return RedirectToAction(nameof(Index));
-        }
-
-        // 4. STERGE: Șterge un mesaj din Inbox
-        // POST: Șterge Mesaj
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Sterge(int id)
-        {
-            var mesaj = await _context.Mesaje.FindAsync(id);
-
-            if (mesaj == null) return NotFound();
-
-            var user = await _userManager.GetUserAsync(User);
-
-            // 🔥 MODIFICAREA E AICI 🔥
-            // Verificăm dacă userul este implicat în conversație (fie ca expeditor, fie ca destinatar)
-            if (user == null || (mesaj.DestinatarId != user.Id && mesaj.ExpeditorId != user.Id))
-            {
-                return Forbid(); // Dacă nu ești niciunul, nu ai voie să ștergi
-            }
-
-            _context.Mesaje.Remove(mesaj);
+            _context.Mesaje.Add(mesajNou);
             await _context.SaveChangesAsync();
 
-            TempData["SuccessMessage"] = "Mesajul a fost șters.";
+            // Redirecționăm înapoi la conversație folosind ID-ul noului mesaj
+            return RedirectToAction(nameof(Index), new { conversatieId = mesajNou.ID_Mesaj });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Trimite(int anuntId, int destinatarId, string continut)
+        {
+            var expeditor = await _userManager.GetUserAsync(User);
+            if (expeditor == null || string.IsNullOrWhiteSpace(continut)) return BadRequest();
+
+            // Validare: să nu-ți trimiți mesaj singur
+            if (expeditor.Id == destinatarId) return RedirectToAction("Details", "Anunturi", new { id = anuntId });
+
+            var mesajNou = new Mesaje
+            {
+                ExpeditorId = expeditor.Id,
+                DestinatarId = destinatarId,
+                ID_Anunt = anuntId,
+                Continut = continut,
+                DataTrimiterii = DateTime.UtcNow
+            };
+
+            _context.Mesaje.Add(mesajNou);
+            await _context.SaveChangesAsync();
+
+            // Redirecționăm utilizatorul direct în Inbox la noua conversație
+            return RedirectToAction("Index", "Mesaje", new { conversatieId = mesajNou.ID_Mesaj });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Editeaza(int id, string noulContinut, int currentConversatieId)
+        {
+            var mesaj = await _context.Mesaje.FindAsync(id);
+            var user = await _userManager.GetUserAsync(User);
+
+            // Verificăm dacă mesajul există și dacă aparține utilizatorului logat
+            if (mesaj != null && mesaj.ExpeditorId == user.Id)
+            {
+                if (!string.IsNullOrWhiteSpace(noulContinut))
+                {
+                    mesaj.Continut = noulContinut;
+                    // Opțional: poți marca mesajul ca fiind editat
+                    // mesaj.Continut += " (editat)"; 
+
+                    _context.Update(mesaj);
+                    await _context.SaveChangesAsync();
+                }
+            }
+
+            return RedirectToAction(nameof(Index), new { conversatieId = currentConversatieId });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Sterge(int id, int? currentConversatieId)
+        {
+            var mesaj = await _context.Mesaje.FindAsync(id);
+            var user = await _userManager.GetUserAsync(User);
+
+            if (mesaj != null && (mesaj.DestinatarId == user.Id || mesaj.ExpeditorId == user.Id))
+            {
+                _context.Mesaje.Remove(mesaj);
+                await _context.SaveChangesAsync();
+            }
+
+            // Dacă avem un ID de conversație activă, rămânem acolo
+            if (currentConversatieId.HasValue)
+            {
+                return RedirectToAction(nameof(Index), new { conversatieId = currentConversatieId.Value });
+            }
+
             return RedirectToAction(nameof(Index));
         }
+
+        // Șterge TOATĂ conversația (Metoda NOUĂ)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> StergeConversatie(int anuntId, int partnerId)
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null) return Unauthorized();
+
+            // Selectăm toate mesajele dintre utilizatorul curent și partener pentru anunțul specific
+            var mesajeDeSters = await _context.Mesaje
+                .Where(m => m.ID_Anunt == anuntId &&
+                           ((m.ExpeditorId == user.Id && m.DestinatarId == partnerId) ||
+                            (m.ExpeditorId == partnerId && m.DestinatarId == user.Id)))
+                .ToListAsync();
+
+            if (mesajeDeSters.Any())
+            {
+                _context.Mesaje.RemoveRange(mesajeDeSters);
+                await _context.SaveChangesAsync();
+            }
+
+            // Fiindcă am șters totul, ne întoarcem la Inbox-ul principal (fără nicio conversație selectată)
+            return RedirectToAction(nameof(Index));
+        }
+
+
     }
 }

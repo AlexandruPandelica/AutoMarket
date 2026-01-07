@@ -1,143 +1,253 @@
 ﻿@model IEnumerable<Platforma_pentru_tranzactii_auto.Models.Mesaje>
-@using Microsoft.AspNetCore.Identity
-@inject UserManager<Utilizator> UserManager
-
 @{
-    ViewData["Title"] = "Mesajele mele";
-    var currentUserId = UserManager.GetUserId(User);
+    ViewData["Title"] = "Mesaje";
+    var chatActiv = ViewBag.ChatActiv as List<Platforma_pentru_tranzactii_auto.Models.Mesaje>;
+    int currentUserId = ViewBag.CurrentUserId;
 }
 
-<div class="container py-5">
-
-    @if (TempData["SuccessMessage"] != null)
-    {
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <i class="bi bi-check-circle-fill me-2"></i> @TempData["SuccessMessage"]
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+<style>
+    .chat-wrapper {
+        height: 80vh;
+        min-height: 500px;
+        display: flex;
+        background: white;
     }
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold">Inbox <span class="badge bg-primary rounded-pill fs-6 align-middle">@Model.Count()</span></h2>
-    </div>
-
-    @if (!Model.Any())
-    {
-        <div class="alert alert-info py-4 text-center">
-            <i class="bi bi-inbox fs-1 d-block mb-2"></i>
-            Nu ai niciun mesaj momentan.
-        </div>
+    .chat-sidebar {
+        width: 300px;
+        border-right: 1px solid #dee2e6;
+        display: flex;
+        flex-direction: column;
+        background: #f8f9fa;
     }
-    else
-    {
-        <div class="list-group shadow-sm gap-3">
-            @foreach (var mesaj in Model)
+
+    .chat-main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        background: white;
+    }
+
+    .avatar-container {
+        width: 45px;
+        height: 45px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .avatar-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .avatar-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+
+    #chatWindow {
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        background-color: #f4f7f6;
+    }
+
+    .message-bubble {
+        padding: 10px 15px;
+        border-radius: 18px;
+        max-width: 75%;
+        font-size: 0.95rem;
+        line-height: 1.4;
+        position: relative;
+    }
+
+    .msg-me {
+        background-color: #007bff;
+        color: white;
+        align-self: flex-end;
+        border-bottom-right-radius: 2px;
+    }
+
+    .msg-partner {
+        background-color: #e9ecef;
+        color: #212529;
+        align-self: flex-start;
+        border-bottom-left-radius: 2px;
+    }
+
+    .message-container {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .btn-group-msg {
+        display: flex;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+
+    .message-container:hover .btn-group-msg {
+        opacity: 1 !important;
+    }
+
+    .btn-action-msg {
+        font-size: 1.1rem;
+        text-decoration: none;
+        padding: 0 5px;
+    }
+</style>
+
+<div class="container py-3">
+    <div class="chat-wrapper shadow-lg rounded-4 overflow-hidden border">
+        <div class="chat-sidebar">
+            <div class="p-3 bg-white border-bottom">
+                <h5 class="fw-bold mb-0 text-center">Conversații</h5>
+            </div>
+            <div class="overflow-auto">
+                @foreach (var conv in ViewBag.Conversatii)
+                {
+                    var partner = conv.ExpeditorId == currentUserId ? conv.Destinatar : conv.Expeditor;
+                    bool isActive = chatActiv?.Any(x => x.ID_Anunt == conv.ID_Anunt && (x.ExpeditorId == partner.Id || x.DestinatarId == partner.Id)) ?? false;
+
+                    <a asp-action="Index" asp-route-conversatieId="@conv.ID_Mesaj"
+                       class="text-decoration-none border-bottom d-block p-3 @(isActive ? "bg-primary text-white" : "text-dark bg-white")">
+                        <div class="d-flex align-items-center">
+                            <div class="avatar-container me-3 border">
+                                @if (partner?.Imagine_Profil != null && partner.Imagine_Profil.Length > 0)
+                                {
+                                    <img src="data:image/*;base64,@(Convert.ToBase64String(partner.Imagine_Profil))" class="avatar-img" />
+                                }
+                                else
+                                {
+                                    <div class="avatar-placeholder @(isActive ? "bg-white text-primary" : "bg-primary text-white")">
+                                        @(partner?.Email?.Substring(0, 1).ToUpper() ?? "U")
+                                    </div>
+                                }
+                            </div>
+
+                            <div class="flex-grow-1 overflow-hidden">
+                                <div class="fw-bold text-truncate">@(partner?.Email.Split('@')[0])</div>
+                                <small class="opacity-75 d-block text-truncate">@conv.Anunt?.Marca @conv.Anunt?.Model</small>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+        </div>
+
+        <div class="chat-main">
+            @if (chatActiv != null)
             {
-                // Verificăm dacă mesajul este trimis de utilizatorul curent
-                bool isSentByMe = mesaj.ExpeditorId.ToString() == currentUserId;
-
-                // Pregătim titlul anunțului (safe navigation)
-                string titluAnunt = (mesaj.Anunt != null) ? $"{mesaj.Anunt.Marca} {mesaj.Anunt.Model}" : "Anunț șters";
-
-                <div class="list-group-item p-4 border rounded-3 position-relative @(isSentByMe ? "bg-light border-primary border-opacity-25" : "bg-white border-0 shadow-sm")">
-
-                    <div class="d-flex w-100 justify-content-between align-items-center mb-2">
-                        <h5 class="mb-1 fw-bold @(isSentByMe ? "text-primary" : "text-dark")">
-                            @if (isSentByMe)
+                <div class="chat-header d-flex justify-content-between align-items-center">
+                    <div class="d-flex align-items-center">
+                        <div class="avatar-container me-2 border" style="width: 40px; height: 40px;">
+                            @if (ViewBag.SelectedPartner?.Imagine_Profil != null && ViewBag.SelectedPartner.Imagine_Profil.Length > 0)
                             {
-                                <span><i class="bi bi-send-fill me-2"></i> Către: @(mesaj.Destinatar?.Email ?? "Utilizator șters")</span>
+                                <img src="data:image/*;base64,@(Convert.ToBase64String(ViewBag.SelectedPartner.Imagine_Profil))" class="avatar-img" />
                             }
                             else
                             {
-                                <span><i class="bi bi-person-circle me-2 text-secondary"></i> De la: @(mesaj.Expeditor?.Email ?? "Utilizator șters")</span>
+                                <div class="avatar-placeholder bg-secondary text-white" style="font-size: 0.9rem;">
+                                    @(ViewBag.SelectedPartner?.Email?.Substring(0, 1).ToUpper() ?? "U")
+                                </div>
                             }
-                        </h5>
-                        <small class="text-muted">@mesaj.DataTrimiterii.ToLocalTime().ToString("dd MMM HH:mm")</small>
+                        </div>
+                        <div>
+                            <h6 class="mb-0 fw-bold">@ViewBag.SelectedPartner.Email</h6>
+                            <small class="text-primary">@ViewBag.SelectedAnunt.Marca @ViewBag.SelectedAnunt.Model</small>
+                        </div>
                     </div>
 
-                    <p class="mb-2 text-muted small">
-                        Referitor la anunțul:
-                        <strong>
-                            @if (mesaj.Anunt != null)
+                    <form asp-action="StergeConversatie" method="post" onsubmit="return confirm('Ștergi conversația?');">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="anuntId" value="@ViewBag.SelectedAnunt.ID_Anunt" />
+                        <input type="hidden" name="partnerId" value="@ViewBag.SelectedPartner.Id" />
+                        <button type="submit" class="btn btn-outline-danger btn-sm border-0"><i class="bi bi-trash3-fill fs-5"></i></button>
+                    </form>
+                </div>
+
+                <div id="chatWindow">
+                    @foreach (var m in chatActiv)
+                    {
+                        bool isMe = m.ExpeditorId == currentUserId;
+                        <div class="message-container @(isMe ? "justify-content-end" : "justify-content-start")">
+                            @if (isMe)
                             {
-                                <a asp-controller="Anunturi" asp-action="Details" asp-route-id="@mesaj.ID_Anunt" class="text-decoration-none">
-                                    @titluAnunt
-                                </a>
+                                <div class="btn-group-msg me-2">
+                                    <button type="button" class="btn btn-link text-primary p-0 btn-action-msg"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#editMessageModal"
+                                            data-msg-id="@m.ID_Mesaj"
+                                            data-msg-content="@m.Continut">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </button>
+                                    <form asp-action="Sterge" asp-route-id="@m.ID_Mesaj" asp-route-currentConversatieId="@chatActiv.First().ID_Mesaj" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-link text-danger p-0 btn-action-msg" onclick="return confirm('Ștergi mesajul?');"><i class="bi bi-x-circle"></i></button>
+                                    </form>
+                                </div>
                             }
-                            else
-                            {
-                                <span>@titluAnunt</span>
-                            }
-                        </strong>
-                    </p>
+                            <div class="message-bubble @(isMe ? "msg-me" : "msg-partner") shadow-sm">
+                                @m.Continut
+                                <div style="font-size: 0.7rem; margin-top: 4px; opacity: 0.8; text-align: right;">@m.DataTrimiterii.ToLocalTime().ToString("HH:mm")</div>
+                            </div>
+                        </div>
+                    }
+                </div>
 
-                    <div class="p-3 rounded-3 border mb-3 @(isSentByMe ? "bg-white" : "bg-light")">
-                        @mesaj.Continut
-                    </div>
-
-                    <div class="d-flex gap-2">
-                        @if (!isSentByMe)
-                        {
-                            <button type="button" class="btn btn-primary btn-sm"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#replyModal"
-                                    data-recipient-id="@mesaj.ExpeditorId"
-                                    data-recipient-name="@(mesaj.Expeditor?.Email ?? "Necunoscut")"
-                                    data-anunt-id="@mesaj.ID_Anunt"
-                                    data-anunt-title="@titluAnunt">
-                                <i class="bi bi-reply-fill"></i> Răspunde
-                            </button>
-                        }
-                        else
-                        {
-                            <span class="badge bg-secondary d-flex align-items-center">Mesaj trimis</span>
-                        }
-
-                        <form asp-controller="Mesaje" asp-action="Sterge" asp-route-id="@mesaj.ID_Mesaj" method="post"
-                              onsubmit="return confirm('Sigur vrei să ștergi acest mesaj?');">
-                            <button type="submit" class="btn btn-outline-danger btn-sm">
-                                <i class="bi bi-trash"></i> Șterge
-                            </button>
-                        </form>
-                    </div>
+                <div class="chat-input-container">
+                    <form asp-action="Raspunde" method="post" class="d-flex gap-2">
+                        <input type="hidden" name="anuntId" value="@ViewBag.SelectedAnunt.ID_Anunt" />
+                        <input type="hidden" name="destinatarId" value="@ViewBag.SelectedPartner.Id" />
+                        <input type="text" name="continut" class="form-control rounded-pill border-2" placeholder="Scrie un mesaj..." required autocomplete="off" />
+                        <button type="submit" class="btn btn-primary rounded-circle shadow-sm px-3"><i class="bi bi-send-fill"></i></button>
+                    </form>
+                </div>
+            }
+            else
+            {
+                <div class="h-100 d-flex flex-column align-items-center justify-content-center text-muted">
+                    <i class="bi bi-chat-left-dots fs-1 mb-2"></i>
+                    <p>Selectează o discuție din lista din stânga.</p>
                 </div>
             }
         </div>
-    }
+    </div>
 </div>
 
-<div class="modal fade" id="replyModal" tabindex="-1" aria-hidden="true">
+@* CODUL NOU: MODALUL CARE LIPSEA *@
+<div class="modal fade" id="editMessageModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title">Trimite un răspuns</h5>
+        <div class="modal-content border-0 shadow-lg rounded-4">
+            <div class="modal-header bg-primary text-white rounded-top-4">
+                <h5 class="modal-title">Editează mesajul</h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-
-            <form asp-controller="Mesaje" asp-action="Raspunde" method="post">
+            <form asp-action="Editeaza" method="post">
+                @Html.AntiForgeryToken()
                 <div class="modal-body p-4">
-                    <input type="hidden" name="destinatarId" id="modalDestinatarId" />
-                    <input type="hidden" name="anuntId" id="modalAnuntId" />
-
-                    <div class="mb-3">
-                        <label class="form-label text-muted small fw-bold">Către:</label>
-                        <input type="text" class="form-control-plaintext fw-bold border-bottom" id="modalDestinatarNume" readonly />
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label text-muted small fw-bold">Referitor la:</label>
-                        <input type="text" class="form-control-plaintext fw-bold border-bottom" id="modalAnuntTitlu" readonly />
-                    </div>
-
-                    <div class="mb-3 mt-3">
-                        <label class="form-label">Mesajul tău:</label>
-                        <textarea name="continut" class="form-control" rows="4" required placeholder="Scrie răspunsul tău aici..."></textarea>
-                    </div>
+                    <input type="hidden" name="id" id="editMsgId" />
+                    <input type="hidden" name="currentConversatieId" value="@(chatActiv?.FirstOrDefault()?.ID_Mesaj)" />
+                    <textarea name="noulContinut" id="editMsgContent" class="form-control" rows="3" required></textarea>
                 </div>
-                <div class="modal-footer border-0 pt-0">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Anulează</button>
-                    <button type="submit" class="btn btn-primary px-4">
-                        <i class="bi bi-send-fill"></i> Trimite Răspuns
-                    </button>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Anulează</button>
+                    <button type="submit" class="btn btn-primary">Salvează</button>
                 </div>
             </form>
         </div>
@@ -146,38 +256,15 @@
 
 @section Scripts {
     <script>
-        var replyModal = document.getElementById('replyModal');
-        replyModal.addEventListener('show.bs.modal', function (event) {
-            var button = event.relatedTarget;
-
-            var recipientId = button.getAttribute('data-recipient-id');
-            var recipientName = button.getAttribute('data-recipient-name');
-            var anuntId = button.getAttribute('data-anunt-id');
-            var anuntTitle = button.getAttribute('data-anunt-title');
-
-            document.getElementById('modalDestinatarId').value = recipientId;
-            document.getElementById('modalAnuntId').value = anuntId;
-            document.getElementById('modalDestinatarNume').value = recipientName;
-            document.getElementById('modalAnuntTitlu').value = anuntTitle;
-        });
+        function updateScroll(){ var e = document.getElementById("chatWindow"); if(e) e.scrollTop = e.scrollHeight; }
+        updateScroll();
+        var editModal = document.getElementById('editMessageModal');
+        if (editModal) {
+            editModal.addEventListener('show.bs.modal', function (event) {
+                var b = event.relatedTarget;
+                document.getElementById('editMsgId').value = b.getAttribute('data-msg-id');
+                document.getElementById('editMsgContent').value = b.getAttribute('data-msg-content');
+            });
+        }
     </script>
-
-    <style>
-        .fade-in-animation {
-            animation: slideDownFade 0.5s ease-out forwards;
-        }
-
-        /* Am schimbat "from/to" cu "0%/100%" pentru a nu confunda Razor */
-        @@keyframes slideDownFade {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
 }
