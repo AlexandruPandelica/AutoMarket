@@ -5,19 +5,36 @@
 }
 
 <style>
-    body {
+    /* 1. Am scos stilizarea de pe 'body' */
+
+    /* 2. Wrapper pentru fundal și centrare */
+    .register-wrapper {
         background: linear-gradient(135deg, #1ea3f7 0%, #0d6efd 50%, #003b99 100%);
-        min-height: 100vh;
-        padding-top: 40px;
-        font-family: 'Segoe UI', sans-serif;
+        min-height: calc(100vh - 60px); /* Înălțimea ecranului minus navbar-ul */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
+        margin-top: -1.5rem; /* Elimină spațiul alb de sub navbar */
+    }
+
+    /* 3. Tehnica de "breakout" pentru a ieși din containerul standard */
+    .full-width-breakout {
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
     }
 
     .register-card {
         background: white;
         border-radius: 18px;
         padding: 35px 40px;
+        width: 100%;
         max-width: 550px;
-        margin: auto;
         box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         animation: fadeIn 0.4s ease-in-out;
     }
@@ -44,6 +61,7 @@
         object-fit: cover;
         margin-bottom: 10px;
         border: 3px solid #0d6efd;
+        background-color: #f8f9fa;
     }
 
     .title {
@@ -54,79 +72,103 @@
         color: #0d6efd;
     }
 
-    .btn-primary {
+    .btn-primary-custom {
+        background-color: #0d6efd;
+        border: none;
         border-radius: 50px;
         padding: 12px;
         font-weight: 600;
+        transition: all 0.3s ease;
     }
+
+        .btn-primary-custom:hover {
+            background-color: #003b99;
+            transform: scale(1.02);
+        }
 </style>
 
-<div class="register-card">
+<div class="full-width-breakout">
+    <div class="register-wrapper">
+        <div class="register-card">
 
-    <h2 class="title">Creează un cont nou</h2>
+            <h2 class="title">Creează un cont nou</h2>
 
-    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3 small text-center"></div>
 
-    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
+            <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" enctype="multipart/form-data">
 
-        <!-- PREVIEW IMAGINE PROFIL -->
-        <div class="text-center">
-            <img id="previewImg" class="profile-preview" src="https://cdn.icon-icons.com/icons2/2506/PNG/512/user_icon_150670.png" />
+                <div class="text-center mb-3">
+                    <img id="previewImg" class="profile-preview" src="https://cdn.icon-icons.com/icons2/2506/PNG/512/user_icon_150670.png" alt="Profile Preview" />
+                    <div>
+                        <label for="Input_ImagineProfilFile" class="btn btn-sm btn-outline-secondary rounded-pill mt-2">
+                            <i class="bi bi-camera"></i> Alege o poză
+                        </label>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <input asp-for="Input.ImagineProfilFile" type="file" accept="image/*" class="form-control form-control-sm" onchange="previewProfile(event)" />
+                    <span asp-validation-for="Input.ImagineProfilFile" class="text-danger small"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Email" class="form-control" placeholder="Email" />
+                    <label asp-for="Input.Email" class="text-secondary">Email</label>
+                    <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                </div>
+
+                <div class="row g-2">
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Nume" class="form-control" placeholder="Nume" />
+                            <label asp-for="Input.Nume" class="text-secondary">Nume</label>
+                            <span asp-validation-for="Input.Nume" class="text-danger small"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Prenume" class="form-control" placeholder="Prenume" />
+                            <label asp-for="Input.Prenume" class="text-secondary">Prenume</label>
+                            <span asp-validation-for="Input.Prenume" class="text-danger small"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Telefon" class="form-control" placeholder="Telefon" />
+                    <label asp-for="Input.Telefon" class="text-secondary">Telefon</label>
+                    <span asp-validation-for="Input.Telefon" class="text-danger small"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Adresa" class="form-control" placeholder="Adresă" />
+                    <label asp-for="Input.Adresa" class="text-secondary">Adresă</label>
+                    <span asp-validation-for="Input.Adresa" class="text-danger small"></span>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Password" type="password" class="form-control" placeholder="Parolă" />
+                    <label asp-for="Input.Password" class="text-secondary">Parolă</label>
+                    <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input asp-for="Input.ConfirmPassword" type="password" class="form-control" placeholder="Confirmare parolă" />
+                    <label asp-for="Input.ConfirmPassword" class="text-secondary">Confirmare parolă</label>
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger small"></span>
+                </div>
+
+                <button id="registerSubmit" type="submit" class="btn btn-primary btn-primary-custom w-100">
+                    Creează cont
+                </button>
+
+                <div class="text-center mt-3">
+                    <a asp-page="./Login" class="text-decoration-none text-muted small">Ai deja cont? Autentifică-te</a>
+                </div>
+
+            </form>
         </div>
-
-        <div class="mb-3">
-            <label class="form-label fw-semibold">Imagine profil</label>
-            <input asp-for="Input.ImagineProfilFile" type="file" accept="image/*" class="form-control" onchange="previewProfile(event)" />
-            <span asp-validation-for="Input.ImagineProfilFile" class="text-danger"></span>
-        </div>
-
-        <div class="form-floating mb-3">
-            <input asp-for="Input.Email" class="form-control" placeholder="Email" />
-            <label asp-for="Input.Email">Email</label>
-            <span asp-validation-for="Input.Email" class="text-danger"></span>
-        </div>
-
-        <div class="form-floating mb-3">
-            <input asp-for="Input.Nume" class="form-control" placeholder="Nume" />
-            <label asp-for="Input.Nume">Nume</label>
-            <span asp-validation-for="Input.Nume" class="text-danger"></span>
-        </div>
-
-        <div class="form-floating mb-3">
-            <input asp-for="Input.Prenume" class="form-control" placeholder="Prenume" />
-            <label asp-for="Input.Prenume">Prenume</label>
-            <span asp-validation-for="Input.Prenume" class="text-danger"></span>
-        </div>
-
-        <div class="form-floating mb-3">
-            <input asp-for="Input.Telefon" class="form-control" placeholder="Telefon" />
-            <label asp-for="Input.Telefon">Telefon</label>
-            <span asp-validation-for="Input.Telefon" class="text-danger"></span>
-        </div>
-
-        <div class="form-floating mb-3">
-            <input asp-for="Input.Adresa" class="form-control" placeholder="Adresă" />
-            <label asp-for="Input.Adresa">Adresă</label>
-            <span asp-validation-for="Input.Adresa" class="text-danger"></span>
-        </div>
-
-        <div class="form-floating mb-3">
-            <input asp-for="Input.Password" type="password" class="form-control" placeholder="Parolă" />
-            <label asp-for="Input.Password">Parolă</label>
-            <span asp-validation-for="Input.Password" class="text-danger"></span>
-        </div>
-
-        <div class="form-floating mb-4">
-            <input asp-for="Input.ConfirmPassword" type="password" class="form-control" placeholder="Confirmare parolă" />
-            <label asp-for="Input.ConfirmPassword">Confirmare parolă</label>
-            <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-        </div>
-
-        <button id="registerSubmit" type="submit" class="btn btn-primary w-100">
-            Creează cont
-        </button>
-
-    </form>
+    </div>
 </div>
 
 @section Scripts {
@@ -137,7 +179,9 @@
             reader.onload = function () {
                 document.getElementById("previewImg").src = reader.result;
             };
-            reader.readAsDataURL(event.target.files[0]);
+            if(event.target.files[0]){
+                reader.readAsDataURL(event.target.files[0]);
+            }
         }
     </script>
 

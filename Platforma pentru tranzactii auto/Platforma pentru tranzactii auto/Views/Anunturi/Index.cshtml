@@ -6,49 +6,81 @@
 }
 
 <div class="row justify-content-center mb-5">
-    <div class="col-md-8">
-        <form asp-action="Index" method="get">
-            <div class="input-group shadow-sm rounded-pill overflow-hidden bg-white p-1">
+    <div class="col-md-10">
+        <form asp-action="Index" method="get" class="bg-white p-4 shadow-sm rounded-3 border">
 
+            <div class="input-group mb-3">
+                <span class="input-group-text bg-light border-end-0"><i class="bi bi-search"></i></span>
                 <input type="text"
                        name="searchString"
                        value="@ViewData["CurrentFilter"]"
-                       class="form-control border-0 ps-4"
-                       placeholder="Caută marcă, model, oraș..."
-                       style="box-shadow: none;">
+                       class="form-control border-start-0 bg-light"
+                       placeholder="Caută marcă, model, oraș sau descriere...">
+            </div>
 
-                <button type="submit" class="btn btn-primary rounded-pill px-4 m-1">
-                    <i class="bi bi-search"></i> Caută
-                </button>
+            <div class="row g-3">
+                <div class="col-6 col-md-3">
+                    <label class="form-label small fw-bold text-muted">Preț Min (€)</label>
+                    <input type="number" name="minPret" class="form-control form-control-sm"
+                           value="@ViewData["MinPret"]" placeholder="Minim">
+                </div>
+                <div class="col-6 col-md-3">
+                    <label class="form-label small fw-bold text-muted">Preț Max (€)</label>
+                    <input type="number" name="maxPret" class="form-control form-control-sm"
+                           value="@ViewData["MaxPret"]" placeholder="Maxim">
+                </div>
 
-                @if (ViewData["CurrentFilter"] != null)
+                <div class="col-6 col-md-3">
+                    <label class="form-label small fw-bold text-muted">An Min</label>
+                    <input type="number" name="minAn" class="form-control form-control-sm"
+                           value="@ViewData["MinAn"]" placeholder="Minim">
+                </div>
+                <div class="col-6 col-md-3">
+                    <label class="form-label small fw-bold text-muted">An Max</label>
+                    <input type="number" name="maxAn" class="form-control form-control-sm"
+                           value="@ViewData["MaxAn"]" placeholder="Maxim">
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end mt-4 pt-2 border-top">
+                @if (ViewData["CurrentFilter"] != null || ViewData["MinPret"] != null || ViewData["MaxPret"] != null || ViewData["MinAn"] != null)
                 {
-                    <a asp-action="Index" class="btn btn-outline-secondary rounded-pill px-3 m-1" title="Resetează filtrele">
-                        <i class="bi bi-x-lg"></i>
+                    <a asp-action="Index" class="btn btn-outline-secondary btn-sm me-2 rounded-pill px-3">
+                        <i class="bi bi-x-lg"></i> Resetează
                     </a>
                 }
+                <button type="submit" class="btn btn-primary btn-sm rounded-pill px-4">
+                    <i class="bi bi-funnel-fill"></i> Filtrează Anunțuri
+                </button>
             </div>
+
         </form>
     </div>
 </div>
 
-
-<main class="container py-5">
+<main class="container py-3">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h1 class="fw-bold mb-1">Anunțuri</h1>
-            <p class="text-muted mb-0">Explorează mașinile disponibile pe platformă.</p>
+            <h1 class="fw-bold mb-1">Anunțuri Auto</h1>
+            <p class="text-muted mb-0">
+                Găsește mașina potrivită din cele @Model.Count() oferte disponibile.
+            </p>
         </div>
-        <a asp-action="Create" class="btn btn-primary rounded-pill">
-            <i class="bi bi-plus-circle"></i> Adaugă anunț
+        <a asp-action="Create" class="btn btn-success rounded-pill shadow-sm">
+            <i class="bi bi-plus-circle"></i> Adaugă anunț nou
         </a>
     </div>
 
     @if (!Model.Any())
     {
-        <div class="alert alert-info rounded-3">
-            Momentan nu există anunțuri. Fii primul care adaugă unul! 🚗
+        <div class="text-center py-5">
+            <div class="mb-3">
+                <i class="bi bi-search text-muted" style="font-size: 3rem;"></i>
+            </div>
+            <h4 class="text-muted">Nu am găsit niciun rezultat.</h4>
+            <p class="text-muted">Încearcă să modifici filtrele de căutare.</p>
+            <a asp-action="Index" class="btn btn-outline-primary rounded-pill">Vezi toate anunțurile</a>
         </div>
     }
     else
@@ -57,28 +89,28 @@
             @foreach (var item in Model)
             {
                 <div class="col-12 col-md-6 col-lg-4">
-                    <div class="card shadow-sm h-100 anunt-card border-0">
+                    <div class="card shadow-sm h-100 anunt-card border-0 overflow-hidden">
 
                         <div class="position-relative">
                             @if (item.Imagine_Anunt != null && item.Imagine_Anunt.Length > 0)
                             {
                                 <img src="data:image/*;base64,@(Convert.ToBase64String(item.Imagine_Anunt))"
                                      class="card-img-top anunt-card-img"
+                                     style="height: 220px; object-fit: cover;"
                                      alt="Imagine @item.Marca @item.Model" />
                             }
                             else
                             {
-                                <div class="anunt-card-img d-flex align-items-center justify-content-center bg-light text-muted">
-                                    Fără imagine
+                                <div class="anunt-card-img d-flex align-items-center justify-content-center bg-light text-muted"
+                                     style="height: 220px;">
+                                    <i class="bi bi-camera-fill me-2"></i> Fără imagine
                                 </div>
                             }
 
-                            <!-- Preț -->
-                            <span class="badge bg-primary price-badge">
+                            <span class="position-absolute bottom-0 start-0 m-3 badge bg-dark bg-opacity-75 fs-6 shadow-sm">
                                 @item.Pret.ToString("N0") €
                             </span>
 
-                            <!-- Buton Favorite (placeholder - îl vei lega la acțiunea ta) -->
                             <form asp-controller="Favorite"
                                   asp-action="Toggle"
                                   method="post"
@@ -87,71 +119,57 @@
                                 @Html.AntiForgeryToken()
                                 <input type="hidden" name="anuntId" value="@item.ID_Anunt" />
 
-                                <button type="submit" class="favorite-btn" title="Adaugă la favorite">
-                                    <i class="bi @(ViewBag.FavoriteIds.Contains(item.ID_Anunt)
-                                       ? "bi-heart-fill"
-    :                                    "bi-heart")" style="color: red !important; font-size: 1.6rem;"></i>
+                                <button type="submit" class="btn btn-light rounded-circle shadow-sm p-2 d-flex align-items-center justify-content-center"
+                                        style="width: 36px; height: 36px; border: none;"
+                                        title="Adaugă la favorite">
+                                    <i class="bi @(ViewBag.FavoriteIds.Contains(item.ID_Anunt) ? "bi-heart-fill text-danger" : "bi-heart text-dark")"></i>
                                 </button>
                             </form>
-
                         </div>
 
                         <div class="card-body">
-                            <h5 class="card-title mb-1">
+                            <h5 class="card-title fw-bold mb-1">
                                 @item.Marca @item.Model
                             </h5>
-                            <p class="text-muted small mb-2">
-                                An fabricație: <strong>@item.An_Fabricatie</strong> ·
-                                Kilometraj: <strong>@item.Kilometraj.ToString("N0") km</strong>
+                            <p class="text-muted small mb-3">
+                                <i class="bi bi-calendar"></i> @item.An_Fabricatie &nbsp;|&nbsp;
+                                <i class="bi bi-speedometer2"></i> @item.Kilometraj.ToString("N0") km
                             </p>
 
                             @if (!string.IsNullOrWhiteSpace(item.Descriere))
                             {
-                                <p class="card-text small mb-3 text-truncate">
+                                <p class="card-text small text-muted text-truncate">
                                     @item.Descriere
                                 </p>
                             }
 
-                            <div class="d-flex justify-content-between align-items-center small text-muted mb-2">
-                                <span>
-                                    <i class="bi bi-geo-alt"></i> @item.Locatie
-                                </span>
-                                <span>
-                                    <i class="bi bi-calendar3"></i>
-                                    @item.Data_Postarii.ToString("dd.MM.yyyy HH:mm")
-                                </span>
-                            </div>
+                            <hr class="my-2 opacity-25">
 
                             <div class="d-flex justify-content-between align-items-center small text-muted">
                                 <span>
-                                    <i class="bi bi-eye"></i> @item.Nr_Vizualizari vizualizări
+                                    <i class="bi bi-geo-alt-fill text-primary"></i> @item.Locatie
                                 </span>
                                 <span>
-                                    <i class="bi bi-person-circle"></i>
-                                    <strong>@(item.User?.Prenume ?? "Necunoscut") @(item.User?.Nume ?? "Necunoscut")</strong>
+                                    <i class="bi bi-clock"></i> @item.Data_Postarii.ToString("dd MMM")
                                 </span>
                             </div>
                         </div>
 
                         <div class="card-footer bg-white border-0 pt-0 pb-3 px-3">
-                            <div class="d-flex justify-content-between">
-                                <a asp-action="Details" asp-route-id="@item.ID_Anunt" class="btn btn-outline-primary btn-sm">
-                                    <i class="bi bi-info-circle"></i> Detalii
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-between">
+                                <a asp-action="Details" asp-route-id="@item.ID_Anunt" class="btn btn-primary btn-sm flex-grow-1">
+                                    Detalii
                                 </a>
 
-                                <div>
-                                    @if (User.Identity.IsAuthenticated && item.UserId.ToString() == User.FindFirstValue(ClaimTypes.NameIdentifier))
-                                    {
-                                        <div>
-                                            <a asp-action="Edit" asp-route-id="@item.ID_Anunt" class="btn btn-outline-secondary btn-sm me-1">
-                                                <i class="bi bi-pencil-square"></i> Edit
-                                            </a>
-                                            <a asp-action="Delete" asp-route-id="@item.ID_Anunt" class="btn btn-outline-danger btn-sm">
-                                                <i class="bi bi-trash"></i> Delete
-                                            </a>
-                                        </div>
-                                    }
-                                </div>
+                                @if (User.Identity.IsAuthenticated && item.UserId.ToString() == User.FindFirstValue(ClaimTypes.NameIdentifier))
+                                {
+                                    <a asp-action="Edit" asp-route-id="@item.ID_Anunt" class="btn btn-outline-secondary btn-sm" title="Editează">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.ID_Anunt" class="btn btn-outline-danger btn-sm" title="Șterge">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                }
                             </div>
                         </div>
 

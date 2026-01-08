@@ -121,7 +121,9 @@
                         </div>
                         <div class="col-6 col-md-4">
                             <div class="text-muted small">Vânzător</div>
-                            <div class="fw-semibold">@(Model.User?.Email ?? "Necunoscut")</div>
+                            <div class="fw-semibold">
+                                @((Model.User?.Prenume + " " + Model.User?.Nume).Trim() == "" ? (Model.User?.Email ?? "Necunoscut") : (Model.User?.Prenume + " " + Model.User?.Nume))
+                            </div>
                             @if (User.Identity.IsAuthenticated && UserManager.GetUserId(User) != Model.UserId.ToString())
                             {
                                 <button type="button" class="btn btn-success btn-sm mt-2 w-100 rounded-pill"
