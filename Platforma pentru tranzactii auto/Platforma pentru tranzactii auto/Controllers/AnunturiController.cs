@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Identity;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
+using Platforma_pentru_tranzactii_auto.Services;
 
 namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei controller-ele stau în namespace-ul .Controllers
 {
@@ -17,11 +18,13 @@ namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei contr
     {
         private readonly PlatformaDbContext _context;
         private readonly UserManager<Utilizator> _userManager;
+        private readonly RecomandareService _recomandareService; // <-- Adaugă asta
 
-        public AnunturiController(PlatformaDbContext context, UserManager<Utilizator> userManager)
+        public AnunturiController(PlatformaDbContext context, UserManager<Utilizator> userManager, RecomandareService recomandareService)
         {
             _context = context;
             _userManager = userManager;
+            _recomandareService = recomandareService; // <-- Adaugă asta
         }
 
         // GET: Anunturi
@@ -150,7 +153,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei contr
         // POST: Anunturi/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID_Anunt,Marca,Model,Pret,An_Fabricatie,Kilometraj,Descriere,Locatie,UserId")] Anunturi anunturi, IEnumerable<IFormFile>? imaginiUpload)
+        public async Task<IActionResult> Create([Bind("ID_Anunt,Marca,Model,Pret,An_Fabricatie,Kilometraj,Descriere,Locatie,UserId, Combustibil, Transmisie, CapacitateMotor, PutereCP, TipCaroserie")] Anunturi anunturi, IEnumerable<IFormFile>? imaginiUpload)
         {
             ModelState.Remove("User");
             ModelState.Remove("Imagine_Anunt");
@@ -240,6 +243,13 @@ namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei contr
             anuntDinDb.Kilometraj = anunturiForm.Kilometraj;
             anuntDinDb.Locatie = anunturiForm.Locatie;
             anuntDinDb.Descriere = anunturiForm.Descriere;
+
+            // --- ADAUGĂ ACESTE LINII ---
+            anuntDinDb.Combustibil = anunturiForm.Combustibil;
+            anuntDinDb.Transmisie = anunturiForm.Transmisie;
+            anuntDinDb.CapacitateMotor = anunturiForm.CapacitateMotor;
+            anuntDinDb.PutereCP = anunturiForm.PutereCP;
+            anuntDinDb.TipCaroserie = anunturiForm.TipCaroserie;
 
             if (imaginiUpload != null && imaginiUpload.Any())
             {
@@ -347,5 +357,30 @@ namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei contr
 
             return RedirectToAction(nameof(Edit), new { id = anunt.ID_Anunt });
         }
+
+        // 1. GET: Afișează pagina cu formularul Dream Car
+        public IActionResult DreamCar()
+        {
+            return View();
+        }
+
+        // 2. POST: Preia datele din formular, calculează similaritatea și arată rezultatele
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DreamCarResults(DreamCarViewModel model)
+        {
+            // Dacă utilizatorul nu a completat toate câmpurile corect, îl întoarcem la formular
+            if (!ModelState.IsValid)
+            {
+                return View("DreamCar", model);
+            }
+
+            // Aici se face magia! Apelăm algoritmul Cosine Similarity pentru Top 3 mașini
+            var recomandari = await _recomandareService.CalculeazaDreamCar(model, 3);
+
+            // Trimitem lista de mașini recomandate către o pagină nouă de rezultate
+            return View("DreamCarResults", recomandari);
+        }
     }
+
 }

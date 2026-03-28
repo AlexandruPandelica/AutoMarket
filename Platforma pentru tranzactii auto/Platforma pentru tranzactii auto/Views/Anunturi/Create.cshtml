@@ -69,6 +69,54 @@
                                 <span asp-validation-for="Locatie" class="text-danger small"></span>
                             </div>
 
+                            <div class="col-md-6">
+                                <label asp-for="Combustibil" class="form-label fw-semibold">Combustibil</label>
+                                <select asp-for="Combustibil" class="form-select">
+                                    <option value="">Alege...</option>
+                                    <option value="Benzina">Benzină</option>
+                                    <option value="Diesel">Diesel</option>
+                                    <option value="Electric">Electric</option>
+                                    <option value="Hibrid">Hibrid</option>
+                                </select>
+                                <span asp-validation-for="Combustibil" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="Transmisie" class="form-label fw-semibold">Transmisie</label>
+                                <select asp-for="Transmisie" class="form-select">
+                                    <option value="">Alege...</option>
+                                    <option value="Manuala">Manuală</option>
+                                    <option value="Automata">Automată</option>
+                                </select>
+                                <span asp-validation-for="Transmisie" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label asp-for="TipCaroserie" class="form-label fw-semibold">Tip Caroserie</label>
+                                <select asp-for="TipCaroserie" class="form-select">
+                                    <option value="">Alege...</option>
+                                    <option value="Sedan">Sedan</option>
+                                    <option value="SUV">SUV</option>
+                                    <option value="Hatchback">Hatchback</option>
+                                    <option value="Break">Break</option>
+                                    <option value="Coupe">Coupe</option>
+                                    <option value="Cabriolet">Cabriolet</option>
+                                </select>
+                                <span asp-validation-for="TipCaroserie" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label asp-for="CapacitateMotor" class="form-label fw-semibold">Motorizare (cm³)</label>
+                                <input asp-for="CapacitateMotor" class="form-control" type="number" placeholder="Ex: 1998" />
+                                <span asp-validation-for="CapacitateMotor" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label asp-for="PutereCP" class="form-label fw-semibold">Putere (CP)</label>
+                                <input asp-for="PutereCP" class="form-control" type="number" placeholder="Ex: 150" />
+                                <span asp-validation-for="PutereCP" class="text-danger small"></span>
+                            </div>
+
                             <div class="col-12">
                                 <label asp-for="Descriere" class="form-label fw-semibold"></label>
                                 <textarea asp-for="Descriere" class="form-control" rows="4"

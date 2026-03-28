@@ -22,6 +22,13 @@ namespace Platforma_pentru_tranzactii_auto.Models
         public int Nr_Vizualizari { get; set; }
         public string Locatie { get; set; }
 
+        // --- PROPRIETĂȚI NOI PENTRU MACHINE LEARNING ---
+        public string? Combustibil { get; set; } // Benzina, Diesel, Electric, Hibrid
+        public string? Transmisie { get; set; }  // Manuala, Automata
+        public int CapacitateMotor { get; set; } // Ex: 1998 (în cm3)
+        public int PutereCP { get; set; }        // Ex: 150 (Cai putere)
+        public string? TipCaroserie { get; set; } // Sedan, SUV, Hatchback, Break
+
         public byte[]? Imagine_Anunt { get; set; }
         public List<ImaginiAnunt>? GalerieImagini { get; set; }
 

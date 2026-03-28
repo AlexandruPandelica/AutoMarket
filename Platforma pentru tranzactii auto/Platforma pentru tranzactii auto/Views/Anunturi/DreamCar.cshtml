@@ -1,0 +1,78 @@
+﻿@model Platforma_pentru_tranzactii_auto.Models.DreamCarViewModel
+
+@{
+    ViewData["Title"] = "Găsește Mașina Visurilor";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0" style="border-radius: 15px;">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <h2 class="font-weight-bold" style="color: #0d6efd;">Găsește Mașina Visurilor 🚗✨</h2>
+                        <p class="text-muted">Introdu preferințele tale, iar algoritmul nostru inteligent îți va recomanda cele mai potrivite autoturisme folosind Cosine Similarity.</p>
+                    </div>
+
+                    <form method="post" asp-action="DreamCarResults">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="PretDorit" class="control-label font-weight-bold"></label>
+                            <div class="input-group">
+                                <input asp-for="PretDorit" class="form-control" type="number" placeholder="Ex: 25000" />
+                                <span class="input-group-text">€</span>
+                            </div>
+                            <span asp-validation-for="PretDorit" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="AnMinim" class="control-label font-weight-bold"></label>
+                            <input asp-for="AnMinim" class="form-control" type="number" placeholder="Ex: 2018" />
+                            <span asp-validation-for="AnMinim" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="KilometrajMaxim" class="control-label font-weight-bold"></label>
+                            <div class="input-group">
+                                <input asp-for="KilometrajMaxim" class="form-control" type="number" placeholder="Ex: 150000" />
+                                <span class="input-group-text">km</span>
+                            </div>
+                            <span asp-validation-for="KilometrajMaxim" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label asp-for="CapacitateMotorDorita" class="control-label font-weight-bold"></label>
+                            <div class="input-group">
+                                <input asp-for="CapacitateMotorDorita" class="form-control" type="number" placeholder="Ex: 1998" />
+                                <span class="input-group-text">cm³</span>
+                            </div>
+                            <span asp-validation-for="CapacitateMotorDorita" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-4">
+                            <label asp-for="PutereCPDorita" class="control-label font-weight-bold"></label>
+                            <div class="input-group">
+                                <input asp-for="PutereCPDorita" class="form-control" type="number" placeholder="Ex: 150" />
+                                <span class="input-group-text">CP</span>
+                            </div>
+                            <span asp-validation-for="PutereCPDorita" class="text-danger"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary btn-lg" style="border-radius: 8px;">
+                                <i class="bi bi-search"></i> Găsește Recomandări
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

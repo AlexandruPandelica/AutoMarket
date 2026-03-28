@@ -114,6 +114,7 @@
 
 <div class="container py-3">
     <div class="chat-wrapper shadow-lg rounded-4 overflow-hidden border">
+
         <div class="chat-sidebar">
             <div class="p-3 bg-white border-bottom">
                 <h5 class="fw-bold mb-0 text-center">Conversații</h5>
@@ -123,6 +124,11 @@
                 {
                     var partner = conv.ExpeditorId == currentUserId ? conv.Destinatar : conv.Expeditor;
                     bool isActive = chatActiv?.Any(x => x.ID_Anunt == conv.ID_Anunt && (x.ExpeditorId == partner.Id || x.DestinatarId == partner.Id)) ?? false;
+
+                    // Calculăm numele de afișat (Nume+Prenume sau prima parte din email)
+                    string displayName = (!string.IsNullOrWhiteSpace(partner?.Prenume) && !string.IsNullOrWhiteSpace(partner?.Nume))
+                    ? $"{partner.Prenume} {partner.Nume}"
+                    : partner?.Email?.Split('@')[0] ?? "Necunoscut";
 
                     <a asp-action="Index" asp-route-conversatieId="@conv.ID_Mesaj"
                        class="text-decoration-none border-bottom d-block p-3 @(isActive ? "bg-primary text-white" : "text-dark bg-white")">
@@ -135,13 +141,13 @@
                                 else
                                 {
                                     <div class="avatar-placeholder @(isActive ? "bg-white text-primary" : "bg-primary text-white")">
-                                        @(partner?.Email?.Substring(0, 1).ToUpper() ?? "U")
+                                        @(displayName.Substring(0, 1).ToUpper())
                                     </div>
                                 }
                             </div>
 
                             <div class="flex-grow-1 overflow-hidden">
-                                <div class="fw-bold text-truncate">@(partner?.Email.Split('@')[0])</div>
+                                <div class="fw-bold text-truncate">@displayName</div>
                                 <small class="opacity-75 d-block text-truncate">@conv.Anunt?.Marca @conv.Anunt?.Model</small>
                             </div>
                         </div>
@@ -153,32 +159,34 @@
         <div class="chat-main">
             @if (chatActiv != null)
             {
-                <div class="chat-header d-flex justify-content-between align-items-center">
+                var activePartner = ViewBag.SelectedPartner;
+                string activeDisplayName = (!string.IsNullOrWhiteSpace(activePartner?.Prenume) && !string.IsNullOrWhiteSpace(activePartner?.Nume))
+                ? $"{activePartner.Prenume} {activePartner.Nume}"
+                : activePartner?.Email?.Split('@')[0] ?? "Necunoscut";
+
+                <div class="chat-header d-flex justify-content-between align-items-center p-3 border-bottom shadow-sm z-1">
                     <div class="d-flex align-items-center">
-                        <div class="avatar-container me-2 border" style="width: 40px; height: 40px;">
-                            @if (ViewBag.SelectedPartner?.Imagine_Profil != null && ViewBag.SelectedPartner.Imagine_Profil.Length > 0)
+                        <div class="avatar-container me-3 border" style="width: 45px; height: 45px;">
+                            @if (activePartner?.Imagine_Profil != null && activePartner.Imagine_Profil.Length > 0)
                             {
-                                <img src="data:image/*;base64,@(Convert.ToBase64String(ViewBag.SelectedPartner.Imagine_Profil))" class="avatar-img" />
+                                <img src="data:image/*;base64,@(Convert.ToBase64String(activePartner.Imagine_Profil))" class="avatar-img" />
                             }
                             else
                             {
-                                <div class="avatar-placeholder bg-secondary text-white" style="font-size: 0.9rem;">
-                                    @(ViewBag.SelectedPartner?.Email?.Substring(0, 1).ToUpper() ?? "U")
+                                <div class="avatar-placeholder bg-secondary text-white" style="font-size: 1.1rem;">
+                                    @(activeDisplayName.Substring(0, 1).ToUpper())
                                 </div>
                             }
                         </div>
                         <div>
-                            <h6 class="mb-0 fw-bold">@ViewBag.SelectedPartner.Email</h6>
-                            <small class="text-primary">@ViewBag.SelectedAnunt.Marca @ViewBag.SelectedAnunt.Model</small>
+                            <h6 class="mb-0 fw-bold fs-5">@activeDisplayName</h6>
+                            <small class="text-primary fw-semibold">@ViewBag.SelectedAnunt.Marca @ViewBag.SelectedAnunt.Model</small>
                         </div>
                     </div>
 
-                    <form asp-action="StergeConversatie" method="post" onsubmit="return confirm('Ștergi conversația?');">
-                        @Html.AntiForgeryToken()
-                        <input type="hidden" name="anuntId" value="@ViewBag.SelectedAnunt.ID_Anunt" />
-                        <input type="hidden" name="partnerId" value="@ViewBag.SelectedPartner.Id" />
-                        <button type="submit" class="btn btn-outline-danger btn-sm border-0"><i class="bi bi-trash3-fill fs-5"></i></button>
-                    </form>
+                    <button type="button" class="btn btn-outline-danger btn-sm border-0" data-bs-toggle="modal" data-bs-target="#deleteConversationModal" title="Șterge conversația">
+                        <i class="bi bi-trash3-fill fs-5"></i>
+                    </button>
                 </div>
 
                 <div id="chatWindow">
@@ -196,10 +204,12 @@
                                             data-msg-content="@m.Continut">
                                         <i class="bi bi-pencil-square"></i>
                                     </button>
-                                    <form asp-action="Sterge" asp-route-id="@m.ID_Mesaj" asp-route-currentConversatieId="@chatActiv.First().ID_Mesaj" method="post" class="d-inline">
-                                        @Html.AntiForgeryToken()
-                                        <button type="submit" class="btn btn-link text-danger p-0 btn-action-msg" onclick="return confirm('Ștergi mesajul?');"><i class="bi bi-x-circle"></i></button>
-                                    </form>
+                                    <button type="button" class="btn btn-link text-danger p-0 btn-action-msg"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#deleteMessageModal"
+                                            data-delete-msg-id="@m.ID_Mesaj">
+                                        <i class="bi bi-x-circle"></i>
+                                    </button>
                                 </div>
                             }
                             <div class="message-bubble @(isMe ? "msg-me" : "msg-partner") shadow-sm">
@@ -210,11 +220,11 @@
                     }
                 </div>
 
-                <div class="chat-input-container">
+                <div class="chat-input-container p-3 border-top bg-white">
                     <form asp-action="Raspunde" method="post" class="d-flex gap-2">
                         <input type="hidden" name="anuntId" value="@ViewBag.SelectedAnunt.ID_Anunt" />
                         <input type="hidden" name="destinatarId" value="@ViewBag.SelectedPartner.Id" />
-                        <input type="text" name="continut" class="form-control rounded-pill border-2" placeholder="Scrie un mesaj..." required autocomplete="off" />
+                        <input type="text" name="continut" class="form-control rounded-pill border-2 px-4" placeholder="Scrie un mesaj..." required autocomplete="off" />
                         <button type="submit" class="btn btn-primary rounded-circle shadow-sm px-3"><i class="bi bi-send-fill"></i></button>
                     </form>
                 </div>
@@ -222,15 +232,17 @@
             else
             {
                 <div class="h-100 d-flex flex-column align-items-center justify-content-center text-muted">
-                    <i class="bi bi-chat-left-dots fs-1 mb-2"></i>
-                    <p>Selectează o discuție din lista din stânga.</p>
+                    <div class="bg-light rounded-circle d-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                        <i class="bi bi-chat-dots fs-1 text-primary"></i>
+                    </div>
+                    <h5 class="fw-bold text-dark">Mesajele tale</h5>
+                    <p>Selectează o discuție din panoul din stânga pentru a începe.</p>
                 </div>
             }
         </div>
     </div>
 </div>
 
-@* CODUL NOU: MODALUL CARE LIPSEA *@
 <div class="modal fade" id="editMessageModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg rounded-4">
@@ -245,25 +257,81 @@
                     <input type="hidden" name="currentConversatieId" value="@(chatActiv?.FirstOrDefault()?.ID_Mesaj)" />
                     <textarea name="noulContinut" id="editMsgContent" class="form-control" rows="3" required></textarea>
                 </div>
-                <div class="modal-footer border-0">
+                <div class="modal-footer border-0 pt-0">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Anulează</button>
-                    <button type="submit" class="btn btn-primary">Salvează</button>
+                    <button type="submit" class="btn btn-primary px-4">Salvează</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
 
+<div class="modal fade" id="deleteMessageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content border-0 shadow-lg rounded-4 text-center">
+            <form asp-action="Sterge" method="post">
+                @Html.AntiForgeryToken()
+                <div class="modal-body p-4">
+                    <i class="bi bi-exclamation-circle text-danger mb-3 d-block" style="font-size: 3rem;"></i>
+                    <h5 class="fw-bold mb-3">Ștergi acest mesaj?</h5>
+                    <p class="text-muted small mb-0">Mesajul va fi șters definitiv din conversație.</p>
+
+                    <input type="hidden" name="id" id="deleteMsgId" />
+                    <input type="hidden" name="currentConversatieId" value="@(chatActiv?.FirstOrDefault()?.ID_Mesaj)" />
+                </div>
+                <div class="modal-footer border-0 d-flex justify-content-center pb-4 pt-0">
+                    <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">Anulează</button>
+                    <button type="submit" class="btn btn-danger px-4">Șterge</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@if (chatActiv != null)
+{
+    <div class="modal fade" id="deleteConversationModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg rounded-4 text-center">
+                <form asp-action="StergeConversatie" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="modal-body p-4">
+                        <i class="bi bi-trash3 text-danger mb-3 d-block" style="font-size: 3rem;"></i>
+                        <h5 class="fw-bold mb-3">Ștergi toată conversația?</h5>
+                        <p class="text-muted small mb-0">Toate mesajele din această discuție vor fi șterse definitiv.</p>
+
+                        <input type="hidden" name="anuntId" value="@ViewBag.SelectedAnunt.ID_Anunt" />
+                        <input type="hidden" name="partnerId" value="@ViewBag.SelectedPartner.Id" />
+                    </div>
+                    <div class="modal-footer border-0 d-flex justify-content-center pb-4 pt-0">
+                        <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">Anulează</button>
+                        <button type="submit" class="btn btn-danger px-4">Da, șterge tot</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
 @section Scripts {
     <script>
         function updateScroll(){ var e = document.getElementById("chatWindow"); if(e) e.scrollTop = e.scrollHeight; }
         updateScroll();
+
         var editModal = document.getElementById('editMessageModal');
         if (editModal) {
             editModal.addEventListener('show.bs.modal', function (event) {
                 var b = event.relatedTarget;
                 document.getElementById('editMsgId').value = b.getAttribute('data-msg-id');
                 document.getElementById('editMsgContent').value = b.getAttribute('data-msg-content');
+            });
+        }
+
+        var deleteModal = document.getElementById('deleteMessageModal');
+        if (deleteModal) {
+            deleteModal.addEventListener('show.bs.modal', function (event) {
+                var b = event.relatedTarget;
+                document.getElementById('deleteMsgId').value = b.getAttribute('data-delete-msg-id');
             });
         }
     </script>

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Platforma_pentru_tranzactii_auto.Models;  
 using Platforma_pentru_tranzactii_auto.Areas.Identity.Data;
+using Platforma_pentru_tranzactii_auto.Services;
 //using Platforma_pentru_tranzactii_auto.Areas.Identity.Data;
 
 
@@ -21,10 +22,11 @@ builder.Services.AddDefaultIdentity<Utilizator>(options =>
 
 builder.Services.AddTransient<IEmailSender, EmailSender>();
 
+
 // === 3. RAZOR + MVC ===
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddScoped<RecomandareService>();
 var app = builder.Build();
 
 // Creăm rolurile la pornire

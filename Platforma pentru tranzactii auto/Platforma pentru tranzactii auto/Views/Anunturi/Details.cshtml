@@ -8,49 +8,43 @@
 
 <main class="container py-5 mt-4">
 
-    <div class="mb-4">
+    <div class="mb-4 d-flex justify-content-start">
         <a asp-action="Index" class="btn btn-outline-secondary btn-sm">
             ← Înapoi la listă
         </a>
     </div>
 
-    <div class="card shadow-lg border-0 rounded-4">
+    <div class="card shadow-lg border-0 rounded-4 mb-5">
         <div class="row g-0">
-
-            <div class="col-lg-5">
-                <div class="position-relative h-100">
-
+            <div class="col-lg-7 d-flex">
+                <div class="position-relative w-100 rounded-start-4" style="height: 450px; background-color: #f8f9fa; overflow: hidden;">
+                    
                     @if (Model.GalerieImagini != null && Model.GalerieImagini.Any())
                     {
                         <div id="carouselAnunt" class="carousel slide h-100" data-bs-ride="carousel">
-
                             <div class="carousel-indicators">
                                 @for (int i = 0; i < Model.GalerieImagini.Count; i++)
                                 {
                                     <button type="button" data-bs-target="#carouselAnunt" data-bs-slide-to="@i" class="@(i==0 ? "active" : "")"></button>
                                 }
                             </div>
-
-                            <div class="carousel-inner h-100" style="border-radius: 1.25rem 0 0 1.25rem; overflow: hidden;">
+                            <div class="carousel-inner h-100">
                                 @for (int i = 0; i < Model.GalerieImagini.Count; i++)
                                 {
                                     var img = Model.GalerieImagini[i];
                                     <div class="carousel-item h-100 @(i==0 ? "active" : "")">
                                         <img src="data:image/*;base64,@(Convert.ToBase64String(img.Imagine))"
                                              class="d-block w-100 h-100"
-                                             style="object-fit: cover; min-height: 400px;"
+                                             style="object-fit: cover; object-position: center;"
                                              alt="Imagine @i">
                                     </div>
                                 }
                             </div>
-
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselAnunt" data-bs-slide="prev">
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
                             </button>
                             <button class="carousel-control-next" type="button" data-bs-target="#carouselAnunt" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
                             </button>
                         </div>
                     }
@@ -58,40 +52,36 @@
                     {
                         <img src="data:image/*;base64,@(Convert.ToBase64String(Model.Imagine_Anunt))"
                              class="img-fluid w-100 h-100"
-                             style="object-fit: cover; border-radius: 1.25rem 0 0 1.25rem; min-height: 300px;"
+                             style="object-fit: cover; object-position: center;"
                              alt="Imagine principală" />
                     }
                     else
                     {
-                        <div class="d-flex align-items-center justify-content-center h-100 w-100 bg-light text-muted"
-                             style="min-height: 300px; border-radius: 1.25rem 0 0 1.25rem;">
-                            Fără imagine
+                        <div class="d-flex align-items-center justify-content-center h-100 w-100 text-muted">
+                            <i class="bi bi-image fs-1 opacity-50"></i>
                         </div>
                     }
 
-                    <span class="badge bg-primary position-absolute"
-                          style="bottom: 16px; left: 16px; padding: 0.6rem 1.1rem; border-radius: 999px; font-size: 0.95rem; z-index: 10;">
+                    <span class="badge bg-primary position-absolute shadow-sm"
+                          style="bottom: 20px; left: 20px; padding: 0.7rem 1.2rem; border-radius: 999px; font-size: 1.1rem; z-index: 10;">
                         @Model.Pret.ToString("N0") €
                     </span>
                 </div>
             </div>
 
-            <div class="col-lg-7">
-                <div class="card-body p-4 p-md-5">
+            <div class="col-lg-5 d-flex">
+                <div class="card-body p-4 p-md-5 d-flex flex-column h-100">
 
-                    <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
                         <div>
-                            <h1 class="h3 fw-bold mb-1">
-                                @Model.Marca @Model.Model
-                            </h1>
+                            <h1 class="h3 fw-bold mb-1">@Model.Marca @Model.Model</h1>
                             <p class="text-muted mb-0">
                                 @if (!string.IsNullOrWhiteSpace(Model.Locatie))
                                 {
-                                    <span><i class="bi bi-geo-alt"></i> @Model.Locatie</span>
+                                    <span><i class="bi bi-geo-alt-fill text-danger"></i> @Model.Locatie</span>
                                 }
                             </p>
                         </div>
-
                         @if (User.Identity.IsAuthenticated && UserManager.GetUserId(User) == Model.UserId.ToString())
                         {
                             <a asp-action="Edit" asp-route-id="@Model.ID_Anunt" class="btn btn-outline-primary btn-sm">
@@ -102,64 +92,89 @@
 
                     <hr />
 
-                    <div class="row gy-3 mb-4">
-                        <div class="col-6 col-md-4">
+                    <div class="row gy-3">
+                        <div class="col-4">
                             <div class="text-muted small">An fabricație</div>
                             <div class="fw-semibold">@Model.An_Fabricatie</div>
                         </div>
-                        <div class="col-6 col-md-4">
+                        <div class="col-4">
                             <div class="text-muted small">Kilometraj</div>
                             <div class="fw-semibold">@Model.Kilometraj.ToString("N0") km</div>
                         </div>
-                        <div class="col-6 col-md-4">
-                            <div class="text-muted small">Data postării</div>
-                            <div class="fw-semibold">@Model.Data_Postarii.ToLocalTime().ToString("dd.MM.yyyy")</div>
+                        <div class="col-4">
+                            <div class="text-muted small">Caroserie</div>
+                            <div class="fw-semibold">@(string.IsNullOrEmpty(Model.TipCaroserie) ? "-" : Model.TipCaroserie)</div>
                         </div>
-                        <div class="col-6 col-md-4">
-                            <div class="text-muted small">Vizualizări</div>
-                            <div class="fw-semibold"><i class="bi bi-eye"></i> @Model.Nr_Vizualizari</div>
+                        <div class="col-4">
+                            <div class="text-muted small">Combustibil</div>
+                            <div class="fw-semibold">@(string.IsNullOrEmpty(Model.Combustibil) ? "-" : Model.Combustibil)</div>
                         </div>
-                        <div class="col-6 col-md-4">
-                            <div class="text-muted small">Vânzător</div>
-                            <div class="fw-semibold">
-                                @((Model.User?.Prenume + " " + Model.User?.Nume).Trim() == "" ? (Model.User?.Email ?? "Necunoscut") : (Model.User?.Prenume + " " + Model.User?.Nume))
-                            </div>
-                            @if (User.Identity.IsAuthenticated && UserManager.GetUserId(User) != Model.UserId.ToString())
-                            {
-                                <button type="button" class="btn btn-success btn-sm mt-2 w-100 rounded-pill"
-                                        data-bs-toggle="modal" data-bs-target="#modalContact">
-                                    <i class="bi bi-envelope-fill"></i> Contactează
-                                </button>
-                            }
+                        <div class="col-4">
+                            <div class="text-muted small">Motorizare</div>
+                            <div class="fw-semibold">@(Model.CapacitateMotor > 0 ? Model.CapacitateMotor + " cm³" : "-")</div>
+                        </div>
+                        <div class="col-4">
+                            <div class="text-muted small">Putere</div>
+                            <div class="fw-semibold">@(Model.PutereCP > 0 ? Model.PutereCP + " CP" : "-")</div>
+                        </div>
+                        <div class="col-4">
+                            <div class="text-muted small">Transmisie</div>
+                            <div class="fw-semibold">@(string.IsNullOrEmpty(Model.Transmisie) ? "-" : Model.Transmisie)</div>
                         </div>
                     </div>
-
-                    @if (!string.IsNullOrWhiteSpace(Model.Descriere))
-                    {
-                        <div class="mb-4">
-                            <h5 class="fw-semibold mb-2">Descriere</h5>
-                            <p class="text-muted mb-0" style="white-space: pre-line;">
-                                @Model.Descriere
-                            </p>
-                        </div>
-                    }
-
-                    <div class="d-flex justify-content-between align-items-center mt-3">
-                        <a asp-action="Index" class="btn btn-outline-secondary">
-                            ← Înapoi la listă
-                        </a>
-
-                        @if (User.Identity.IsAuthenticated && UserManager.GetUserId(User) == Model.UserId.ToString())
-                        {
-                            <div>
-                                <a asp-action="Delete" asp-route-id="@Model.ID_Anunt" class="btn btn-outline-danger btn-sm">
-                                    Șterge Anunț
-                                </a>
-                            </div>
-                        }
-                    </div>
-
                 </div>
+            </div>
+        </div>
+
+        <div class="card-body px-4 px-md-5 pb-4">
+            @if (!string.IsNullOrWhiteSpace(Model.Descriere))
+            {
+                <hr class="mt-0" />
+                <div class="mb-4">
+                    <h5 class="fw-semibold mb-2 fs-6">Descriere</h5>
+                    <p class="text-muted mb-0 small" style="white-space: pre-line;">
+                        @Model.Descriere
+                    </p>
+                </div>
+            }
+
+            @if (!string.IsNullOrWhiteSpace(Model.Locatie))
+            {
+                <hr class="mt-0" />
+                <div class="mb-4">
+                    <h5 class="fw-semibold mb-2 fs-6"><i class="bi bi-map"></i> Locație vehicul</h5>
+                    <div class="ratio ratio-21x9 rounded-3 overflow-hidden border">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=@Uri.EscapeDataString(Model.Locatie)&t=&z=13&ie=UTF8&iwloc=&output=embed" 
+                            frameborder="0" 
+                            style="border:0;" 
+                            allowfullscreen="">
+                        </iframe>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="card-footer bg-light px-4 px-md-5 py-3 d-flex justify-content-between align-items-center rounded-bottom-4">
+            <div class="small text-muted d-flex align-items-center gap-3">
+                <span><i class="bi bi-eye"></i> @Model.Nr_Vizualizari vizualizări</span>
+                <span><i class="bi bi-calendar-event"></i> Postat pe @Model.Data_Postarii.ToLocalTime().ToString("dd.MM.yyyy")</span>
+                <span><i class="bi bi-person"></i> Vânzător: @((Model.User?.Prenume + " " + Model.User?.Nume).Trim() == "" ? (Model.User?.Email ?? "Necunoscut") : (Model.User?.Prenume + " " + Model.User?.Nume))</span>
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+                @if (User.Identity.IsAuthenticated && UserManager.GetUserId(User) == Model.UserId.ToString())
+                {
+                    <a asp-action="Delete" asp-route-id="@Model.ID_Anunt" class="btn btn-outline-danger btn-sm">
+                        <i class="bi bi-trash"></i> Șterge Anunț
+                    </a>
+                }
+                else
+                {
+                    <button type="button" class="btn btn-success btn-sm px-3" data-bs-toggle="modal" data-bs-target="#modalContact">
+                        <i class="bi bi-envelope-fill"></i> Contactează vânzătorul
+                    </button>
+                }
             </div>
         </div>
     </div>
@@ -232,7 +247,6 @@
         </div>
     </div>
 </main>
-
 
 <div class="modal fade" id="modalContact" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -316,13 +330,10 @@
             });
         });
 
-        // --- 2. SCRIPT ȘTERGERE COMENTARIU (NOU) ---
-        // Folosim Event Delegation pentru că butoanele de ștergere apar dinamic
+        // --- 2. SCRIPT ȘTERGERE COMENTARIU ---
         document.getElementById('lista-comentarii')?.addEventListener('submit', function(e) {
-
-            // Verificăm dacă formularul trimis este unul de ștergere
             if (e.target.classList.contains('delete-comment-form')) {
-                e.preventDefault(); // Oprim refresh-ul paginii
+                e.preventDefault();
 
                 if (!confirm('Sigur vrei să ștergi acest comentariu?')) {
                     return;
@@ -341,23 +352,18 @@
                 })
                 .then(response => {
                     if (response.ok) {
-                        // Căutăm cardul comentariului după ID
                         var card = document.getElementById('comment-' + commentId);
                         if (card) {
-                            // Animație de ștergere
                             card.style.transition = "all 0.5s ease";
                             card.style.opacity = "0";
                             card.style.transform = "translateX(20px)";
 
-                            // Eliminăm elementul după ce se termină animația
                             setTimeout(() => {
                                 card.remove();
-
-                                // Opțional: Actualizăm contorul de comentarii
                                 var counterSpan = document.querySelector('h3 span.text-muted');
                                 if(counterSpan) {
                                     var text = counterSpan.innerText;
-                                    var count = parseInt(text.replace(/\D/g,'')); // Extragem numărul
+                                    var count = parseInt(text.replace(/\D/g,''));
                                     if(!isNaN(count) && count > 0) {
                                         counterSpan.innerText = '(' + (count - 1) + ')';
                                     }
@@ -379,18 +385,14 @@
         }
 
         @@keyframes slideDownFade {
-            from
-
-        {
-            opacity: 0;
-            transform: translateY(-20px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 }

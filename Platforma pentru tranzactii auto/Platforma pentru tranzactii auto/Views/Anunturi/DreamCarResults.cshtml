@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Platforma_pentru_tranzactii_auto.Models.Anunturi>
+
+@{
+    ViewData["Title"] = "Rezultate Recomandări";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2>Recomandările tale personalizate 🎯</h2>
+            <p class="text-muted">Iată cele mai bune potriviri calculate de algoritmul nostru inteligent.</p>
+        </div>
+        <div>
+            <a asp-action="DreamCar" class="btn btn-outline-secondary">← Caută din nou</a>
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-warning text-center" role="alert">
+            Nu am putut găsi mașini care să se potrivească preferințelor tale. Încearcă să ajustezi bugetul sau anul de fabricație!
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var anunt in Model)
+            {
+                <div class="col">
+                    <div class="card h-100 shadow-sm" style="border-radius: 12px; overflow: hidden;">
+
+                        @if (anunt.Imagine_Anunt != null)
+                        {
+                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(anunt.Imagine_Anunt)" class="card-img-top" alt="@anunt.Marca @anunt.Model" style="height: 200px; object-fit: cover;">
+                        }
+                        else
+                        {
+                            <img src="/images/no-image.jpg" class="card-img-top" alt="Fără imagine" style="height: 200px; object-fit: cover;">
+                        }
+
+                        <div class="card-body">
+                            <h4 class="card-title font-weight-bold mb-3">@anunt.Marca @anunt.Model</h4>
+                            <h5 class="text-primary mb-3">@anunt.Pret.ToString("N0") €</h5>
+
+                            <div class="text-muted small mb-3">
+                                <span class="me-3"><i class="bi bi-calendar"></i> @anunt.An_Fabricatie</span>
+                                <span><i class="bi bi-speedometer2"></i> @anunt.Kilometraj.ToString("N0") km</span>
+                            </div>
+
+                            <div class="text-muted small mb-3">
+                                @if (anunt.PutereCP > 0)
+                                {
+                                    <span class="me-3"><i class="bi bi-lightning"></i> @anunt.PutereCP CP</span>
+                                }
+                                @if (anunt.CapacitateMotor > 0)
+                                {
+                                    <span><i class="bi bi-gear"></i> @anunt.CapacitateMotor cm³</span>
+                                }
+                            </div>
+
+                            <p class="card-text text-truncate">@anunt.Descriere</p>
+                        </div>
+
+                        <div class="card-footer bg-white border-0 pb-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted"><i class="bi bi-geo-alt"></i> @anunt.Locatie</small>
+                                <a asp-action="Details" asp-route-id="@anunt.ID_Anunt" class="btn btn-primary w-50">Detalii</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
