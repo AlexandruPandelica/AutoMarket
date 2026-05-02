@@ -27390,6 +27390,416 @@
       ]
     },
     {
+      "Route": "videos/14912521-uhd_2158_3840_60fps.izi7kehbln.mp4",
+      "AssetFile": "videos/14912521-uhd_2158_3840_60fps.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9096030"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IkhniYQA9yKI3HXjaP2hkwRUzJsdyfTyZd81FXNZSaE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 16 Apr 2026 14:09:52 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "izi7kehbln"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-IkhniYQA9yKI3HXjaP2hkwRUzJsdyfTyZd81FXNZSaE="
+        },
+        {
+          "Name": "label",
+          "Value": "videos/14912521-uhd_2158_3840_60fps.mp4"
+        }
+      ]
+    },
+    {
+      "Route": "videos/14912521-uhd_2158_3840_60fps.mp4",
+      "AssetFile": "videos/14912521-uhd_2158_3840_60fps.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9096030"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IkhniYQA9yKI3HXjaP2hkwRUzJsdyfTyZd81FXNZSaE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 16 Apr 2026 14:09:52 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-IkhniYQA9yKI3HXjaP2hkwRUzJsdyfTyZd81FXNZSaE="
+        }
+      ]
+    },
+    {
+      "Route": "videos/21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.3szfdmbfrz.mp4",
+      "AssetFile": "videos/21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5004408"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Apr 2026 10:45:20 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3szfdmbfrz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ="
+        },
+        {
+          "Name": "label",
+          "Value": "videos/21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.mp4"
+        }
+      ]
+    },
+    {
+      "Route": "videos/21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.mp4",
+      "AssetFile": "videos/21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5004408"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Apr 2026 10:45:20 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ="
+        }
+      ]
+    },
+    {
+      "Route": "videos/5b28831c-890e-4b09-9cb7-f08a8da1b62c_audiQ5.6yea6grx8u.mp4",
+      "AssetFile": "videos/5b28831c-890e-4b09-9cb7-f08a8da1b62c_audiQ5.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3865797"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LmBotXEeVTIhuIb2RWEj4TVTBXDcqqg/7vwt5L3X1kc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Apr 2026 10:04:09 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6yea6grx8u"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-LmBotXEeVTIhuIb2RWEj4TVTBXDcqqg/7vwt5L3X1kc="
+        },
+        {
+          "Name": "label",
+          "Value": "videos/5b28831c-890e-4b09-9cb7-f08a8da1b62c_audiQ5.mp4"
+        }
+      ]
+    },
+    {
+      "Route": "videos/5b28831c-890e-4b09-9cb7-f08a8da1b62c_audiQ5.mp4",
+      "AssetFile": "videos/5b28831c-890e-4b09-9cb7-f08a8da1b62c_audiQ5.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3865797"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LmBotXEeVTIhuIb2RWEj4TVTBXDcqqg/7vwt5L3X1kc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Apr 2026 10:04:09 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-LmBotXEeVTIhuIb2RWEj4TVTBXDcqqg/7vwt5L3X1kc="
+        }
+      ]
+    },
+    {
+      "Route": "videos/87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.izi7kehbln.mp4",
+      "AssetFile": "videos/87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9096030"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IkhniYQA9yKI3HXjaP2hkwRUzJsdyfTyZd81FXNZSaE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 16 Apr 2026 14:24:35 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "izi7kehbln"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-IkhniYQA9yKI3HXjaP2hkwRUzJsdyfTyZd81FXNZSaE="
+        },
+        {
+          "Name": "label",
+          "Value": "videos/87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.mp4"
+        }
+      ]
+    },
+    {
+      "Route": "videos/87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.mp4",
+      "AssetFile": "videos/87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9096030"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IkhniYQA9yKI3HXjaP2hkwRUzJsdyfTyZd81FXNZSaE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 16 Apr 2026 14:24:35 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-IkhniYQA9yKI3HXjaP2hkwRUzJsdyfTyZd81FXNZSaE="
+        }
+      ]
+    },
+    {
+      "Route": "videos/Chevrolet Camaro SS – Design Details.3szfdmbfrz.mp4",
+      "AssetFile": "videos/Chevrolet Camaro SS – Design Details.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5004408"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Apr 2026 10:44:24 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3szfdmbfrz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ="
+        },
+        {
+          "Name": "label",
+          "Value": "videos/Chevrolet Camaro SS – Design Details.mp4"
+        }
+      ]
+    },
+    {
+      "Route": "videos/Chevrolet Camaro SS – Design Details.mp4",
+      "AssetFile": "videos/Chevrolet Camaro SS – Design Details.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5004408"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Apr 2026 10:44:24 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ="
+        }
+      ]
+    },
+    {
       "Route": "videos/audi.gif",
       "AssetFile": "videos/audi.gif",
       "Selectors": [],
@@ -27468,6 +27878,88 @@
         {
           "Name": "label",
           "Value": "videos/audi.gif"
+        }
+      ]
+    },
+    {
+      "Route": "videos/audiQ5.6yea6grx8u.mp4",
+      "AssetFile": "videos/audiQ5.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3865797"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LmBotXEeVTIhuIb2RWEj4TVTBXDcqqg/7vwt5L3X1kc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Apr 2026 09:59:36 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6yea6grx8u"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-LmBotXEeVTIhuIb2RWEj4TVTBXDcqqg/7vwt5L3X1kc="
+        },
+        {
+          "Name": "label",
+          "Value": "videos/audiQ5.mp4"
+        }
+      ]
+    },
+    {
+      "Route": "videos/audiQ5.mp4",
+      "AssetFile": "videos/audiQ5.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3865797"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LmBotXEeVTIhuIb2RWEj4TVTBXDcqqg/7vwt5L3X1kc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Apr 2026 09:59:36 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-LmBotXEeVTIhuIb2RWEj4TVTBXDcqqg/7vwt5L3X1kc="
         }
       ]
     },

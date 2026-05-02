@@ -153,7 +153,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei contr
         // POST: Anunturi/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID_Anunt,Marca,Model,Pret,An_Fabricatie,Kilometraj,Descriere,Locatie,UserId, Combustibil, Transmisie, CapacitateMotor, PutereCP, TipCaroserie")] Anunturi anunturi, IEnumerable<IFormFile>? imaginiUpload)
+        public async Task<IActionResult> Create([Bind("ID_Anunt,Marca,Model,Pret,An_Fabricatie,Kilometraj,Descriere,Locatie,UserId, Combustibil, Transmisie, CapacitateMotor, PutereCP, TipCaroserie, VideoPath")] Anunturi anunturi, IEnumerable<IFormFile>? imaginiUpload, IFormFile? videoUpload)
         {
             ModelState.Remove("User");
             ModelState.Remove("Imagine_Anunt");
@@ -161,6 +161,26 @@ namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei contr
 
             anunturi.Data_Postarii = DateTime.UtcNow;
             anunturi.Nr_Vizualizari = 0;
+
+            if (videoUpload != null && videoUpload.Length > 0)
+            {
+                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "videos");
+
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                string uniqueFileName = Guid.NewGuid().ToString() + "_" + videoUpload.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await videoUpload.CopyToAsync(stream);
+                }
+
+                anunturi.VideoPath = uniqueFileName;
+            }
 
             if (imaginiUpload != null && imaginiUpload.Any())
             {
@@ -223,7 +243,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei contr
         // POST: Anunturi/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Anunturi anunturiForm, IEnumerable<IFormFile>? imaginiUpload)
+        public async Task<IActionResult> Edit(int id, Anunturi anunturiForm, IEnumerable<IFormFile>? imaginiUpload, IFormFile? videoUpload)
         {
             if (id != anunturiForm.ID_Anunt) return NotFound();
 
@@ -239,17 +259,41 @@ namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei contr
             anuntDinDb.Marca = anunturiForm.Marca;
             anuntDinDb.Model = anunturiForm.Model;
             anuntDinDb.Pret = anunturiForm.Pret;
-            anuntDinDb.An_Fabricatie = anunturiForm.An_Fabricatie;
+            anuntDinDb.An_Fabricatie = anunturiForm.An_Fabricatie; // ✅ Adaugă asta
             anuntDinDb.Kilometraj = anunturiForm.Kilometraj;
             anuntDinDb.Locatie = anunturiForm.Locatie;
             anuntDinDb.Descriere = anunturiForm.Descriere;
 
-            // --- ADAUGĂ ACESTE LINII ---
             anuntDinDb.Combustibil = anunturiForm.Combustibil;
             anuntDinDb.Transmisie = anunturiForm.Transmisie;
             anuntDinDb.CapacitateMotor = anunturiForm.CapacitateMotor;
             anuntDinDb.PutereCP = anunturiForm.PutereCP;
             anuntDinDb.TipCaroserie = anunturiForm.TipCaroserie;
+
+            if (videoUpload != null && videoUpload.Length > 0)
+            {
+                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "videos");
+                if (!Directory.Exists(uploadsFolder)) Directory.CreateDirectory(uploadsFolder);
+
+                if (!string.IsNullOrEmpty(anuntDinDb.VideoPath))
+                {
+                    string oldFilePath = Path.Combine(uploadsFolder, anuntDinDb.VideoPath);
+                    if (System.IO.File.Exists(oldFilePath))
+                    {
+                        System.IO.File.Delete(oldFilePath);
+                    }
+                }
+
+                string uniqueFileName = Guid.NewGuid().ToString() + "_" + videoUpload.FileName;
+                string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await videoUpload.CopyToAsync(stream);
+                }
+
+                anuntDinDb.VideoPath = uniqueFileName;
+            }
 
             if (imaginiUpload != null && imaginiUpload.Any())
             {
@@ -310,6 +354,15 @@ namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei contr
             var user = await _userManager.GetUserAsync(User);
             if (user == null || anunturi.UserId != user.Id) return Forbid();
 
+            if (!string.IsNullOrEmpty(anunturi.VideoPath))
+            {
+                string videoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "videos", anunturi.VideoPath);
+                if (System.IO.File.Exists(videoPath))
+                {
+                    System.IO.File.Delete(videoPath);
+                }
+            }
+
             _context.Anunt.Remove(anunturi);
             await _context.SaveChangesAsync();
 
@@ -354,6 +407,35 @@ namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei contr
 
             _context.ImaginiAnunt.Remove(imagine);
             await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Edit), new { id = anunt.ID_Anunt });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> StergeVideo(int id)
+        {
+            var anunt = await _context.Anunt.FindAsync(id);
+            if (anunt == null) return NotFound();
+
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user == null || anunt.UserId != user.Id)
+            {
+                return Forbid();
+            }
+
+            if (!string.IsNullOrEmpty(anunt.VideoPath))
+            {
+                string videoPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "videos", anunt.VideoPath);
+                if (System.IO.File.Exists(videoPath))
+                {
+                    System.IO.File.Delete(videoPath);
+                }
+
+                anunt.VideoPath = null;
+                await _context.SaveChangesAsync();
+            }
 
             return RedirectToAction(nameof(Edit), new { id = anunt.ID_Anunt });
         }

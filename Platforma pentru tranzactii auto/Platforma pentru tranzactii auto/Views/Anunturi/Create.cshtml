@@ -124,27 +124,39 @@
                                 <span asp-validation-for="Descriere" class="text-danger small"></span>
                             </div>
 
+                            <hr class="my-4 text-muted" />
+
                             <div class="col-md-6">
-                                <label class="form-label fw-semibold">Încarcă imagini (Poți selecta mai multe)</label>
-                                <input type="file" name="imaginiUpload" class="form-control" multiple accept="image/*" />
+                                <label class="form-label fw-semibold"><i class="bi bi-images text-primary"></i> Încarcă imagini (Poți selecta mai multe)</label>
+                                <input type="file" name="imaginiUpload" class="form-control bg-light" multiple accept="image/*" />
                                 <small class="text-muted d-block mt-1">
                                     Format: JPG, PNG · Prima imagine selectată va fi coperta.
                                 </small>
                             </div>
 
                             <div class="col-md-6">
-                                <label asp-for="UserId" class="form-label fw-semibold">Utilizator</label>
-                                <select asp-for="UserId" class="form-select" asp-items="ViewBag.UserId"></select>
+                                <label class="form-label fw-semibold"><i class="bi bi-camera-video text-danger"></i> Video de Prezentare (Opțional)</label>
+                                <input type="file" name="videoUpload" class="form-control bg-light border-danger-subtle" accept="video/mp4,video/webm,video/ogg" />
+                                <small class="text-muted d-block mt-1">
+                                    Format acceptat: MP4, WebM. Durată recomandată: max 30 sec.
+                                </small>
+                            </div>
+
+                            <hr class="my-4 text-muted" />
+
+                            <div class="col-md-6">
+                                <label asp-for="UserId" class="form-label fw-semibold text-muted">Utilizator</label>
+                                <select asp-for="UserId" class="form-select bg-light" asp-items="ViewBag.UserId"></select>
                                 <span asp-validation-for="UserId" class="text-danger small"></span>
                             </div>
                         </div>
 
-                        <div class="d-flex justify-content-between align-items-center mt-4">
+                        <div class="d-flex justify-content-between align-items-center mt-5">
                             <a asp-action="Index" class="btn btn-outline-secondary">
                                 ← Înapoi la listă
                             </a>
-                            <button type="submit" class="btn btn-primary px-4">
-                                Publică anunțul
+                            <button type="submit" class="btn btn-primary px-5 py-2 fw-bold shadow-sm rounded-pill">
+                                <i class="bi bi-check2-circle"></i> Publică anunțul
                             </button>
                         </div>
                     </form>

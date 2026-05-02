@@ -30,6 +30,8 @@ namespace Platforma_pentru_tranzactii_auto.Models
         public string? TipCaroserie { get; set; } // Sedan, SUV, Hatchback, Break
 
         public byte[]? Imagine_Anunt { get; set; }
+        // --- NOU: Calea către videoclipul salvat fizic pe server ---
+        public string? VideoPath { get; set; }
         public List<ImaginiAnunt>? GalerieImagini { get; set; }
 
         // FK către utilizator (proprietar)

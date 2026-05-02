@@ -2,123 +2,514 @@
     ViewData["Title"] = "Despre Platformă";
 }
 
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+
 <style>
-    .about-hero {
-        background: linear-gradient(135deg, #0d6efd 0%, #003b99 100%);
-        color: white;
-        padding: 60px 20px;
-        border-radius: 15px;
-        margin-bottom: 40px;
+    .am-wrap {
+        font-family: 'DM Sans', sans-serif;
+        color: #1a1a1a;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 24px 16px 60px;
+    }
+
+    /* ── HERO ── */
+    .am-hero {
+        position: relative;
+        background: #0a0f1e;
+        border-radius: 20px;
+        padding: 64px 48px 56px;
+        overflow: hidden;
+        margin-bottom: 56px;
+    }
+
+        .am-hero::before {
+            content: '';
+            position: absolute;
+            top: -60px;
+            right: -60px;
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, #1a4fff33 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .am-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            left: 20%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #0d6efd22 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+    .am-hero-tag {
+        display: inline-block;
+        background: #1a4fff22;
+        border: 0.5px solid #1a4fff55;
+        color: #7ba7ff;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 6px 14px;
+        border-radius: 100px;
+        margin-bottom: 24px;
+    }
+
+    .am-hero h1 {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-weight: 800;
+        font-size: clamp(1.8rem, 3vw, 2.6rem);
+        color: #fff;
+        line-height: 1.1;
+        margin: 0 0 20px;
+        max-width: 560px;
+    }
+
+        .am-hero h1 span {
+            color: #4d8fff;
+        }
+
+    .am-hero p {
+        color: #8896b3;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        max-width: 480px;
+        margin: 0;
+        font-weight: 300;
+    }
+
+    .am-hero-badge {
+        position: absolute;
+        top: 48px;
+        right: 48px;
+        background: #111827;
+        border: 0.5px solid #1e3a5f;
+        border-radius: 14px;
+        padding: 18px 22px;
         text-align: center;
     }
 
-        .about-hero h1 {
-            font-weight: 700;
-            font-size: 2.8rem;
+        .am-hero-badge .num {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #4d8fff;
+            display: block;
+            line-height: 1;
         }
 
-    .info-card {
-        background: white;
-        padding: 25px;
-        border-radius: 15px;
-        box-shadow: 0 4px 18px rgba(0,0,0,0.1);
-        transition: 0.3s;
-    }
-
-        .info-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 25px rgba(0,0,0,0.18);
+        .am-hero-badge .lbl {
+            font-size: 11px;
+            color: #8896b3;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-top: 6px;
         }
 
-    .icon-box {
-        width: 60px;
-        height: 60px;
-        border-radius: 12px;
-        background-color: #e7f1ff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 28px;
-        color: #0d6efd;
-        margin-bottom: 15px;
+    /* ── LABELS & TITLES ── */
+    .am-section-label {
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        color: #4d8fff;
+        margin-bottom: 10px;
     }
 
-    .section-title {
+    .am-section-title {
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-weight: 700;
-        font-size: 1.8rem;
-        margin-bottom: 20px;
+        font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+        color: #0a0f1e;
+        margin: 0 0 10px;
+        line-height: 1.2;
     }
 
-    .about-text {
-        font-size: 1.1rem;
-        line-height: 1.7;
+    .am-section-sub {
+        color: #6b7280;
+        font-size: 0.97rem;
+        font-weight: 300;
+        line-height: 1.65;
+        margin: 0 0 36px;
+        max-width: 560px;
+    }
+
+    /* ── FEATURES GRID ── */
+    .am-features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 60px;
+    }
+
+    .am-feat {
+        background: #fff;
+        border: 0.5px solid #e5e7eb;
+        border-radius: 16px;
+        padding: 24px 20px;
+        transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+        .am-feat:hover {
+            border-color: #4d8fff66;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(77, 143, 255, 0.1);
+        }
+
+    .am-feat-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: #e7f1ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        margin-bottom: 14px;
+    }
+
+    .am-feat h4 {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-weight: 700;
+        font-size: 0.95rem;
+        margin: 0 0 8px;
+        color: #0a0f1e;
+    }
+
+    .am-feat p {
+        font-size: 0.85rem;
+        color: #6b7280;
+        margin: 0;
+        line-height: 1.6;
+        font-weight: 300;
+    }
+
+    /* ── TWO COLUMN SECTION ── */
+    .am-two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin-bottom: 60px;
+        align-items: start;
+    }
+
+    /* ── STATS ── */
+    .am-stat-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .am-stat {
+        background: #0a0f1e;
+        border-radius: 14px;
+        padding: 22px 18px;
+    }
+
+        .am-stat .val {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 2rem;
+            font-weight: 800;
+            color: #4d8fff;
+            display: block;
+            line-height: 1;
+            margin-bottom: 6px;
+        }
+
+        .am-stat .desc {
+            font-size: 0.82rem;
+            color: #8896b3;
+            font-weight: 300;
+        }
+
+    /* ── MISSION QUOTE ── */
+    .am-mission {
+        background: #f3f4f6;
+        border-radius: 14px;
+        padding: 24px 22px;
+        margin-top: 20px;
+    }
+
+        .am-mission p {
+            font-size: 0.95rem;
+            color: #4b5563;
+            line-height: 1.75;
+            margin: 0;
+            font-weight: 300;
+            font-style: italic;
+        }
+
+            .am-mission p::before {
+                content: '\201C';
+                font-size: 2rem;
+                color: #4d8fff;
+                line-height: 0;
+                vertical-align: -0.45rem;
+                margin-right: 4px;
+            }
+
+    /* ── ROLE PILLS ── */
+    .am-team-row {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 60px;
+        flex-wrap: wrap;
+    }
+
+    .am-role-pill {
+        background: #fff;
+        border: 0.5px solid #e5e7eb;
+        border-radius: 100px;
+        padding: 10px 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.88rem;
+        color: #374151;
+        font-weight: 400;
+    }
+
+        .am-role-pill .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #4d8fff;
+            flex-shrink: 0;
+        }
+
+        .am-role-pill.green .dot {
+            background: #22c55e;
+        }
+
+        .am-role-pill.amber .dot {
+            background: #f59e0b;
+        }
+
+    /* ── CTA ── */
+    .am-cta {
+        background: #0a0f1e;
+        border-radius: 20px;
+        padding: 48px 44px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 32px;
+        flex-wrap: wrap;
+    }
+
+    .am-cta-text h3 {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-weight: 800;
+        font-size: clamp(1.2rem, 2vw, 1.6rem);
+        color: #fff;
+        margin: 0 0 8px;
+    }
+
+    .am-cta-text p {
+        color: #8896b3;
+        margin: 0;
+        font-size: 0.9rem;
+        font-weight: 300;
+    }
+
+    .am-cta-btn {
+        background: #1a4fff;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 14px 28px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.92rem;
+        font-weight: 500;
+        cursor: pointer;
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: background 0.2s ease;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+        .am-cta-btn:hover {
+            background: #2d5fff;
+            color: #fff;
+            text-decoration: none;
+        }
+
+    /* ── RESPONSIVE ── */
+    @@media (max-width: 768px) {
+        .am-hero {
+            padding: 40px 24px 36px;
+        }
+
+        .am-hero-badge {
+            display: none;
+        }
+
+        .am-features {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .am-two-col {
+            grid-template-columns: 1fr;
+        }
+
+        .am-cta {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .am-cta-btn {
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    @@media (max-width: 480px) {
+        .am-features {
+            grid-template-columns: 1fr;
+        }
     }
 </style>
 
-<div class="container mt-4">
+<div class="am-wrap">
 
-    <!-- HERO SECTION -->
-    <div class="about-hero">
-        <h1>Despre Platforma AutoMarket</h1>
-        <p class="mt-3 lead">
-            Platforma inteligentă pentru tranzacții auto – creată pentru a conecta cumpărătorii și vânzătorii într-un mod rapid, sigur și eficient.
+    <!-- HERO -->
+    <div class="am-hero">
+        <div class="am-hero-tag">Platforma Auto Nr. 1 în România</div>
+        <h1>
+            Mașina ta ideală<br />
+            e la un click<br />
+            <span>distanță</span>
+        </h1>
+        <p>
+            Conectăm cumpărători și vânzători printr-o experiență digitală
+            rapidă, sigură și inteligentă.
+        </p>
+        <div class="am-hero-badge">
+            <span class="num">10K+</span>
+            <span class="lbl">Anunțuri active</span>
+        </div>
+    </div>
+
+    <!-- INTRO SECTION -->
+    <div style="margin-bottom: 36px;">
+        <div class="am-section-label">Ce oferim</div>
+        <div class="am-section-title">Tot ce ai nevoie, într-un singur loc</div>
+        <p class="am-section-sub">
+            Funcționalități gândite pentru o experiență fluidă, de la primul
+            search până la tranzacție.
         </p>
     </div>
 
-    <!-- PREZENTARE GENERALĂ -->
-    <div class="mb-5">
-        <h2 class="section-title">Ce este AutoMarket?</h2>
-        <p class="about-text">
-            AutoMarket este o platformă modernă unde utilizatorii pot publica, gestiona și găsi anunțuri auto
-            într-un mod simplu și intuitiv. Scopul nostru este să facilităm procesul de vânzare și achiziție prin:
-        </p>
-
-        <ul class="about-text">
-            <li>Filtrare avansată dupa marcă, model, ora, pret, an </li>
-            <li>📸 Vizualizare imagini pentru fiecare vehicul</li>
-            <li>⭐ Posibilitatea de a salva anunțurile favorite</li>
-            <li>💬 Sistem de comentarii și rating</li>
-            <li>📊 Număr de vizualizări pentru fiecare anunț</li>
-            <li>🔐 Conturi securizate pentru clienți și administratori</li>
-        </ul>
+    <!-- FEATURES -->
+    <div class="am-features">
+        <div class="am-feat">
+            <div class="am-feat-icon">🔍</div>
+            <h4>Filtrare avansată</h4>
+            <p>Caută după marcă, model, an, preț, oră publicare și mai mult.</p>
+        </div>
+        <div class="am-feat">
+            <div class="am-feat-icon">📸</div>
+            <h4>Galerie foto HD</h4>
+            <p>Fiecare anunț vine cu imagini de calitate pentru o decizie informată.</p>
+        </div>
+        <div class="am-feat">
+            <div class="am-feat-icon">⭐</div>
+            <h4>Favorite & Wishlist</h4>
+            <p>Salvează anunțurile preferate și revin-o oricând la ele rapid.</p>
+        </div>
+        <div class="am-feat">
+            <div class="am-feat-icon">💬</div>
+            <h4>Comentarii & Rating</h4>
+            <p>Sistem complet de feedback pentru o comunitate de încredere.</p>
+        </div>
+        <div class="am-feat">
+            <div class="am-feat-icon">📊</div>
+            <h4>Statistici anunțuri</h4>
+            <p>Urmărește vizualizările și performanța fiecărui anunț în timp real.</p>
+        </div>
+        <div class="am-feat">
+            <div class="am-feat-icon">🔐</div>
+            <h4>Conturi securizate</h4>
+            <p>Autentificare robustă, roluri distincte Client & Admin.</p>
+        </div>
     </div>
 
-    <!-- CARDURI INFORMATII -->
-    <div class="row g-4">
-
-        <div class="col-md-4">
-            <div class="info-card text-center">
-                <div class="icon-box">🚗</div>
-                <h4>Publicare Anunțuri Auto</h4>
-                <p>Utilizatorii pot adăuga anunțuri cu detalii complete: preț, marcă, model, an, poze și descriere.</p>
+    <!-- DE CE AUTOMARKET + STATS -->
+    <div class="am-two-col">
+        <div>
+            <div class="am-section-label">Misiunea noastră</div>
+            <div class="am-section-title">De ce AutoMarket?</div>
+            <p style="color: #6b7280; font-size: 0.93rem; line-height: 1.75; font-weight: 300; margin: 0 0 20px;">
+                Am construit AutoMarket pentru că piața auto merita o platformă
+                modernă — nu doar un site cu anunțuri, ci un ecosistem complet
+                care pune utilizatorul pe primul loc.
+            </p>
+            <div class="am-mission">
+                <p>
+                    Credem într-o piață digitală sigură, accesibilă și rapidă
+                    pentru toată lumea. Tehnologie modernă și transparență deplină.
+                </p>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="info-card text-center">
-                <div class="icon-box">⭐</div>
-                <h4>Favorite & Wishlist</h4>
-                <p>Salvează anunțurile care îți plac într-o listă personalizată pentru acces rapid oricând.</p>
+        <div>
+            <div class="am-stat-grid">
+                <div class="am-stat">
+                    <span class="val">10K+</span>
+                    <span class="desc">Anunțuri publicate</span>
+                </div>
+                <div class="am-stat">
+                    <span class="val">98%</span>
+                    <span class="desc">Utilizatori mulțumiți</span>
+                </div>
+                <div class="am-stat">
+                    <span class="val">50+</span>
+                    <span class="desc">Mărci disponibile</span>
+                </div>
+                <div class="am-stat">
+                    <span class="val">24/7</span>
+                    <span class="desc">Disponibilitate</span>
+                </div>
             </div>
         </div>
-
-        <div class="col-md-4">
-            <div class="info-card text-center">
-                <div class="icon-box">🛡️</div>
-                <h4>Securitate & Conturi</h4>
-                <p>Sistem complet de autentificare, roluri (Client/Admin) și gestionare date în siguranță.</p>
-            </div>
-        </div>
-
     </div>
 
-    <!-- MISIUNE -->
-    <div class="mt-5 mb-5">
-        <h2 class="section-title">Misiunea Noastră</h2>
-        <p class="about-text">
-            Ne propunem să simplificăm procesul de tranzacții auto prin tehnologie modernă, transparență și
-            o experiență intuitivă pentru utilizatori. Credem într-o piață digitală sigură, accesibilă și rapidă
-            pentru toată lumea.
-        </p>
+    <!-- ROLURI -->
+    <div style="margin-bottom: 20px;">
+        <div class="am-section-label">Echipa & roluri</div>
+        <div class="am-section-title" style="margin-bottom: 20px;">Cine folosește AutoMarket</div>
     </div>
+    <div class="am-team-row">
+        <div class="am-role-pill">
+            <span class="dot"></span> Cumpărători care caută mașina perfectă
+        </div>
+        <div class="am-role-pill green">
+            <span class="dot"></span> Vânzători care vor expunere maximă
+        </div>
+        <div class="am-role-pill amber">
+            <span class="dot"></span> Administratori care gestionează platforma
+        </div>
+        <div class="am-role-pill">
+            <span class="dot"></span> Dealeri auto profesioniști
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="am-cta">
+        <div class="am-cta-text">
+            <h3>Gata să găsești mașina visurilor tale? ✨</h3>
+            <p>Explorează mii de anunțuri verificate sau publică-l pe al tău în câteva minute.</p>
+        </div>
+        <a asp-controller="Anunturi" asp-action="Create" class="am-cta-btn">
+            Publică un anunț →
+        </a>
+    </div>
+
 </div>

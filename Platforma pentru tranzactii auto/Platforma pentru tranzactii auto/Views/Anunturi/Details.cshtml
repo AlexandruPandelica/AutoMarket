@@ -18,7 +18,7 @@
         <div class="row g-0">
             <div class="col-lg-7 d-flex">
                 <div class="position-relative w-100 rounded-start-4" style="height: 450px; background-color: #f8f9fa; overflow: hidden;">
-                    
+
                     @if (Model.GalerieImagini != null && Model.GalerieImagini.Any())
                     {
                         <div id="carouselAnunt" class="carousel slide h-100" data-bs-ride="carousel">
@@ -138,17 +138,30 @@
                 </div>
             }
 
+            @if (!string.IsNullOrWhiteSpace(Model.VideoPath))
+            {
+                <hr class="mt-0" />
+                <div class="mb-4">
+                    <h5 class="fw-semibold mb-3 fs-6"><i class="bi bi-play-btn-fill text-danger"></i> Video Prezentare</h5>
+                    <div class="rounded-4 overflow-hidden border shadow-sm bg-black text-center">
+                        <video width="100%" style="max-height: 500px;" controls controlsList="nodownload">
+                            <source src="~/videos/@Model.VideoPath" type="video/mp4">
+                            Browser-ul tău nu suportă redarea video.
+                        </video>
+                    </div>
+                </div>
+            }
+
             @if (!string.IsNullOrWhiteSpace(Model.Locatie))
             {
                 <hr class="mt-0" />
                 <div class="mb-4">
                     <h5 class="fw-semibold mb-2 fs-6"><i class="bi bi-map"></i> Locație vehicul</h5>
                     <div class="ratio ratio-21x9 rounded-3 overflow-hidden border">
-                        <iframe 
-                            src="https://maps.google.com/maps?q=@Uri.EscapeDataString(Model.Locatie)&t=&z=13&ie=UTF8&iwloc=&output=embed" 
-                            frameborder="0" 
-                            style="border:0;" 
-                            allowfullscreen="">
+                        <iframe src="https://maps.google.com/maps?q=@Uri.EscapeDataString(Model.Locatie)&t=&z=13&ie=UTF8&iwloc=&output=embed"
+                                frameborder="0"
+                                style="border:0;"
+                                allowfullscreen="">
                         </iframe>
                     </div>
                 </div>
@@ -248,6 +261,22 @@
     </div>
 </main>
 
+<div class="modal fade" id="deleteCommentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content border-0 shadow-lg rounded-4 text-center">
+            <div class="modal-body p-4">
+                <i class="bi bi-exclamation-circle text-danger mb-3 d-block" style="font-size: 3rem;"></i>
+                <h5 class="fw-bold mb-3">Ștergi recenzia?</h5>
+                <p class="text-muted small mb-0">Această acțiune este ireversibilă și comentariul va dispărea imediat.</p>
+            </div>
+            <div class="modal-footer border-0 d-flex justify-content-center pb-4 pt-0">
+                <button type="button" class="btn btn-light px-4" data-bs-dismiss="modal">Anulează</button>
+                <button type="button" class="btn btn-danger px-4" id="confirmDeleteCommentBtn">Șterge</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="modalContact" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg">
@@ -330,52 +359,84 @@
             });
         });
 
-        // --- 2. SCRIPT ȘTERGERE COMENTARIU ---
-        document.getElementById('lista-comentarii')?.addEventListener('submit', function(e) {
-            if (e.target.classList.contains('delete-comment-form')) {
+        // --- 2. SCRIPT ȘTERGERE COMENTARIU (CU MODAL) ---
+        let formToDelete = null;
+        let deleteModalInstance = null;
+
+        document.getElementById('lista-comentarii')?.addEventListener('click', function(e) {
+            if (e.target.closest('.trigger-delete-comment')) {
                 e.preventDefault();
 
-                if (!confirm('Sigur vrei să ștergi acest comentariu?')) {
-                    return;
+                formToDelete = e.target.closest('.delete-comment-form');
+
+                if (!deleteModalInstance) {
+                    deleteModalInstance = new bootstrap.Modal(document.getElementById('deleteCommentModal'));
                 }
-
-                var form = e.target;
-                var commentId = form.getAttribute('data-comment-id');
-                var formData = new FormData(form);
-
-                fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        var card = document.getElementById('comment-' + commentId);
-                        if (card) {
-                            card.style.transition = "all 0.5s ease";
-                            card.style.opacity = "0";
-                            card.style.transform = "translateX(20px)";
-
-                            setTimeout(() => {
-                                card.remove();
-                                var counterSpan = document.querySelector('h3 span.text-muted');
-                                if(counterSpan) {
-                                    var text = counterSpan.innerText;
-                                    var count = parseInt(text.replace(/\D/g,''));
-                                    if(!isNaN(count) && count > 0) {
-                                        counterSpan.innerText = '(' + (count - 1) + ')';
-                                    }
-                                }
-                            }, 500);
-                        }
-                    } else {
-                        alert('Nu s-a putut șterge comentariul.');
-                    }
-                })
-                .catch(error => console.error('Eroare:', error));
+                deleteModalInstance.show();
             }
+        });
+
+        document.getElementById('confirmDeleteCommentBtn')?.addEventListener('click', function() {
+            if (!formToDelete) return;
+
+            var commentId = formToDelete.getAttribute('data-comment-id');
+            var formData = new FormData(formToDelete);
+            var btn = this;
+            var originalText = btn.innerHTML;
+
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span>...';
+            btn.disabled = true;
+
+            fetch(formToDelete.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    var card = document.getElementById('comment-' + commentId);
+                    if (card) {
+                        card.style.transition = "all 0.5s ease";
+                        card.style.opacity = "0";
+                        card.style.transform = "translateX(20px)";
+
+                        setTimeout(() => {
+                            card.remove();
+
+                            var counterSpan = document.querySelector('h3 span.text-muted');
+                            if(counterSpan) {
+                                var text = counterSpan.innerText;
+                                var count = parseInt(text.replace(/\D/g,''));
+                                if(!isNaN(count) && count > 0) {
+                                    counterSpan.innerText = '(' + (count - 1) + ')';
+                                }
+                            }
+
+                            var remainingComments = document.querySelectorAll('.delete-comment-form').length;
+                            if(remainingComments === 0) {
+                                document.getElementById('lista-comentarii').innerHTML = `
+                                    <div id="no-comments-msg" class="text-center text-muted py-4 fade-in-animation">
+                                        <i class="bi bi-chat-square-text display-4 mb-3 d-block opacity-25"></i>
+                                        <p>Încă nu există recenzii pentru acest anunț. Fii tu primul!</p>
+                                    </div>
+                                `;
+                            }
+                        }, 500);
+                    }
+                    deleteModalInstance.hide();
+                } else {
+                    alert('Nu s-a putut șterge comentariul.');
+                    deleteModalInstance.hide();
+                }
+            })
+            .catch(error => console.error('Eroare:', error))
+            .finally(() => {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                formToDelete = null;
+            });
         });
     </script>
 
@@ -389,6 +450,7 @@
                 opacity: 0;
                 transform: translateY(-20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);

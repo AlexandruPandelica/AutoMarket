@@ -19,6 +19,7 @@
                         <input type="hidden" asp-for="ID_Anunt" />
                         <input type="hidden" asp-for="Data_Postarii" />
                         <input type="hidden" asp-for="Nr_Vizualizari" />
+                        <input type="hidden" asp-for="VideoPath" />
 
                         <div class="row">
                             <div class="col-md-6 mb-3">
@@ -44,7 +45,7 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label asp-for="An_Fabricatie" class="form-label fw-bold">An Fabricație</label>
-                                <input asp-for="An_Fabricatie" class="form-control" type="number" min="1900" max="2025" />
+                                <input asp-for="An_Fabricatie" class="form-control" type="number" min="1900" max="2030" />
                                 <span asp-validation-for="An_Fabricatie" class="text-danger"></span>
                             </div>
                         </div>
@@ -64,52 +65,55 @@
                                 <span asp-validation-for="Locatie" class="text-danger"></span>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <label asp-for="Combustibil" class="form-label fw-semibold">Combustibil</label>
-                            <select asp-for="Combustibil" class="form-select">
-                                <option value="">Alege...</option>
-                                <option value="Benzina">Benzină</option>
-                                <option value="Diesel">Diesel</option>
-                                <option value="Electric">Electric</option>
-                                <option value="Hibrid">Hibrid</option>
-                            </select>
-                            <span asp-validation-for="Combustibil" class="text-danger small"></span>
-                        </div>
 
-                        <div class="col-md-6">
-                            <label asp-for="Transmisie" class="form-label fw-semibold">Transmisie</label>
-                            <select asp-for="Transmisie" class="form-select">
-                                <option value="">Alege...</option>
-                                <option value="Manuala">Manuală</option>
-                                <option value="Automata">Automată</option>
-                            </select>
-                            <span asp-validation-for="Transmisie" class="text-danger small"></span>
-                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Combustibil" class="form-label fw-semibold">Combustibil</label>
+                                <select asp-for="Combustibil" class="form-select">
+                                    <option value="">Alege...</option>
+                                    <option value="Benzina">Benzină</option>
+                                    <option value="Diesel">Diesel</option>
+                                    <option value="Electric">Electric</option>
+                                    <option value="Hibrid">Hibrid</option>
+                                </select>
+                                <span asp-validation-for="Combustibil" class="text-danger small"></span>
+                            </div>
 
-                        <div class="col-md-4">
-                            <label asp-for="TipCaroserie" class="form-label fw-semibold">Tip Caroserie</label>
-                            <select asp-for="TipCaroserie" class="form-select">
-                                <option value="">Alege...</option>
-                                <option value="Sedan">Sedan</option>
-                                <option value="SUV">SUV</option>
-                                <option value="Hatchback">Hatchback</option>
-                                <option value="Break">Break</option>
-                                <option value="Coupe">Coupe</option>
-                                <option value="Cabriolet">Cabriolet</option>
-                            </select>
-                            <span asp-validation-for="TipCaroserie" class="text-danger small"></span>
-                        </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Transmisie" class="form-label fw-semibold">Transmisie</label>
+                                <select asp-for="Transmisie" class="form-select">
+                                    <option value="">Alege...</option>
+                                    <option value="Manuala">Manuală</option>
+                                    <option value="Automata">Automată</option>
+                                </select>
+                                <span asp-validation-for="Transmisie" class="text-danger small"></span>
+                            </div>
 
-                        <div class="col-md-4">
-                            <label asp-for="CapacitateMotor" class="form-label fw-semibold">Motorizare (cm³)</label>
-                            <input asp-for="CapacitateMotor" class="form-control" type="number" placeholder="Ex: 1998" />
-                            <span asp-validation-for="CapacitateMotor" class="text-danger small"></span>
-                        </div>
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="TipCaroserie" class="form-label fw-semibold">Tip Caroserie</label>
+                                <select asp-for="TipCaroserie" class="form-select">
+                                    <option value="">Alege...</option>
+                                    <option value="Sedan">Sedan</option>
+                                    <option value="SUV">SUV</option>
+                                    <option value="Hatchback">Hatchback</option>
+                                    <option value="Break">Break</option>
+                                    <option value="Coupe">Coupe</option>
+                                    <option value="Cabriolet">Cabriolet</option>
+                                </select>
+                                <span asp-validation-for="TipCaroserie" class="text-danger small"></span>
+                            </div>
 
-                        <div class="col-md-4">
-                            <label asp-for="PutereCP" class="form-label fw-semibold">Putere (CP)</label>
-                            <input asp-for="PutereCP" class="form-control" type="number" placeholder="Ex: 150" />
-                            <span asp-validation-for="PutereCP" class="text-danger small"></span>
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="CapacitateMotor" class="form-label fw-semibold">Motorizare (cm³)</label>
+                                <input asp-for="CapacitateMotor" class="form-control" type="number" placeholder="Ex: 1998" />
+                                <span asp-validation-for="CapacitateMotor" class="text-danger small"></span>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="PutereCP" class="form-label fw-semibold">Putere (CP)</label>
+                                <input asp-for="PutereCP" class="form-control" type="number" placeholder="Ex: 150" />
+                                <span asp-validation-for="PutereCP" class="text-danger small"></span>
+                            </div>
                         </div>
 
                         <div class="mb-4">
@@ -120,38 +124,67 @@
 
                         <div class="card bg-light border-0 mb-4">
                             <div class="card-body">
-                                <h5 class="card-title text-secondary border-bottom pb-2">Gestionează Galeria Foto</h5>
+                                <h5 class="card-title text-secondary border-bottom pb-2">Gestionează Fișierele Media</h5>
 
-                                @if (Model.GalerieImagini != null && Model.GalerieImagini.Any())
-                                {
-                                    <div class="row g-2 mb-3">
-                                        @foreach (var img in Model.GalerieImagini)
-                                        {
-                                            <div class="col-4 col-md-3 position-relative">
-                                                <img src="data:image/*;base64,@(Convert.ToBase64String(img.Imagine))"
-                                                     class="img-thumbnail w-100"
-                                                     style="height: 100px; object-fit: cover;" />
+                                <div class="mb-4">
+                                    <h6 class="fw-bold mb-3"><i class="bi bi-images text-primary"></i> Imagini Actuale</h6>
+                                    @if (Model.GalerieImagini != null && Model.GalerieImagini.Any())
+                                    {
+                                        <div class="row g-2 mb-3">
+                                            @foreach (var img in Model.GalerieImagini)
+                                            {
+                                                <div class="col-4 col-md-3 position-relative">
+                                                    <img src="data:image/*;base64,@(Convert.ToBase64String(img.Imagine))"
+                                                         class="img-thumbnail w-100"
+                                                         style="height: 100px; object-fit: cover;" />
 
-                                                <button type="button"
-                                                        class="btn btn-danger btn-sm position-absolute top-0 end-0 m-1 p-0 d-flex justify-content-center align-items-center"
-                                                        style="width: 20px; height: 20px; border-radius: 50%;"
-                                                        onclick="stergeImagine(@img.ID_Imagine)">
-                                                    <span style="font-size: 12px;">&times;</span>
-                                                </button>
-                                            </div>
-                                        }
+                                                    <button type="button"
+                                                            class="btn btn-danger btn-sm position-absolute top-0 end-0 m-1 p-0 d-flex justify-content-center align-items-center"
+                                                            style="width: 20px; height: 20px; border-radius: 50%;"
+                                                            onclick="stergeImagine(@img.ID_Imagine)">
+                                                        <span style="font-size: 12px;">&times;</span>
+                                                    </button>
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <p class="text-muted small">Nu există imagini suplimentare în galerie.</p>
+                                    }
+
+                                    <div class="mt-3">
+                                        <label class="form-label fw-semibold">Adaugă imagini noi</label>
+                                        <input type="file" name="imaginiUpload" class="form-control" multiple accept="image/*" />
+                                        <div class="form-text">Poți selecta mai multe. Ele se vor adăuga la cele existente.</div>
                                     </div>
-                                }
-                                else
-                                {
-                                    <p class="text-muted small">Nu există imagini suplimentare în galerie.</p>
-                                }
-
-                                <div class="mt-3">
-                                    <label class="form-label fw-bold">Adaugă imagini noi</label>
-                                    <input type="file" name="imaginiUpload" class="form-control" multiple accept="image/*" />
-                                    <div class="form-text">Poți selecta mai multe. Ele se vor adăuga la cele existente.</div>
                                 </div>
+
+                                <hr class="my-4" />
+
+                                <div>
+                                    <h6 class="fw-bold mb-3"><i class="bi bi-camera-video text-danger"></i> Video de Prezentare</h6>
+
+                                    @if (!string.IsNullOrWhiteSpace(Model.VideoPath))
+                                    {
+                                        <div class="alert alert-success d-flex align-items-center justify-content-between mb-3 py-2">
+                                            <div class="d-flex align-items-center">
+                                                <i class="bi bi-check-circle-fill me-2 fs-5"></i>
+                                                <div>
+                                                    <strong>Acest anunț are un video atașat.</strong>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-danger btn-sm" onclick="stergeVideo()">
+                                                <i class="bi bi-trash"></i> Șterge Video
+                                            </button>
+                                        </div>
+                                    }
+
+                                    <label class="form-label fw-semibold">Încarcă un video nou (Opțional)</label>
+                                    <input type="file" name="videoUpload" class="form-control border-danger-subtle" accept="video/mp4,video/webm,video/ogg" />
+                                    <div class="form-text">Format acceptat: MP4, WebM. Fișierul selectat va suprascrie videoclipul vechi (dacă există).</div>
+                                </div>
+
                             </div>
                         </div>
 
@@ -180,17 +213,26 @@
     <input type="hidden" name="id" id="idImagineDeSters" />
 </form>
 
+<form id="formStergeVideo" asp-action="StergeVideo" method="post">
+    <input type="hidden" name="id" value="@Model.ID_Anunt" />
+</form>
+
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 
     <script>
-        // Funcția care pune ID-ul în formularul ascuns și îl trimite
         function stergeImagine(id) {
             if (confirm('Ești sigur că vrei să ștergi această imagine?')) {
                 document.getElementById('idImagineDeSters').value = id;
                 document.getElementById('formStergeImagine').submit();
+            }
+        }
+
+        function stergeVideo() {
+            if (confirm('Ești sigur că vrei să ștergi definitiv acest videoclip? Acțiunea este ireversibilă.')) {
+                document.getElementById('formStergeVideo').submit();
             }
         }
     </script>

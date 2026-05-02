@@ -54,8 +54,9 @@
                 @if (User.Identity.IsAuthenticated && Model.UserId.ToString() == UserManager.GetUserId(User))
                 {
                     <form asp-action="StergeComentariu" method="post" class="delete-comment-form d-inline" data-comment-id="@Model.ID_Comentariu">
+                        @Html.AntiForgeryToken()
                         <input type="hidden" name="id" value="@Model.ID_Comentariu" />
-                        <button type="submit" class="btn btn-link text-danger p-0 small text-decoration-none" title="Șterge acest comentariu">
+                        <button type="button" class="btn btn-link text-danger p-0 small text-decoration-none trigger-delete-comment" title="Șterge acest comentariu">
                             <i class="bi bi-trash"></i> Șterge
                         </button>
                     </form>

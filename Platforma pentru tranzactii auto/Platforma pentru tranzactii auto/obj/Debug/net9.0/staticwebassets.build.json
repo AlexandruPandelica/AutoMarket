@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "yUxFkSLVOhqaIFS85UIQOH7N1ZAlMogPEF0DdYfGPhQ=",
+  "Hash": "iJJaF5J2bKQ6m0fJrptwkOfHcXJoKfwAAH9Anctmme0=",
   "Source": "Platforma pentru tranzactii auto",
   "BasePath": "_content/Platforma pentru tranzactii auto",
   "Mode": "Default",
@@ -5351,6 +5351,90 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
+      "Identity": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\14912521-uhd_2158_3840_60fps.mp4",
+      "SourceId": "Platforma pentru tranzactii auto",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\",
+      "BasePath": "_content/Platforma pentru tranzactii auto",
+      "RelativePath": "videos/14912521-uhd_2158_3840_60fps#[.{fingerprint}]?.mp4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "izi7kehbln",
+      "Integrity": "IkhniYQA9yKI3HXjaP2hkwRUzJsdyfTyZd81FXNZSaE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\videos\\14912521-uhd_2158_3840_60fps.mp4"
+    },
+    {
+      "Identity": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.mp4",
+      "SourceId": "Platforma pentru tranzactii auto",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\",
+      "BasePath": "_content/Platforma pentru tranzactii auto",
+      "RelativePath": "videos/21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details#[.{fingerprint}]?.mp4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "3szfdmbfrz",
+      "Integrity": "Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\videos\\21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.mp4"
+    },
+    {
+      "Identity": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\5b28831c-890e-4b09-9cb7-f08a8da1b62c_audiQ5.mp4",
+      "SourceId": "Platforma pentru tranzactii auto",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\",
+      "BasePath": "_content/Platforma pentru tranzactii auto",
+      "RelativePath": "videos/5b28831c-890e-4b09-9cb7-f08a8da1b62c_audiQ5#[.{fingerprint}]?.mp4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "6yea6grx8u",
+      "Integrity": "LmBotXEeVTIhuIb2RWEj4TVTBXDcqqg/7vwt5L3X1kc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\videos\\5b28831c-890e-4b09-9cb7-f08a8da1b62c_audiQ5.mp4"
+    },
+    {
+      "Identity": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.mp4",
+      "SourceId": "Platforma pentru tranzactii auto",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\",
+      "BasePath": "_content/Platforma pentru tranzactii auto",
+      "RelativePath": "videos/87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps#[.{fingerprint}]?.mp4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "izi7kehbln",
+      "Integrity": "IkhniYQA9yKI3HXjaP2hkwRUzJsdyfTyZd81FXNZSaE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\videos\\87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.mp4"
+    },
+    {
       "Identity": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\audi.gif",
       "SourceId": "Platforma pentru tranzactii auto",
       "SourceType": "Discovered",
@@ -5370,6 +5454,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\videos\\audi.gif"
+    },
+    {
+      "Identity": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\audiQ5.mp4",
+      "SourceId": "Platforma pentru tranzactii auto",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\",
+      "BasePath": "_content/Platforma pentru tranzactii auto",
+      "RelativePath": "videos/audiQ5#[.{fingerprint}]?.mp4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "6yea6grx8u",
+      "Integrity": "LmBotXEeVTIhuIb2RWEj4TVTBXDcqqg/7vwt5L3X1kc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\videos\\audiQ5.mp4"
     },
     {
       "Identity": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\audiR8.gif",
@@ -5412,6 +5517,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\videos\\audiRS7.gif"
+    },
+    {
+      "Identity": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\Chevrolet Camaro SS – Design Details.mp4",
+      "SourceId": "Platforma pentru tranzactii auto",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\",
+      "BasePath": "_content/Platforma pentru tranzactii auto",
+      "RelativePath": "videos/Chevrolet Camaro SS – Design Details#[.{fingerprint}]?.mp4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "3szfdmbfrz",
+      "Integrity": "Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\videos\\Chevrolet Camaro SS – Design Details.mp4"
     }
   ],
   "Endpoints": [
@@ -33101,6 +33227,334 @@
       ]
     },
     {
+      "Route": "videos/14912521-uhd_2158_3840_60fps.izi7kehbln.mp4",
+      "AssetFile": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\14912521-uhd_2158_3840_60fps.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9096030"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IkhniYQA9yKI3HXjaP2hkwRUzJsdyfTyZd81FXNZSaE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 16 Apr 2026 14:09:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "izi7kehbln"
+        },
+        {
+          "Name": "label",
+          "Value": "videos/14912521-uhd_2158_3840_60fps.mp4"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-IkhniYQA9yKI3HXjaP2hkwRUzJsdyfTyZd81FXNZSaE="
+        }
+      ]
+    },
+    {
+      "Route": "videos/14912521-uhd_2158_3840_60fps.mp4",
+      "AssetFile": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\14912521-uhd_2158_3840_60fps.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9096030"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IkhniYQA9yKI3HXjaP2hkwRUzJsdyfTyZd81FXNZSaE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 16 Apr 2026 14:09:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-IkhniYQA9yKI3HXjaP2hkwRUzJsdyfTyZd81FXNZSaE="
+        }
+      ]
+    },
+    {
+      "Route": "videos/21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.3szfdmbfrz.mp4",
+      "AssetFile": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5004408"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Apr 2026 10:45:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3szfdmbfrz"
+        },
+        {
+          "Name": "label",
+          "Value": "videos/21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.mp4"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ="
+        }
+      ]
+    },
+    {
+      "Route": "videos/21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.mp4",
+      "AssetFile": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5004408"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Apr 2026 10:45:20 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ="
+        }
+      ]
+    },
+    {
+      "Route": "videos/5b28831c-890e-4b09-9cb7-f08a8da1b62c_audiQ5.6yea6grx8u.mp4",
+      "AssetFile": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\5b28831c-890e-4b09-9cb7-f08a8da1b62c_audiQ5.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3865797"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LmBotXEeVTIhuIb2RWEj4TVTBXDcqqg/7vwt5L3X1kc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Apr 2026 10:04:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6yea6grx8u"
+        },
+        {
+          "Name": "label",
+          "Value": "videos/5b28831c-890e-4b09-9cb7-f08a8da1b62c_audiQ5.mp4"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-LmBotXEeVTIhuIb2RWEj4TVTBXDcqqg/7vwt5L3X1kc="
+        }
+      ]
+    },
+    {
+      "Route": "videos/5b28831c-890e-4b09-9cb7-f08a8da1b62c_audiQ5.mp4",
+      "AssetFile": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\5b28831c-890e-4b09-9cb7-f08a8da1b62c_audiQ5.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3865797"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LmBotXEeVTIhuIb2RWEj4TVTBXDcqqg/7vwt5L3X1kc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Apr 2026 10:04:09 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-LmBotXEeVTIhuIb2RWEj4TVTBXDcqqg/7vwt5L3X1kc="
+        }
+      ]
+    },
+    {
+      "Route": "videos/87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.izi7kehbln.mp4",
+      "AssetFile": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9096030"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IkhniYQA9yKI3HXjaP2hkwRUzJsdyfTyZd81FXNZSaE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 16 Apr 2026 14:24:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "izi7kehbln"
+        },
+        {
+          "Name": "label",
+          "Value": "videos/87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.mp4"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-IkhniYQA9yKI3HXjaP2hkwRUzJsdyfTyZd81FXNZSaE="
+        }
+      ]
+    },
+    {
+      "Route": "videos/87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.mp4",
+      "AssetFile": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "9096030"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"IkhniYQA9yKI3HXjaP2hkwRUzJsdyfTyZd81FXNZSaE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 16 Apr 2026 14:24:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-IkhniYQA9yKI3HXjaP2hkwRUzJsdyfTyZd81FXNZSaE="
+        }
+      ]
+    },
+    {
       "Route": "videos/audi.gif",
       "AssetFile": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\audi.gif",
       "Selectors": [],
@@ -33179,6 +33633,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-AHDJvxrIHcByeaef9uHjf3SU4H8Vf7dFPT7NOd/yhxs="
+        }
+      ]
+    },
+    {
+      "Route": "videos/audiQ5.6yea6grx8u.mp4",
+      "AssetFile": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\audiQ5.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3865797"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LmBotXEeVTIhuIb2RWEj4TVTBXDcqqg/7vwt5L3X1kc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Apr 2026 09:59:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6yea6grx8u"
+        },
+        {
+          "Name": "label",
+          "Value": "videos/audiQ5.mp4"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-LmBotXEeVTIhuIb2RWEj4TVTBXDcqqg/7vwt5L3X1kc="
+        }
+      ]
+    },
+    {
+      "Route": "videos/audiQ5.mp4",
+      "AssetFile": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\audiQ5.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "3865797"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LmBotXEeVTIhuIb2RWEj4TVTBXDcqqg/7vwt5L3X1kc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Apr 2026 09:59:36 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-LmBotXEeVTIhuIb2RWEj4TVTBXDcqqg/7vwt5L3X1kc="
         }
       ]
     },
@@ -33343,6 +33879,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-oNYjD8CCtnhGjDFkqmhHrKo16DlApTDlpRKBofspYqU="
+        }
+      ]
+    },
+    {
+      "Route": "videos/Chevrolet Camaro SS – Design Details.3szfdmbfrz.mp4",
+      "AssetFile": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\Chevrolet Camaro SS – Design Details.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5004408"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Apr 2026 10:44:24 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3szfdmbfrz"
+        },
+        {
+          "Name": "label",
+          "Value": "videos/Chevrolet Camaro SS – Design Details.mp4"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ="
+        }
+      ]
+    },
+    {
+      "Route": "videos/Chevrolet Camaro SS – Design Details.mp4",
+      "AssetFile": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\Chevrolet Camaro SS – Design Details.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5004408"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Apr 2026 10:44:24 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ="
         }
       ]
     }

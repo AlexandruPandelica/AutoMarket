@@ -3,8 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\views\\mesaje\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\views\\mesaje\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\views\\anunturi\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\views\\anunturi\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\views\\anunturi\\dreamcarresults.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\views\\anunturi\\dreamcarresults.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\models\\dreamcarviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\models\\dreamcarviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\services\\recomandareservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\services\\recomandareservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\models\\anunturi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\models\\anunturi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\controllers\\anunturicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\controllers\\anunturicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\views\\home\\privacy.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\views\\anunturi\\_comentariu.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -15,24 +39,16 @@
       "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\views\\anunturi\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\models\\anunturi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\models\\anunturi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\views\\anunturi\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\views\\anunturi\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\views\\anunturi\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\views\\anunturi\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\migrations\\20260416135421_adaugarevideopath.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\migrations\\20260416135421_adaugarevideopath.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\views\\anunturi\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\views\\anunturi\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\controllers\\anunturicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\controllers\\anunturicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|c:\\users\\asus\\documents\\github\\automarket\\platforma pentru tranzactii auto\\platforma pentru tranzactii auto\\views\\anunturi\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{21F69368-4B35-41E6-B9B2-FDE5835488CB}|Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto.csproj|solutionrelative:platforma pentru tranzactii auto\\views\\anunturi\\delete.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,7 +58,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -54,71 +70,120 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Mesaje\\Index.cshtml",
-              "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Views\\Mesaje\\Index.cshtml",
-              "ToolTip": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Mesaje\\Index.cshtml",
-              "RelativeToolTip": "Platforma pentru tranzactii auto\\Views\\Mesaje\\Index.cshtml",
-              "ViewState": "AgIAADYBAAAAAAAAAAAQwFEBAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-03-28T13:46:57.217Z",
+              "DocumentIndex": 2,
+              "Title": "DreamCarViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Models\\DreamCarViewModel.cs",
+              "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Models\\DreamCarViewModel.cs",
+              "ToolTip": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Models\\DreamCarViewModel.cs",
+              "RelativeToolTip": "Platforma pentru tranzactii auto\\Models\\DreamCarViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-02T17:40:31.887Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "_Comentariu.cshtml",
-              "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\_Comentariu.cshtml",
-              "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Views\\Anunturi\\_Comentariu.cshtml",
-              "ToolTip": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\_Comentariu.cshtml",
-              "RelativeToolTip": "Platforma pentru tranzactii auto\\Views\\Anunturi\\_Comentariu.cshtml",
-              "ViewState": "AgIAACoAAAAAAAAAAAAQwDsAAAAhAAAAAAAAAA==",
+              "Title": "DreamCarResults.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\DreamCarResults.cshtml",
+              "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Views\\Anunturi\\DreamCarResults.cshtml",
+              "ToolTip": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\DreamCarResults.cshtml",
+              "RelativeToolTip": "Platforma pentru tranzactii auto\\Views\\Anunturi\\DreamCarResults.cshtml",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAEcAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-03-28T13:25:00.72Z",
+              "WhenOpened": "2026-05-02T17:39:15.717Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
+              "Title": "RecomandareService.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Services\\RecomandareService.cs",
+              "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Services\\RecomandareService.cs",
+              "ToolTip": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Services\\RecomandareService.cs",
+              "RelativeToolTip": "Platforma pentru tranzactii auto\\Services\\RecomandareService.cs",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAowGcAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-01T17:32:18.469Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Privacy.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Home\\Privacy.cshtml",
+              "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Views\\Home\\Privacy.cshtml",
+              "ToolTip": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Home\\Privacy.cshtml",
+              "RelativeToolTip": "Platforma pentru tranzactii auto\\Views\\Home\\Privacy.cshtml",
+              "ViewState": "AgIAAOkBAAAAAAAAAAAswAMCAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-01T11:05:07.793Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "_Comentariu.cshtml",
+              "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\_Comentariu.cshtml",
+              "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Views\\Anunturi\\_Comentariu.cshtml",
+              "ToolTip": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\_Comentariu.cshtml",
+              "RelativeToolTip": "Platforma pentru tranzactii auto\\Views\\Anunturi\\_Comentariu.cshtml",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAAD4AAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-23T10:08:21.032Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "20260416135421_AdaugareVideoPath.cs",
+              "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Migrations\\20260416135421_AdaugareVideoPath.cs",
+              "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Migrations\\20260416135421_AdaugareVideoPath.cs",
+              "ToolTip": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Migrations\\20260416135421_AdaugareVideoPath.cs",
+              "RelativeToolTip": "Platforma pentru tranzactii auto\\Migrations\\20260416135421_AdaugareVideoPath.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T13:54:27.92Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Anunturi.cs",
               "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Models\\Anunturi.cs",
               "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Models\\Anunturi.cs",
               "ToolTip": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Models\\Anunturi.cs",
               "RelativeToolTip": "Platforma pentru tranzactii auto\\Models\\Anunturi.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAA7wCkAAAA/AAAAAAAAAA==",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAwCQAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-26T13:08:05.621Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\Edit.cshtml",
               "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Views\\Anunturi\\Edit.cshtml",
               "ToolTip": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\Edit.cshtml",
               "RelativeToolTip": "Platforma pentru tranzactii auto\\Views\\Anunturi\\Edit.cshtml",
-              "ViewState": "AgIAAFUAAAAAAAAAAAAQwHAAAAAeAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAAAADAAAABkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-03-26T13:07:19.768Z"
+              "WhenOpened": "2026-03-26T13:07:19.768Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "Details.cshtml",
               "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\Details.cshtml",
               "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Views\\Anunturi\\Details.cshtml",
               "ToolTip": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\Details.cshtml",
               "RelativeToolTip": "Platforma pentru tranzactii auto\\Views\\Anunturi\\Details.cshtml",
-              "ViewState": "AgIAAHIBAAAAAAAAAAAQwI0BAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAUBAAAAAAAAAAAiwMIBAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2026-03-26T13:07:02.821Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-26T13:07:02.821Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 11,
               "Title": "Delete.cshtml",
               "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\Delete.cshtml",
               "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Views\\Anunturi\\Delete.cshtml",
@@ -130,27 +195,28 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "Create.cshtml",
               "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\Create.cshtml",
               "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Views\\Anunturi\\Create.cshtml",
               "ToolTip": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Views\\Anunturi\\Create.cshtml",
               "RelativeToolTip": "Platforma pentru tranzactii auto\\Views\\Anunturi\\Create.cshtml",
-              "ViewState": "AgIAAGkAAAAAAAAAAAAQwEwAAABKAAAAAAAAAA==",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAAAK4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2026-03-26T13:01:19.612Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "AnunturiController.cs",
               "DocumentMoniker": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Controllers\\AnunturiController.cs",
               "RelativeDocumentMoniker": "Platforma pentru tranzactii auto\\Controllers\\AnunturiController.cs",
               "ToolTip": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\Controllers\\AnunturiController.cs",
               "RelativeToolTip": "Platforma pentru tranzactii auto\\Controllers\\AnunturiController.cs",
-              "ViewState": "AgIAAOcAAAAAAAAAAAAcwPsAAABAAAAAAAAAAA==",
+              "ViewState": "AgIAAPcAAAAAAAAAAADwvwUBAABTAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-25T13:51:12.092Z"
+              "WhenOpened": "2025-11-25T13:51:12.092Z",
+              "EditorCaption": ""
             }
           ]
         }
