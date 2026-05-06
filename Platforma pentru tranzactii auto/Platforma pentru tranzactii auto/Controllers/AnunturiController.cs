@@ -451,16 +451,10 @@ namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei contr
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DreamCarResults(DreamCarViewModel model)
         {
-            // Dacă utilizatorul nu a completat toate câmpurile corect, îl întoarcem la formular
             if (!ModelState.IsValid)
-            {
                 return View("DreamCar", model);
-            }
 
-            // Aici se face magia! Apelăm algoritmul Cosine Similarity pentru Top 3 mașini
             var recomandari = await _recomandareService.CalculeazaDreamCar(model, 3);
-
-            // Trimitem lista de mașini recomandate către o pagină nouă de rezultate
             return View("DreamCarResults", recomandari);
         }
     }

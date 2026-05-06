@@ -16,74 +16,112 @@ namespace Platforma_pentru_tranzactii_auto.Services
             _context = context;
         }
 
-        public async Task<List<Anunturi>> CalculeazaDreamCar(DreamCarViewModel dreamCar, int topRecomandari = 3)
+        public async Task<List<DreamCarResultViewModel>> CalculeazaDreamCar(DreamCarViewModel dreamCar, int topRecomandari = 3)
         {
-            // PASUL 1: FILTRAREA HARD (Pre-procesare)
-            // Nu băgăm în algoritm mașini care nu respectă limitele stricte ale utilizatorului.
+            // PASUL 1: FILTRAREA HARD
             var query = _context.Anunt.AsQueryable();
 
             if (dreamCar.PretDorit > 0)
                 query = query.Where(a => a.Pret <= dreamCar.PretDorit);
-
             if (dreamCar.AnMinim > 0)
                 query = query.Where(a => a.An_Fabricatie >= dreamCar.AnMinim);
-
             if (dreamCar.KilometrajMaxim > 0)
                 query = query.Where(a => a.Kilometraj <= dreamCar.KilometrajMaxim);
 
-            // Aducem din baza de date DOAR mașinile valide
             var masiniValide = await query.ToListAsync();
+            if (!masiniValide.Any()) return new List<DreamCarResultViewModel>();
 
-            // Dacă nicio mașină nu se încadrează în buget/an/km, ne oprim aici
-            if (!masiniValide.Any()) return new List<Anunturi>();
-
-            // PASUL 2: NORMALIZAREA (pe baza mașinilor rămase, pentru precizie maximă)
+            // PASUL 2: NORMALIZARE
             decimal maxPret = masiniValide.Max(a => a.Pret) == 0 ? 1 : masiniValide.Max(a => a.Pret);
             decimal minPret = masiniValide.Min(a => a.Pret);
-
             int maxAn = masiniValide.Max(a => a.An_Fabricatie) == 0 ? 1 : masiniValide.Max(a => a.An_Fabricatie);
             int minAn = masiniValide.Min(a => a.An_Fabricatie);
-
             int maxKm = masiniValide.Max(a => a.Kilometraj) == 0 ? 1 : masiniValide.Max(a => a.Kilometraj);
             int minKm = masiniValide.Min(a => a.Kilometraj);
-
             int maxCapacitate = masiniValide.Max(a => a.CapacitateMotor) == 0 ? 1 : masiniValide.Max(a => a.CapacitateMotor);
             int minCapacitate = masiniValide.Min(a => a.CapacitateMotor);
-
             int maxPutere = masiniValide.Max(a => a.PutereCP) == 0 ? 1 : masiniValide.Max(a => a.PutereCP);
             int minPutere = masiniValide.Min(a => a.PutereCP);
 
-            // PASUL 3: Creăm Vectorul Ideal al utilizatorului
+            // PASUL 3: VECTOR UTILIZATOR
             double[] vectorUtilizator = {
-            1.0 - Normalize(dreamCar.PretDorit, minPret, maxPret),
-            1.0,  // vrea întotdeauna cel mai nou an posibil
-            0.0,  // vrea întotdeauna cel mai mic kilometraj posibil
-            Normalize(dreamCar.CapacitateMotorDorita, minCapacitate, maxCapacitate),
-            Normalize(dreamCar.PutereCPDorita, minPutere, maxPutere)
-            };
+        1.0 - Normalize(dreamCar.PretDorit, minPret, maxPret),
+        1.0,
+        0.0,
+        Normalize(dreamCar.CapacitateMotorDorita, minCapacitate, maxCapacitate),
+        Normalize(dreamCar.PutereCPDorita, minPutere, maxPutere)
+    };
 
             var recomandari = new Dictionary<Anunturi, double>();
 
-            // PASUL 4: Calculăm similaritatea doar pentru mașinile pe care și le permite
+            // PASUL 4: COSINE SIMILARITY
             foreach (var masina in masiniValide)
             {
                 double[] vectorMasina = {
-                    1.0 - Normalize(masina.Pret, minPret, maxPret),
-                    Normalize(masina.An_Fabricatie, minAn, maxAn),
-                    1.0 - Normalize(masina.Kilometraj, minKm, maxKm),
-                    Normalize(masina.CapacitateMotor, minCapacitate, maxCapacitate),
-                    Normalize(masina.PutereCP, minPutere, maxPutere)
-                };
+            1.0 - Normalize(masina.Pret, minPret, maxPret),
+            Normalize(masina.An_Fabricatie, minAn, maxAn),
+            1.0 - Normalize(masina.Kilometraj, minKm, maxKm),
+            Normalize(masina.CapacitateMotor, minCapacitate, maxCapacitate),
+            Normalize(masina.PutereCP, minPutere, maxPutere)
+        };
 
-                double similaritate = CosineSimilarity(vectorUtilizator, vectorMasina);
-                recomandari.Add(masina, similaritate);
+                recomandari.Add(masina, CosineSimilarity(vectorUtilizator, vectorMasina));
             }
 
-            // PASUL 5: Returnăm primele "topRecomandari" rezultate, sortate descrescător după scor
-            return recomandari.OrderByDescending(r => r.Value)
-                              .Take(topRecomandari)
-                              .Select(r => r.Key)
-                              .ToList();
+            // PASUL 5: TOP 3 + calcul scor deal
+            var top = recomandari
+                .OrderByDescending(r => r.Value)
+                .Take(topRecomandari)
+                .ToList();
+
+            var rezultate = new List<DreamCarResultViewModel>();
+
+            foreach (var item in top)
+            {
+                var masina = item.Key;
+
+                // Găsim mașini similare (aceeași marcă sau capacitate apropiată ±200cm3)
+                var similare = masiniValide
+                    .Where(a => a.ID_Anunt != masina.ID_Anunt &&
+                               (a.Marca == masina.Marca ||
+                                Math.Abs(a.CapacitateMotor - masina.CapacitateMotor) <= 200))
+                    .ToList();
+
+                decimal mediaPret = similare.Any()
+                        ? (decimal)similare.Average(a => (double)a.Pret)
+    :                     (decimal)masiniValide.Average(a => (double)a.Pret);
+
+                decimal diferenta = masina.Pret - mediaPret;
+                decimal procentDiferenta = mediaPret > 0 ? (diferenta / mediaPret) * 100 : 0;
+
+                string label, color;
+                if (procentDiferenta <= -10) { label = "🟢 Deal Bun"; color = "success"; }
+                else if (procentDiferenta <= 10) { label = "🟡 Preț Corect"; color = "warning"; }
+                else { label = "🔴 Suprapreț"; color = "danger"; }
+
+                rezultate.Add(new DreamCarResultViewModel
+                {
+                    Anunt = masina,
+                    ScorSimilaritate = Math.Round(item.Value * 100, 1),
+                    DealLabel = label,
+                    DealColor = color,
+                    MediaPretSimilare = Math.Round(mediaPret, 0),
+                    DiferentaPret = Math.Round(diferenta, 0),
+                    // ← adaugă astea
+                    GlobalMinAn = minAn,
+                    GlobalMaxAn = maxAn,
+                    GlobalMinKm = minKm,
+                    GlobalMaxKm = maxKm,
+                    GlobalMinPutere = minPutere,
+                    GlobalMaxPutere = maxPutere,
+                    GlobalMinCapacitate = minCapacitate,
+                    GlobalMaxCapacitate = maxCapacitate,
+                    GlobalMinPret = minPret,
+                    GlobalMaxPret = maxPret,
+                });
+            }
+
+            return rezultate;
         }
 
         // Metoda matematică Cosine Similarity

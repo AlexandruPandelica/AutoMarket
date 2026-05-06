@@ -4,70 +4,398 @@
     ViewData["Title"] = "Găsește Mașina Visurilor";
 }
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow-sm border-0" style="border-radius: 15px;">
-                <div class="card-body p-5">
-                    <div class="text-center mb-4">
-                        <h2 class="font-weight-bold" style="color: #0d6efd;">Găsește Mașina Visurilor 🚗✨</h2>
-                        <p class="text-muted">Introdu preferințele tale, iar algoritmul nostru inteligent îți va recomanda cele mai potrivite autoturisme folosind Cosine Similarity.</p>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+<style>
+    .dc-page {
+        min-height: 100vh;
+        background: #f0f2f5;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        padding: 48px 16px 80px;
+    }
+
+    .dc-layout {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr 420px;
+        gap: 48px;
+        align-items: start;
+    }
+
+    /* ── LEFT PANEL ── */
+    .dc-left {
+        padding-top: 24px;
+    }
+
+    .dc-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: #0d6efd15;
+        border: 1px solid #0d6efd30;
+        color: #0d6efd;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 6px 14px;
+        border-radius: 100px;
+        margin-bottom: 28px;
+    }
+
+    .dc-headline {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: clamp(3.5rem, 7vw, 5.5rem);
+        line-height: 0.95;
+        color: #0a0f1e;
+        margin: 0 0 24px;
+        letter-spacing: 1px;
+    }
+
+    .dc-headline span {
+        color: #0d6efd;
+        display: block;
+    }
+
+    .dc-desc {
+        font-size: 1rem;
+        color: #6b7280;
+        line-height: 1.75;
+        font-weight: 300;
+        max-width: 420px;
+        margin: 0 0 40px;
+    }
+
+    .dc-features {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .dc-feat {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .dc-feat-dot {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: #0a0f1e;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        flex-shrink: 0;
+    }
+
+    .dc-feat-text {
+        font-size: 0.88rem;
+        color: #4b5563;
+        font-weight: 400;
+        line-height: 1.4;
+    }
+
+    .dc-feat-text strong {
+        color: #0a0f1e;
+        font-weight: 600;
+        display: block;
+        font-size: 0.9rem;
+    }
+
+    /* ── FORM CARD ── */
+    .dc-card {
+        background: #fff;
+        border-radius: 24px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.10);
+        overflow: hidden;
+        position: sticky;
+        top: 24px;
+    }
+
+    .dc-card-header {
+        background: #0a0f1e;
+        padding: 28px 32px 24px;
+    }
+
+    .dc-card-header h3 {
+        font-family: 'Bebas Neue', sans-serif;
+        font-size: 1.6rem;
+        color: #fff;
+        margin: 0 0 4px;
+        letter-spacing: 1px;
+    }
+
+    .dc-card-header p {
+        font-size: 0.82rem;
+        color: #8896b3;
+        margin: 0;
+        font-weight: 300;
+    }
+
+    .dc-card-body {
+        padding: 28px 32px 32px;
+    }
+
+    .dc-field {
+        margin-bottom: 20px;
+    }
+
+    .dc-label {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #374151;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        margin-bottom: 8px;
+    }
+
+    .dc-label-icon {
+        font-size: 14px;
+    }
+
+    .dc-input-wrap {
+        display: flex;
+        align-items: center;
+        background: #f9fafb;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .dc-input-wrap:focus-within {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 3px rgba(13,110,253,0.1);
+        background: #fff;
+    }
+
+    .dc-input-wrap input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        padding: 12px 16px;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 0.95rem;
+        color: #0a0f1e;
+        outline: none;
+    }
+
+    .dc-input-wrap input::placeholder {
+        color: #9ca3af;
+        font-weight: 300;
+    }
+
+    .dc-unit {
+        padding: 0 14px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        color: #9ca3af;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        border-left: 1px solid #e5e7eb;
+        background: #f3f4f6;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        min-height: 46px;
+    }
+
+    .dc-error {
+        font-size: 0.78rem;
+        color: #ef4444;
+        margin-top: 5px;
+        display: block;
+    }
+
+    .dc-divider {
+        height: 1px;
+        background: #f3f4f6;
+        margin: 24px 0;
+    }
+
+    .dc-submit {
+        width: 100%;
+        background: #0d6efd;
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        padding: 15px 24px;
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.15s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .dc-submit:hover {
+        background: #0b5ed7;
+        transform: translateY(-1px);
+    }
+
+    .dc-submit:active {
+        transform: translateY(0);
+    }
+
+    .dc-submit-note {
+        text-align: center;
+        font-size: 0.75rem;
+        color: #9ca3af;
+        margin-top: 12px;
+        font-weight: 300;
+    }
+
+    /* ── RESPONSIVE ── */
+    @@media (max-width: 768px) {
+        .dc-layout {
+            grid-template-columns: 1fr;
+            gap: 32px;
+        }
+        .dc-left { padding-top: 0; }
+        .dc-card { position: static; }
+        .dc-headline { font-size: 3rem; }
+    }
+</style>
+
+<div class="dc-page">
+    <div class="dc-layout">
+
+        <!-- LEFT: Branding -->
+        <div class="dc-left">
+            <div class="dc-eyebrow">
+                <span>✦</span> Powered by Cosine Similarity AI
+            </div>
+
+            <h1 class="dc-headline">
+                Găsește<br>
+                Mașina<br>
+                <span>Visurilor</span>
+            </h1>
+
+            <p class="dc-desc">
+                Introdu preferințele tale și algoritmul nostru inteligent
+                analizează întreaga bază de date pentru a-ți găsi cele mai
+                potrivite autoturisme în câteva secunde.
+            </p>
+
+            <div class="dc-features">
+                <div class="dc-feat">
+                    <div class="dc-feat-dot">🎯</div>
+                    <div class="dc-feat-text">
+                        <strong>Potrivire precisă</strong>
+                        Algoritm Cosine Similarity pe 5 dimensiuni
                     </div>
-
-                    <form method="post" asp-action="DreamCarResults">
-                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="PretDorit" class="control-label font-weight-bold"></label>
-                            <div class="input-group">
-                                <input asp-for="PretDorit" class="form-control" type="number" placeholder="Ex: 25000" />
-                                <span class="input-group-text">€</span>
-                            </div>
-                            <span asp-validation-for="PretDorit" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="AnMinim" class="control-label font-weight-bold"></label>
-                            <input asp-for="AnMinim" class="form-control" type="number" placeholder="Ex: 2018" />
-                            <span asp-validation-for="AnMinim" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="KilometrajMaxim" class="control-label font-weight-bold"></label>
-                            <div class="input-group">
-                                <input asp-for="KilometrajMaxim" class="form-control" type="number" placeholder="Ex: 150000" />
-                                <span class="input-group-text">km</span>
-                            </div>
-                            <span asp-validation-for="KilometrajMaxim" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label asp-for="CapacitateMotorDorita" class="control-label font-weight-bold"></label>
-                            <div class="input-group">
-                                <input asp-for="CapacitateMotorDorita" class="form-control" type="number" placeholder="Ex: 1998" />
-                                <span class="input-group-text">cm³</span>
-                            </div>
-                            <span asp-validation-for="CapacitateMotorDorita" class="text-danger"></span>
-                        </div>
-
-                        <div class="form-group mb-4">
-                            <label asp-for="PutereCPDorita" class="control-label font-weight-bold"></label>
-                            <div class="input-group">
-                                <input asp-for="PutereCPDorita" class="form-control" type="number" placeholder="Ex: 150" />
-                                <span class="input-group-text">CP</span>
-                            </div>
-                            <span asp-validation-for="PutereCPDorita" class="text-danger"></span>
-                        </div>
-
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary btn-lg" style="border-radius: 8px;">
-                                <i class="bi bi-search"></i> Găsește Recomandări
-                            </button>
-                        </div>
-                    </form>
+                </div>
+                <div class="dc-feat">
+                    <div class="dc-feat-dot">💰</div>
+                    <div class="dc-feat-text">
+                        <strong>Analiză de preț</strong>
+                        Compară automat cu media pieței
+                    </div>
+                </div>
+                <div class="dc-feat">
+                    <div class="dc-feat-dot">📊</div>
+                    <div class="dc-feat-text">
+                        <strong>Grafice interactive</strong>
+                        Vizualizează profilul fiecărei mașini recomandate
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- RIGHT: Form -->
+        <div class="dc-card">
+            <div class="dc-card-header">
+                <h3>Preferințele Tale 🚗</h3>
+                <p>Completează criteriile pentru recomandări personalizate</p>
+            </div>
+
+            <div class="dc-card-body">
+                <form method="post" asp-action="DreamCarResults">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3" style="font-size:0.85rem;"></div>
+
+                    <div class="dc-field">
+                        <div class="dc-label">
+                            <span class="dc-label-icon">💶</span>
+                            <span>Buget Maxim</span>
+                        </div>
+                        <div class="dc-input-wrap">
+                            <input asp-for="PretDorit" type="number" placeholder="Ex: 25000" />
+                            <span class="dc-unit">EUR</span>
+                        </div>
+                        <span asp-validation-for="PretDorit" class="dc-error"></span>
+                    </div>
+
+                    <div class="dc-field">
+                        <div class="dc-label">
+                            <span class="dc-label-icon">📅</span>
+                            <span>Anul Minim Dorit</span>
+                        </div>
+                        <div class="dc-input-wrap">
+                            <input asp-for="AnMinim" type="number" placeholder="Ex: 2018" />
+                        </div>
+                        <span asp-validation-for="AnMinim" class="dc-error"></span>
+                    </div>
+
+                    <div class="dc-field">
+                        <div class="dc-label">
+                            <span class="dc-label-icon">🛣️</span>
+                            <span>Kilometraj Maxim</span>
+                        </div>
+                        <div class="dc-input-wrap">
+                            <input asp-for="KilometrajMaxim" type="number" placeholder="Ex: 150000" />
+                            <span class="dc-unit">KM</span>
+                        </div>
+                        <span asp-validation-for="KilometrajMaxim" class="dc-error"></span>
+                    </div>
+
+                    <div class="dc-divider"></div>
+
+                    <div class="dc-field">
+                        <div class="dc-label">
+                            <span class="dc-label-icon">⚙️</span>
+                            <span>Capacitate Motor Dorită</span>
+                        </div>
+                        <div class="dc-input-wrap">
+                            <input asp-for="CapacitateMotorDorita" type="number" placeholder="Ex: 1998" />
+                            <span class="dc-unit">CM³</span>
+                        </div>
+                        <span asp-validation-for="CapacitateMotorDorita" class="dc-error"></span>
+                    </div>
+
+                    <div class="dc-field">
+                        <div class="dc-label">
+                            <span class="dc-label-icon">⚡</span>
+                            <span>Putere Dorită</span>
+                        </div>
+                        <div class="dc-input-wrap">
+                            <input asp-for="PutereCPDorita" type="number" placeholder="Ex: 150" />
+                            <span class="dc-unit">CP</span>
+                        </div>
+                        <span asp-validation-for="PutereCPDorita" class="dc-error"></span>
+                    </div>
+
+                    <div style="margin-top: 28px;">
+                        <button type="submit" class="dc-submit">
+                            <i class="bi bi-search"></i>
+                            Găsește Recomandări
+                        </button>
+                        <p class="dc-submit-note">Algoritmul analizează toate mașinile disponibile</p>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
     </div>
 </div>
 
