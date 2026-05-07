@@ -21,12 +21,15 @@ builder.Services.AddDefaultIdentity<Utilizator>(options =>
     .AddEntityFrameworkStores<PlatformaDbContext>();
 
 builder.Services.AddTransient<IEmailSender, EmailSender>();
-
+builder.Services.Configure<ClusteringSettings>(
+    builder.Configuration.GetSection("ClusteringSettings")
+);
 
 // === 3. RAZOR + MVC ===
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<RecomandareService>();
+builder.Services.AddSingleton<ClusteringService>();
 var app = builder.Build();
 
 // Creăm rolurile la pornire

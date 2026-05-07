@@ -19,12 +19,14 @@ namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei contr
         private readonly PlatformaDbContext _context;
         private readonly UserManager<Utilizator> _userManager;
         private readonly RecomandareService _recomandareService; // <-- Adaugă asta
+        private readonly ClusteringService _clusteringService;
 
-        public AnunturiController(PlatformaDbContext context, UserManager<Utilizator> userManager, RecomandareService recomandareService)
+        public AnunturiController(PlatformaDbContext context, UserManager<Utilizator> userManager, RecomandareService recomandareService, ClusteringService clusteringService)
         {
             _context = context;
             _userManager = userManager;
             _recomandareService = recomandareService; // <-- Adaugă asta
+            _clusteringService = clusteringService;
         }
 
         // GET: Anunturi
@@ -111,6 +113,22 @@ namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei contr
             anunturi.Nr_Vizualizari++;
             _context.Update(anunturi);
             await _context.SaveChangesAsync();
+
+            // CLUSTERING
+            var clusterInfo = _clusteringService.GetClusterInfoPentruAnunt(anunturi);
+            ViewBag.ClusterInfo = clusterInfo;
+
+            var toateAnunturile = await _context.Anunt
+                .Include(a => a.User)
+                .Where(a => a.ID_Anunt != id)
+                .ToListAsync();
+
+            var masiniSimilare = toateAnunturile
+                .Where(a => _clusteringService.AsigneazaCluster(a) == clusterInfo.ClusterId)
+                .Take(3)
+                .ToList();
+
+            ViewBag.MasiniSimilare = masiniSimilare;
 
             return View(anunturi);
         }

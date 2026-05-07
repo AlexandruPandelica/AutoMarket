@@ -126,9 +126,12 @@
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // ── DATE DIN RAZOR ──────────────────────────────────────────────
-        const masini = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+
+    @if (modelList.Any())
+    {
+        <script>
+                // ── DATE DIN RAZOR ──────────────────────────────────────────────
+                const masini = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
         modelList.Select(r => new
         {
           nume = r.Anunt.Marca + " " + r.Anunt.Model,
@@ -143,134 +146,135 @@
         })
     ));
 
-        // ── CULORI ──────────────────────────────────────────────────────
-        const palette = [
-            { border: 'rgba(13,110,253,0.9)',  bg: 'rgba(13,110,253,0.15)'  },
-            { border: 'rgba(25,135,84,0.9)',   bg: 'rgba(25,135,84,0.15)'   },
-            { border: 'rgba(220,53,69,0.9)',   bg: 'rgba(220,53,69,0.15)'   },
-        ];
+                // ── CULORI ──────────────────────────────────────────────────────
+                const palette = [
+                    { border: 'rgba(13,110,253,0.9)',  bg: 'rgba(13,110,253,0.15)'  },
+                    { border: 'rgba(25,135,84,0.9)',   bg: 'rgba(25,135,84,0.15)'   },
+                    { border: 'rgba(220,53,69,0.9)',   bg: 'rgba(220,53,69,0.15)'   },
+                ];
 
-        // Normalizare simplă pentru radar (0-100)
-        function norm(val, min, max) {
-            if (max === min) return 50;
-            return Math.round(((val - min) / (max - min)) * 100);
-        }
+                // Normalizare simplă pentru radar (0-100)
+                function norm(val, min, max) {
+                    if (max === min) return 50;
+                    return Math.round(((val - min) / (max - min)) * 100);
+                }
 
-        const preturi    = masini.map(m => m.pret);
-        const ani        = masini.map(m => m.an);
-        const kms        = masini.map(m => m.km);
-        const puteri     = masini.map(m => m.putere);
-        const capacitati = masini.map(m => m.capacitate);
+                const preturi    = masini.map(m => m.pret);
+                const ani        = masini.map(m => m.an);
+                const kms        = masini.map(m => m.km);
+                const puteri     = masini.map(m => m.putere);
+                const capacitati = masini.map(m => m.capacitate);
 
                 // Cu valorile globale din Razor:
-        const minPret = @modelList[0].GlobalMinPret;
-        const maxPret = @modelList[0].GlobalMaxPret;
-        const minAn   = @modelList[0].GlobalMinAn;
-        const maxAn   = @modelList[0].GlobalMaxAn;
-        const minKm   = @modelList[0].GlobalMinKm;
-        const maxKm   = @modelList[0].GlobalMaxKm;
-        const minPut  = @modelList[0].GlobalMinPutere;
-        const maxPut  = @modelList[0].GlobalMaxPutere;
-        const minCap  = @modelList[0].GlobalMinCapacitate;
-        const maxCap  = @modelList[0].GlobalMaxCapacitate;
+                const minPret = @modelList[0].GlobalMinPret;
+                const maxPret = @modelList[0].GlobalMaxPret;
+                const minAn   = @modelList[0].GlobalMinAn;
+                const maxAn   = @modelList[0].GlobalMaxAn;
+                const minKm   = @modelList[0].GlobalMinKm;
+                const maxKm   = @modelList[0].GlobalMaxKm;
+                const minPut  = @modelList[0].GlobalMinPutere;
+                const maxPut  = @modelList[0].GlobalMaxPutere;
+                const minCap  = @modelList[0].GlobalMinCapacitate;
+                const maxCap  = @modelList[0].GlobalMaxCapacitate;
 
-        // ── RADAR CHART ─────────────────────────────────────────────────
-        const radarDatasets = masini.map((m, i) => ({
-            label: m.nume,
-            data: [
-                100 - norm(m.pret,       minPret, maxPret),  // Preț mic = mai bun
-                norm(m.an,               minAn,   maxAn),    // An nou = mai bun
-                100 - norm(m.km,         minKm,   maxKm),    // Km mic = mai bun
-                norm(m.putere,           minPut,  maxPut),   // Putere mare = mai bun
-                norm(m.capacitate,       minCap,  maxCap),   // Capacitate
-            ],
-            borderColor:     palette[i].border,
-            backgroundColor: palette[i].bg,
-            borderWidth: 2,
-            pointBackgroundColor: palette[i].border,
-            pointRadius: 4,
-        }));
+                // ── RADAR CHART ─────────────────────────────────────────────────
+                const radarDatasets = masini.map((m, i) => ({
+                    label: m.nume,
+                    data: [
+                        100 - norm(m.pret,       minPret, maxPret),  // Preț mic = mai bun
+                        norm(m.an,               minAn,   maxAn),    // An nou = mai bun
+                        100 - norm(m.km,         minKm,   maxKm),    // Km mic = mai bun
+                        norm(m.putere,           minPut,  maxPut),   // Putere mare = mai bun
+                        norm(m.capacitate,       minCap,  maxCap),   // Capacitate
+                    ],
+                    borderColor:     palette[i].border,
+                    backgroundColor: palette[i].bg,
+                    borderWidth: 2,
+                    pointBackgroundColor: palette[i].border,
+                    pointRadius: 4,
+                }));
 
-        new Chart(document.getElementById('radarChart'), {
-            type: 'radar',
-            data: {
-                labels: ['Preț Avantajos', 'An Fabricație', 'Kilometraj Redus', 'Putere Motor', 'Capacitate Motor'],
-                datasets: radarDatasets,
-            },
-            options: {
-                responsive: true,
-                scales: {
-                    r: {
-                        min: 0, max: 100,
-                        ticks: { stepSize: 25, font: { size: 10 } },
-                        pointLabels: { font: { size: 11 }, color: '#444' },
-                        grid:  { color: 'rgba(0,0,0,0.08)' },
-                        angleLines: { color: 'rgba(0,0,0,0.08)' },
-                    }
-                },
-                plugins: {
-                    legend: { position: 'bottom', labels: { font: { size: 12 }, padding: 16 } },
-                    tooltip: {
-                        callbacks: {
-                            label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}/100`
-                        }
-                    }
-                }
-            }
-        });
-
-        // ── BAR CHART ────────────────────────────────────────────────────
-        const barLabels = masini.map(m => m.nume);
-
-        const pretDataset = {
-            label: 'Prețul mașinii (€)',
-            data: masini.map(m => m.pret),
-            backgroundColor: masini.map((m, i) => palette[i].border),
-            borderRadius: 8,
-            borderSkipped: false,
-        };
-
-        const mediaDataset = {
-            label: 'Media pieței (€)',
-            data: masini.map(m => m.mediaPret),
-            backgroundColor: 'rgba(108,117,125,0.25)',
-            borderColor:     'rgba(108,117,125,0.7)',
-            borderWidth: 2,
-            borderRadius: 8,
-            borderSkipped: false,
-        };
-
-        new Chart(document.getElementById('barChart'), {
-            type: 'bar',
-            data: {
-                labels: barLabels,
-                datasets: [pretDataset, mediaDataset],
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { position: 'bottom', labels: { font: { size: 12 }, padding: 16 } },
-                    tooltip: {
-                        callbacks: {
-                            label: ctx => ` ${ctx.dataset.label}: ${ctx.raw.toLocaleString('ro-RO')} €`
-                        }
-                    }
-                },
-                scales: {
-                    y: {
-                        beginAtZero: false,
-                        ticks: {
-                            callback: val => val.toLocaleString('ro-RO') + ' €',
-                            font: { size: 11 }
-                        },
-                        grid: { color: 'rgba(0,0,0,0.06)' }
+                new Chart(document.getElementById('radarChart'), {
+                    type: 'radar',
+                    data: {
+                        labels: ['Preț Avantajos', 'An Fabricație', 'Kilometraj Redus', 'Putere Motor', 'Capacitate Motor'],
+                        datasets: radarDatasets,
                     },
-                    x: {
-                        ticks: { font: { size: 11 } },
-                        grid: { display: false }
+                    options: {
+                        responsive: true,
+                        scales: {
+                            r: {
+                                min: 0, max: 100,
+                                ticks: { stepSize: 25, font: { size: 10 } },
+                                pointLabels: { font: { size: 11 }, color: '#444' },
+                                grid:  { color: 'rgba(0,0,0,0.08)' },
+                                angleLines: { color: 'rgba(0,0,0,0.08)' },
+                            }
+                        },
+                        plugins: {
+                            legend: { position: 'bottom', labels: { font: { size: 12 }, padding: 16 } },
+                            tooltip: {
+                                callbacks: {
+                                    label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}/100`
+                                }
+                            }
+                        }
                     }
-                }
-            }
-        });
-    </script>
+                });
+
+                // ── BAR CHART ────────────────────────────────────────────────────
+                const barLabels = masini.map(m => m.nume);
+
+                const pretDataset = {
+                    label: 'Prețul mașinii (€)',
+                    data: masini.map(m => m.pret),
+                    backgroundColor: masini.map((m, i) => palette[i].border),
+                    borderRadius: 8,
+                    borderSkipped: false,
+                };
+
+                const mediaDataset = {
+                    label: 'Media pieței (€)',
+                    data: masini.map(m => m.mediaPret),
+                    backgroundColor: 'rgba(108,117,125,0.25)',
+                    borderColor:     'rgba(108,117,125,0.7)',
+                    borderWidth: 2,
+                    borderRadius: 8,
+                    borderSkipped: false,
+                };
+
+                new Chart(document.getElementById('barChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: barLabels,
+                        datasets: [pretDataset, mediaDataset],
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'bottom', labels: { font: { size: 12 }, padding: 16 } },
+                            tooltip: {
+                                callbacks: {
+                                    label: ctx => ` ${ctx.dataset.label}: ${ctx.raw.toLocaleString('ro-RO')} €`
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                ticks: {
+                                    callback: val => val.toLocaleString('ro-RO') + ' €',
+                                    font: { size: 11 }
+                                },
+                                grid: { color: 'rgba(0,0,0,0.06)' }
+                            },
+                            x: {
+                                ticks: { font: { size: 11 } },
+                                grid: { display: false }
+                            }
+                        }
+                    }
+                });
+        </script>
+    }
 }

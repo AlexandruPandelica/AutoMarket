@@ -329,7 +329,7 @@
                             <span>Buget Maxim</span>
                         </div>
                         <div class="dc-input-wrap">
-                            <input asp-for="PretDorit" type="number" placeholder="Ex: 25000" />
+                            <input asp-for="PretDorit" type="number" min="1" placeholder="Ex: 25000" />
                             <span class="dc-unit">EUR</span>
                         </div>
                         <span asp-validation-for="PretDorit" class="dc-error"></span>
@@ -341,7 +341,7 @@
                             <span>Anul Minim Dorit</span>
                         </div>
                         <div class="dc-input-wrap">
-                            <input asp-for="AnMinim" type="number" placeholder="Ex: 2018" />
+                            <input asp-for="AnMinim" type="number" min="1900" placeholder="Ex: 2018" />
                         </div>
                         <span asp-validation-for="AnMinim" class="dc-error"></span>
                     </div>
@@ -352,7 +352,7 @@
                             <span>Kilometraj Maxim</span>
                         </div>
                         <div class="dc-input-wrap">
-                            <input asp-for="KilometrajMaxim" type="number" placeholder="Ex: 150000" />
+                            <input asp-for="KilometrajMaxim" type="number" min="0" placeholder="Ex: 150000" />
                             <span class="dc-unit">KM</span>
                         </div>
                         <span asp-validation-for="KilometrajMaxim" class="dc-error"></span>
@@ -366,7 +366,7 @@
                             <span>Capacitate Motor Dorită</span>
                         </div>
                         <div class="dc-input-wrap">
-                            <input asp-for="CapacitateMotorDorita" type="number" placeholder="Ex: 1998" />
+                            <input asp-for="CapacitateMotorDorita" type="number" min="1" placeholder="Ex: 1998" />
                             <span class="dc-unit">CM³</span>
                         </div>
                         <span asp-validation-for="CapacitateMotorDorita" class="dc-error"></span>
@@ -378,7 +378,7 @@
                             <span>Putere Dorită</span>
                         </div>
                         <div class="dc-input-wrap">
-                            <input asp-for="PutereCPDorita" type="number" placeholder="Ex: 150" />
+                            <input asp-for="PutereCPDorita" type="number" min="1" placeholder="Ex: 150" />
                             <span class="dc-unit">CP</span>
                         </div>
                         <span asp-validation-for="PutereCPDorita" class="dc-error"></span>
