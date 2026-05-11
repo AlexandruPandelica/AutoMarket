@@ -188,6 +188,13 @@
                         <i class="bi bi-envelope-fill"></i> Contactează vânzătorul
                     </button>
                 }
+                <!-- Adaugă ÎNAINTE de butonul "Contactează vânzătorul" -->
+                <button type="button"
+                        class="btn btn-outline-warning btn-sm px-3"
+                        id="btnAdaugaComparator"
+                        onclick="adaugaLaComparator(@Model.ID_Anunt, '@Model.Marca @Model.Model', @Model.Pret, @Model.An_Fabricatie, @Model.Kilometraj, '@Model.Combustibil', '@Model.TipCaroserie', @Model.PutereCP, @Model.CapacitateMotor, '@Model.Transmisie', '@Model.Locatie')">
+                    <i class="bi bi-bar-chart-line"></i> Adaugă la comparator
+                </button>
             </div>
         </div>
     </div>
@@ -501,6 +508,99 @@
                 formToDelete = null;
             });
         });
+
+                // --- 3. COMPARATOR ---
+        function adaugaLaComparator(id, nume, pret, an, km, combustibil, caroserie, putere, motor, transmisie, locatie) {
+            let lista = JSON.parse(localStorage.getItem('comparator') || '[]');
+
+            if (lista.find(x => x.id === id)) {
+                alert('Această mașină este deja în comparator!');
+                return;
+            }
+            if (lista.length >= 3) {
+                alert('Poți compara maxim 3 mașini. Șterge una din comparator mai întâi.');
+                return;
+            }
+
+            lista.push({ id, nume, pret, an, km, combustibil, caroserie, putere, motor, transmisie, locatie });
+            localStorage.setItem('comparator', JSON.stringify(lista));
+
+            // Schimbă butonul
+            var btn = document.getElementById('btnAdaugaComparator');
+            btn.classList.remove('btn-outline-warning');
+            btn.classList.add('btn-warning');
+            btn.innerHTML = '<i class="bi bi-check-lg"></i> Adăugat în comparator';
+            btn.disabled = true;
+
+            // Arată notificarea
+            var toast = document.createElement('div');
+            toast.className = 'alert alert-success alert-dismissible fade show position-fixed shadow';
+            toast.style = 'bottom: 20px; right: 20px; z-index: 9999; min-width: 280px;';
+            toast.innerHTML = `
+                <i class="bi bi-check-circle-fill me-2"></i>
+                <strong>${nume}</strong> adăugat în comparator!
+                <br><a href="/Anunturi/Comparator" class="alert-link">Vezi comparatorul (${lista.length}/3)</a>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            `;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 5000);
+
+            actualizeazaBaraComparator();
+        }
+
+        function actualizeazaBaraComparator() {
+            let lista = JSON.parse(localStorage.getItem('comparator') || '[]');
+            var bara = document.getElementById('bara-comparator');
+            if (!bara) return;
+
+            if (lista.length === 0) {
+                bara.style.display = 'none';
+                return;
+            }
+
+            bara.style.display = 'flex';
+            document.getElementById('comparator-count').textContent = lista.length;
+            var numeContainer = document.getElementById('comparator-names');
+            numeContainer.innerHTML = lista.map(x =>
+                `<span class="badge bg-light text-dark border me-2">
+                    ${x.nume}
+                    <button class="btn-close btn-close-sm ms-1" style="font-size:0.5rem" onclick="stergedinComparator(${x.id})"></button>
+                </span>`
+            ).join('');
+        }
+
+        function stergedinComparator(id) {
+            let lista = JSON.parse(localStorage.getItem('comparator') || '[]');
+            lista = lista.filter(x => x.id !== id);
+            localStorage.setItem('comparator', JSON.stringify(lista));
+            actualizeazaBaraComparator();
+
+            // Resetează butonul dacă e mașina curentă
+            var btn = document.getElementById('btnAdaugaComparator');
+            if (btn && btn.disabled) {
+                btn.classList.add('btn-outline-warning');
+                btn.classList.remove('btn-warning');
+                btn.innerHTML = '<i class="bi bi-bar-chart-line"></i> Adaugă la comparator';
+                btn.disabled = false;
+            }
+        }
+
+        // La încărcare: verifică dacă mașina curentă e deja în comparator
+        document.addEventListener('DOMContentLoaded', function() {
+            let lista = JSON.parse(localStorage.getItem('comparator') || '[]');
+            var idCurent = @Model.ID_Anunt;
+            if (lista.find(x => x.id === idCurent)) {
+                var btn = document.getElementById('btnAdaugaComparator');
+                if (btn) {
+                    btn.classList.remove('btn-outline-warning');
+                    btn.classList.add('btn-warning');
+                    btn.innerHTML = '<i class="bi bi-check-lg"></i> Adăugat în comparator';
+                    btn.disabled = true;
+                }
+            }
+            actualizeazaBaraComparator();
+        });
+
     </script>
 
     <style>

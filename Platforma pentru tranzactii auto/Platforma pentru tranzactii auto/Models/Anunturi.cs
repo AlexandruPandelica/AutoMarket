@@ -9,32 +9,46 @@ namespace Platforma_pentru_tranzactii_auto.Models
     {
         [Key]
         public int ID_Anunt { get; set; }
+
         [Required]
         public string Marca { get; set; }
+
         [Required]
         public string Model { get; set; }
+
         [Required]
+        [Range(1, int.MaxValue, ErrorMessage = "Prețul trebuie să fie mai mare decât 0.")]
         public int Pret { get; set; }
+
+        [Range(1900, 2025, ErrorMessage = "Anul trebuie să fie între 1900 și 2025.")]
         public int An_Fabricatie { get; set; }
+
+        [Range(0, int.MaxValue, ErrorMessage = "Kilometrajul nu poate fi negativ.")]
         public int Kilometraj { get; set; }
+
         public string Descriere { get; set; }
+
         public DateTime Data_Postarii { get; set; } = DateTime.Now;
         public int Nr_Vizualizari { get; set; }
         public string Locatie { get; set; }
 
-        // --- PROPRIETĂȚI NOI PENTRU MACHINE LEARNING ---
+        // --- PROPRIETATI NOI PENTRU MACHINE LEARNING ---
         public string? Combustibil { get; set; } // Benzina, Diesel, Electric, Hibrid
         public string? Transmisie { get; set; }  // Manuala, Automata
-        public int CapacitateMotor { get; set; } // Ex: 1998 (în cm3)
+
+        [Range(0, int.MaxValue, ErrorMessage = "Capacitatea motorului nu poate fi negativă.")]
+        public int CapacitateMotor { get; set; } // Ex: 1998 (in cm3)
+
+        [Range(0, int.MaxValue, ErrorMessage = "Puterea nu poate fi negativă.")]
         public int PutereCP { get; set; }        // Ex: 150 (Cai putere)
         public string? TipCaroserie { get; set; } // Sedan, SUV, Hatchback, Break
 
         public byte[]? Imagine_Anunt { get; set; }
-        // --- NOU: Calea către videoclipul salvat fizic pe server ---
+        // Calea catre videoclipul salvat fizic pe server ---
         public string? VideoPath { get; set; }
         public List<ImaginiAnunt>? GalerieImagini { get; set; }
 
-        // FK către utilizator (proprietar)
+        // FK catre utilizator (proprietar)
         public int UserId { get; set; }
 
         [ForeignKey("UserId")]

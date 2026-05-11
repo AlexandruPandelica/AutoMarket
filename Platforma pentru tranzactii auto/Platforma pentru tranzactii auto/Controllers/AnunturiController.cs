@@ -475,6 +475,21 @@ namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei contr
             var recomandari = await _recomandareService.CalculeazaDreamCar(model, 3);
             return View("DreamCarResults", recomandari);
         }
+
+        public IActionResult Comparator()
+        {
+            return View();
+        }
+
+        
+        [HttpGet]
+        public IActionResult GetImagine(int id)
+        {
+            var anunt = _context.Anunt.Find(id);  
+            if (anunt?.Imagine_Anunt == null)
+                return NotFound();
+            return File(anunt.Imagine_Anunt, "image/jpeg");
+        }
     }
 
 }

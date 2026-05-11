@@ -42,7 +42,7 @@
                             <div class="col-md-6">
                                 <label asp-for="Pret" class="form-label fw-semibold"></label>
                                 <div class="input-group">
-                                    <input asp-for="Pret" class="form-control" placeholder="Ex: 15000" />
+                                    <input asp-for="Pret" class="form-control" placeholder="Ex: 15000" min="0" />
                                     <span class="input-group-text">€</span>
                                 </div>
                                 <span asp-validation-for="Pret" class="text-danger small"></span>
@@ -50,14 +50,14 @@
 
                             <div class="col-md-6">
                                 <label asp-for="An_Fabricatie" class="form-label fw-semibold"></label>
-                                <input asp-for="An_Fabricatie" class="form-control" placeholder="Ex: 2019" />
+                                <input asp-for="An_Fabricatie" class="form-control" placeholder="Ex: 2019" min="0" />
                                 <span asp-validation-for="An_Fabricatie" class="text-danger small"></span>
                             </div>
 
                             <div class="col-md-6">
                                 <label asp-for="Kilometraj" class="form-label fw-semibold"></label>
                                 <div class="input-group">
-                                    <input asp-for="Kilometraj" class="form-control" placeholder="Ex: 120000" />
+                                    <input asp-for="Kilometraj" class="form-control" placeholder="Ex: 120000" min="0" />
                                     <span class="input-group-text">km</span>
                                 </div>
                                 <span asp-validation-for="Kilometraj" class="text-danger small"></span>
@@ -107,13 +107,13 @@
 
                             <div class="col-md-4">
                                 <label asp-for="CapacitateMotor" class="form-label fw-semibold">Motorizare (cm³)</label>
-                                <input asp-for="CapacitateMotor" class="form-control" type="number" placeholder="Ex: 1998" />
+                                <input asp-for="CapacitateMotor" class="form-control" type="number" placeholder="Ex: 1998" min="0" />
                                 <span asp-validation-for="CapacitateMotor" class="text-danger small"></span>
                             </div>
 
                             <div class="col-md-4">
                                 <label asp-for="PutereCP" class="form-label fw-semibold">Putere (CP)</label>
-                                <input asp-for="PutereCP" class="form-control" type="number" placeholder="Ex: 150" />
+                                <input asp-for="PutereCP" class="form-control" type="number" placeholder="Ex: 150" min="0" />
                                 <span asp-validation-for="PutereCP" class="text-danger small"></span>
                             </div>
 
