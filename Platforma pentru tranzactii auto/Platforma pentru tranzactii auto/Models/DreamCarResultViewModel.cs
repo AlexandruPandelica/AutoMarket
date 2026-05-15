@@ -4,6 +4,7 @@
     {
         public Anunturi Anunt { get; set; }
         public double ScorSimilaritate { get; set; }
+        public double ScorEuclidian { get; set; }
         public string DealLabel { get; set; }    // "Deal Bun", "Pret Corect", "Suprapret"
         public string DealColor { get; set; }    // "success", "warning", "danger"
         public decimal MediaPretSimilare { get; set; }

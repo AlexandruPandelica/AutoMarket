@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Platforma_pentru_tranzactii_auto.Models;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,20 @@ namespace Platforma_pentru_tranzactii_auto.Services
     public class RecomandareService
     {
         private readonly PlatformaDbContext _context;
+        private readonly double[] _minValues;
+        private readonly double[] _maxValues;
 
-        public RecomandareService(PlatformaDbContext context)
+        public RecomandareService(PlatformaDbContext context, IConfiguration configuration)
         {
             _context = context;
+            // Preluăm limitele globale din appsettings.json pentru normalizarea KNN
+            _minValues = configuration.GetSection("KNNSettings:MinValues").Get<double[]>();
+            _maxValues = configuration.GetSection("KNNSettings:MaxValues").Get<double[]>();
         }
 
-        public async Task<List<DreamCarResultViewModel>> CalculeazaDreamCar(DreamCarViewModel dreamCar, int topRecomandari = 3)
+        public async Task<DreamCarComparisonViewModel> CalculeazaDreamCarComparativ(DreamCarViewModel dreamCar, int topRecomandari = 3)
         {
-            // PASUL 1: FILTRAREA HARD
+            // PASUL 1: FILTRARE HARD
             var query = _context.Anunt.AsQueryable();
 
             if (dreamCar.PretDorit > 0)
@@ -26,131 +32,135 @@ namespace Platforma_pentru_tranzactii_auto.Services
             if (dreamCar.AnMinim > 0)
                 query = query.Where(a => a.An_Fabricatie >= dreamCar.AnMinim);
             if (dreamCar.KilometrajMaxim > 0)
-                query = query.Where(a => a.Kilometraj <= dreamCar.KilometrajMaxim);
+                query = query.Where(a => a.Kilometraj <= dreamCar.KilometrajMaxim); 
 
             var masiniValide = await query.ToListAsync();
-            if (!masiniValide.Any()) return new List<DreamCarResultViewModel>();
+            if (!masiniValide.Any()) return new DreamCarComparisonViewModel();
 
-            // PASUL 2: NORMALIZARE
-            decimal maxPret = masiniValide.Max(a => a.Pret) == 0 ? 1 : masiniValide.Max(a => a.Pret);
-            decimal minPret = masiniValide.Min(a => a.Pret);
-            int maxAn = masiniValide.Max(a => a.An_Fabricatie) == 0 ? 1 : masiniValide.Max(a => a.An_Fabricatie);
-            int minAn = masiniValide.Min(a => a.An_Fabricatie);
-            int maxKm = masiniValide.Max(a => a.Kilometraj) == 0 ? 1 : masiniValide.Max(a => a.Kilometraj);
-            int minKm = masiniValide.Min(a => a.Kilometraj);
-            int maxCapacitate = masiniValide.Max(a => a.CapacitateMotor) == 0 ? 1 : masiniValide.Max(a => a.CapacitateMotor);
-            int minCapacitate = masiniValide.Min(a => a.CapacitateMotor);
-            int maxPutere = masiniValide.Max(a => a.PutereCP) == 0 ? 1 : masiniValide.Max(a => a.PutereCP);
-            int minPutere = masiniValide.Min(a => a.PutereCP);
+            // Limite locale pentru Radar Chart
+            decimal localMinPret = masiniValide.Min(a => a.Pret);
+            decimal localMaxPret = masiniValide.Max(a => a.Pret);
+            int localMinAn = masiniValide.Min(a => a.An_Fabricatie);
+            int localMaxAn = masiniValide.Max(a => a.An_Fabricatie);
+            int localMinKm = masiniValide.Min(a => a.Kilometraj);
+            int localMaxKm = masiniValide.Max(a => a.Kilometraj);
+            int localMinCap = masiniValide.Min(a => a.CapacitateMotor);
+            int localMaxCap = masiniValide.Max(a => a.CapacitateMotor);
+            int localMinPutere = masiniValide.Min(a => a.PutereCP);
+            int localMaxPutere = masiniValide.Max(a => a.PutereCP);
 
-            // PASUL 3: VECTOR UTILIZATOR
-            double[] vectorUtilizator = {
-        1.0 - Normalize(dreamCar.PretDorit, minPret, maxPret),
-        1.0,
-        0.0,
-        Normalize(dreamCar.CapacitateMotorDorita, minCapacitate, maxCapacitate),
-        Normalize(dreamCar.PutereCPDorita, minPutere, maxPutere)
-    };
+            // PASUL 2: VECTORI UTILIZATOR — DIFERIȚI pentru fiecare algoritm
+            // Cosine: valori ideale (direcție optimă)
+            double[] vectorCosine = {
+            1.0 - NormalizeKNN((double)dreamCar.PretDorit, 0), // preț cât mai mic
+            1.0,  // an cât mai nou
+            0.0,  // km cât mai puțini
+            NormalizeKNN(dreamCar.CapacitateMotorDorita, 3),
+            NormalizeKNN(dreamCar.PutereCPDorita, 4)
+            };
 
-            var recomandari = new Dictionary<Anunturi, double>();
+            // KNN: valorile EXACTE introduse de utilizator (distanță fizică)
+            double[] vectorKNN = {
+            NormalizeKNN((double)dreamCar.PretDorit, 0),
+            NormalizeKNN(dreamCar.AnMinim, 1),
+            NormalizeKNN(dreamCar.KilometrajMaxim, 2),
+            NormalizeKNN(dreamCar.CapacitateMotorDorita, 3),
+            NormalizeKNN(dreamCar.PutereCPDorita, 4)
+            };
+            var toateRezultatele = new List<DreamCarResultViewModel>();
 
-            // PASUL 4: COSINE SIMILARITY
+            // PASUL 3: CALCUL SCORURI PENTRU TOATE MAȘINILE
             foreach (var masina in masiniValide)
             {
                 double[] vectorMasina = {
-            1.0 - Normalize(masina.Pret, minPret, maxPret),
-            Normalize(masina.An_Fabricatie, minAn, maxAn),
-            1.0 - Normalize(masina.Kilometraj, minKm, maxKm),
-            Normalize(masina.CapacitateMotor, minCapacitate, maxCapacitate),
-            Normalize(masina.PutereCP, minPutere, maxPutere)
-        };
+                    NormalizeKNN((double)masina.Pret, 0),
+                    NormalizeKNN(masina.An_Fabricatie, 1),
+                    NormalizeKNN(masina.Kilometraj, 2),
+                    NormalizeKNN(masina.CapacitateMotor, 3),
+                    NormalizeKNN(masina.PutereCP, 4)
+                };
 
-                recomandari.Add(masina, CosineSimilarity(vectorUtilizator, vectorMasina));
-            }
+                // După — fiecare folosește vectorul său propriu
+                double simCosine = CosineSimilarity(vectorCosine, vectorMasina);
+                double distEuclidean = EuclideanDistance(vectorKNN, vectorMasina);
+                double simEuclidean = 1.0 / (1.0 + distEuclidean);
 
-            // PASUL 5: TOP 3 + calcul scor deal
-            var top = recomandari
-                .OrderByDescending(r => r.Value)
-                .Take(topRecomandari)
-                .ToList();
+                // Logica Deal
+                var similare = masiniValide.Where(a => a.ID_Anunt != masina.ID_Anunt &&
+                    (a.Marca == masina.Marca || Math.Abs(a.CapacitateMotor - masina.CapacitateMotor) <= 200)).ToList();
 
-            var rezultate = new List<DreamCarResultViewModel>();
-
-            foreach (var item in top)
-            {
-                var masina = item.Key;
-
-                // Găsim mașini similare (aceeași marcă sau capacitate apropiată ±200cm3)
-                var similare = masiniValide
-                    .Where(a => a.ID_Anunt != masina.ID_Anunt &&
-                               (a.Marca == masina.Marca ||
-                                Math.Abs(a.CapacitateMotor - masina.CapacitateMotor) <= 200))
-                    .ToList();
-
-                decimal mediaPret = similare.Any()
-                        ? (decimal)similare.Average(a => (double)a.Pret)
-    :                     (decimal)masiniValide.Average(a => (double)a.Pret);
-
+                decimal mediaPret = similare.Any() ? (decimal)similare.Average(a => (double)a.Pret) : (decimal)masiniValide.Average(a => (double)a.Pret);
                 decimal diferenta = masina.Pret - mediaPret;
-                decimal procentDiferenta = mediaPret > 0 ? (diferenta / mediaPret) * 100 : 0;
+                decimal procent = mediaPret > 0 ? (diferenta / mediaPret) * 100 : 0;
 
                 string label, color;
-                if (procentDiferenta <= -10) { label = "🟢 Deal Bun"; color = "success"; }
-                else if (procentDiferenta <= 10) { label = "🟡 Preț Corect"; color = "warning"; }
+                if (procent <= -10) { label = "🟢 Deal Bun"; color = "success"; }
+                else if (procent <= 10) { label = "🟡 Preț Corect"; color = "warning"; }
                 else { label = "🔴 Suprapreț"; color = "danger"; }
 
-                rezultate.Add(new DreamCarResultViewModel
+                toateRezultatele.Add(new DreamCarResultViewModel
                 {
                     Anunt = masina,
-                    ScorSimilaritate = Math.Round(item.Value * 100, 1),
+                    ScorSimilaritate = Math.Round(simCosine * 100, 1),
+                    ScorEuclidian = Math.Round(simEuclidean * 100, 1),
                     DealLabel = label,
                     DealColor = color,
                     MediaPretSimilare = Math.Round(mediaPret, 0),
                     DiferentaPret = Math.Round(diferenta, 0),
-                    // ← adaugă astea
-                    GlobalMinAn = minAn,
-                    GlobalMaxAn = maxAn,
-                    GlobalMinKm = minKm,
-                    GlobalMaxKm = maxKm,
-                    GlobalMinPutere = minPutere,
-                    GlobalMaxPutere = maxPutere,
-                    GlobalMinCapacitate = minCapacitate,
-                    GlobalMaxCapacitate = maxCapacitate,
-                    GlobalMinPret = minPret,
-                    GlobalMaxPret = maxPret,
+                    GlobalMinAn = localMinAn,
+                    GlobalMaxAn = localMaxAn,
+                    GlobalMinKm = localMinKm,
+                    GlobalMaxKm = localMaxKm,
+                    GlobalMinPret = localMinPret,
+                    GlobalMaxPret = localMaxPret,
+                    GlobalMinPutere = localMinPutere,
+                    GlobalMaxPutere = localMaxPutere,
+                    GlobalMinCapacitate = localMinCap,
+                    GlobalMaxCapacitate = localMaxCap
                 });
             }
 
-            return rezultate;
-        }
-
-        // Metoda matematică Cosine Similarity
-        private double CosineSimilarity(double[] vectorA, double[] vectorB)
-        {
-            double dotProduct = 0;
-            double normA = 0;
-            double normB = 0;
-
-            for (int i = 0; i < vectorA.Length; i++)
+            // PASUL 4: SEPARAREA ÎN DOUĂ LISTE
+            return new DreamCarComparisonViewModel
             {
-                dotProduct += vectorA[i] * vectorB[i];
-                normA += Math.Pow(vectorA[i], 2);
-                normB += Math.Pow(vectorB[i], 2);
-            }
+                // Top bazat pe Cosine (Stil/Profil)
+                RecomandariStil = toateRezultatele
+                    .OrderByDescending(r => r.ScorSimilaritate)
+                    .Take(topRecomandari)
+                    .ToList(),
 
-            if (normA == 0 || normB == 0) return 0;
-            return dotProduct / (Math.Sqrt(normA) * Math.Sqrt(normB));
+                // Top bazat pe KNN (Cifre exacte/Proximitate)
+                RecomandariPrecizie = toateRezultatele
+                    .OrderByDescending(r => r.ScorEuclidian)
+                    .Take(topRecomandari)
+                    .ToList()
+            };
         }
 
-        // Metoda de Normalizare Min-Max (actualizată cu Clamp pentru siguranță)
-        private double Normalize(decimal value, decimal min, decimal max)
+        private double CosineSimilarity(double[] vA, double[] vB)
         {
-            if (max == min) return 0;
+            double dot = 0, nA = 0, nB = 0;
+            for (int i = 0; i < vA.Length; i++)
+            {
+                dot += vA[i] * vB[i];
+                nA += Math.Pow(vA[i], 2);
+                nB += Math.Pow(vB[i], 2);
+            }
+            return (nA == 0 || nB == 0) ? 0 : dot / (Math.Sqrt(nA) * Math.Sqrt(nB));
+        }
 
-            double normalized = (double)((value - min) / (max - min));
+        private double EuclideanDistance(double[] vA, double[] vB)
+        {
+            double sum = 0;
+            for (int i = 0; i < vA.Length; i++) sum += Math.Pow(vA[i] - vB[i], 2);
+            return Math.Sqrt(sum);
+        }
 
-            // Asigurăm că valoarea rămâne strict între 0 și 1
-            return Math.Clamp(normalized, 0.0, 1.0);
+        private double NormalizeKNN(double val, int idx)
+        {
+            if (_minValues == null || _maxValues == null) return 0;
+            double min = _minValues[idx], max = _maxValues[idx];
+            return max == min ? 0 : Math.Clamp((val - min) / (max - min), 0.0, 1.0);
         }
     }
 }

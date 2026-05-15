@@ -1,0 +1,83 @@
+﻿@model Platforma_pentru_tranzactii_auto.Models.DreamCarResultViewModel
+
+@{
+    var anunt = Model.Anunt;
+}
+
+<div class="card h-100 shadow-sm border-0" style="border-radius: 12px; overflow: hidden; transition: transform 0.2s;">
+    @if (anunt.Imagine_Anunt != null)
+    {
+        <img src="data:image/jpeg;base64,@Convert.ToBase64String(anunt.Imagine_Anunt)"
+             class="card-img-top" style="height: 200px; object-fit: cover;" alt="Imagine @anunt.Marca">
+    }
+    else
+    {
+        <img src="/images/no-image.jpg" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Fără imagine">
+    }
+
+    <div class="card-body">
+        <div class="d-flex flex-column gap-1 mb-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <span class="badge bg-@Model.DealColor fs-7">@Model.DealLabel</span>
+                <span class="badge bg-primary" title="Algoritm Cosine Similarity (Stil/Profil)">
+                    <i class="bi bi-compass"></i> @Model.ScorSimilaritate% stil
+                </span>
+            </div>
+            <div class="d-flex justify-content-end">
+                <span class="badge bg-info text-dark" style="font-size: 0.75rem;" title="Algoritm KNN Distanța Euclidiană (Cifre Exacte)">
+                    <i class="bi bi-ruler"></i> @Model.ScorEuclidian% cifre
+                </span>
+            </div>
+        </div>
+
+        <h5 class="card-title fw-bold mb-1">@anunt.Marca @anunt.Model</h5>
+        <h4 class="text-primary fw-bold mb-2">@anunt.Pret.ToString("N0") €</h4>
+
+        <div class="mb-3">
+            <small class="text-muted d-block" style="font-size: 0.8rem;">
+                Media pieței: <strong>@Model.MediaPretSimilare.ToString("N0") €</strong>
+            </small>
+            @if (Model.DiferentaPret < 0)
+            {
+                <small class="text-success fw-bold">
+                    <i class="bi bi-arrow-down-circle"></i> Economisești @Math.Abs(Model.DiferentaPret).ToString("N0") €
+                </small>
+            }
+            else if (Model.DiferentaPret > 0)
+            {
+                <small class="text-danger fw-bold">
+                    <i class="bi bi-arrow-up-circle"></i> +@Model.DiferentaPret.ToString("N0") € peste medie
+                </small>
+            }
+        </div>
+
+        <div class="row g-0 text-muted small mb-3">
+            <div class="col-6 mb-1"><i class="bi bi-calendar3 me-1"></i> @anunt.An_Fabricatie</div>
+            <div class="col-6 mb-1"><i class="bi bi-speedometer2 me-1"></i> @anunt.Kilometraj.ToString("N0") km</div>
+            <div class="col-6"><i class="bi bi-lightning-charge me-1"></i> @anunt.PutereCP CP</div>
+            <div class="col-6"><i class="bi bi-gear-wide-connected me-1"></i> @anunt.CapacitateMotor cm³</div>
+        </div>
+
+        <p class="card-text text-truncate small text-muted">@anunt.Descriere</p>
+    </div>
+
+    <div class="card-footer bg-white border-0 pb-3">
+        <div class="d-flex justify-content-between align-items-center">
+            <small class="text-muted"><i class="bi bi-geo-alt"></i> @anunt.Locatie</small>
+            <a asp-action="Details" asp-controller="Anunturi" asp-route-id="@anunt.ID_Anunt" class="btn btn-primary btn-sm px-4">
+                Vezi Detalii
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.12) !important;
+    }
+
+    .fs-7 {
+        font-size: 0.85rem;
+    }
+</style>

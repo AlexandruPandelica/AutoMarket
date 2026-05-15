@@ -1,280 +1,147 @@
-﻿@model IEnumerable<Platforma_pentru_tranzactii_auto.Models.DreamCarResultViewModel>
+﻿@model Platforma_pentru_tranzactii_auto.Models.DreamCarComparisonViewModel
 
 @{
-    ViewData["Title"] = "Rezultate Recomandări";
-    var modelList = Model.ToList();
+    ViewData["Title"] = "Studiu Comparativ Recomandări";
+    // Extragere date pentru graficul de comparație (primele mașini din fiecare top)
+    var topStil = Model.RecomandariStil.FirstOrDefault();
+    var topPrecizie = Model.RecomandariPrecizie.FirstOrDefault();
 }
 
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <div>
-            <h2>Recomandările tale personalizate 🎯</h2>
-            <p class="text-muted">Iată cele mai bune potriviri calculate de algoritmul nostru inteligent.</p>
+            <h2 class="fw-bold">Analiză Comparativă Dream Car 🤖</h2>
+            <p class="text-muted">Am utilizat doi algoritmi diferiți pentru a-ți oferi perspective variate asupra pieței.</p>
         </div>
-        <div>
-            <a asp-action="DreamCar" class="btn btn-outline-secondary">← Caută din nou</a>
-        </div>
+        <a asp-action="DreamCar" class="btn btn-outline-secondary">← Nouă Căutare</a>
     </div>
 
-    @if (!Model.Any())
+    @if (!(Model.RecomandariStil?.Any() ?? false) && !(Model.RecomandariPrecizie?.Any() ?? false))
     {
-        <div class="alert alert-warning text-center" role="alert">
-            Nu am putut găsi mașini care să se potrivească preferințelor tale. Încearcă să ajustezi bugetul sau anul de fabricație!
+        <div class="alert alert-warning text-center">
+            Nu am găsit mașini potrivite. Încearcă să relaxezi filtrele de căutare.
         </div>
     }
     else
     {
-        <!-- CARDURI -->
-        <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
-            @foreach (var result in modelList)
-            {
-                var anunt = result.Anunt;
-                <div class="col">
-                    <div class="card h-100 shadow-sm" style="border-radius: 12px; overflow: hidden;">
-
-                        @if (anunt.Imagine_Anunt != null)
-                        {
-                            <img src="data:image/jpeg;base64,@Convert.ToBase64String(anunt.Imagine_Anunt)"
-                                 class="card-img-top" style="height: 200px; object-fit: cover;">
-                        }
-                        else
-                        {
-                            <img src="/images/no-image.jpg" class="card-img-top" style="height: 200px; object-fit: cover;">
-                        }
-
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="badge bg-@result.DealColor fs-6">@result.DealLabel</span>
-                                <span class="badge bg-primary">⭐ @result.ScorSimilaritate% potrivire</span>
-                            </div>
-
-                            <h4 class="card-title fw-bold mb-1">@anunt.Marca @anunt.Model</h4>
-                            <h5 class="text-primary mb-1">@anunt.Pret.ToString("N0") €</h5>
-
-                            <small class="text-muted mb-3 d-block">
-                                Media mașini similare: <strong>@result.MediaPretSimilare.ToString("N0") €</strong>
-                                @if (result.DiferentaPret < 0)
-                                {
-                                    <span class="text-success fw-bold"> (@result.DiferentaPret.ToString("N0") € față de medie)</span>
-                                }
-                                else if (result.DiferentaPret > 0)
-                                {
-                                    <span class="text-danger fw-bold"> (+@result.DiferentaPret.ToString("N0") € față de medie)</span>
-                                }
-                                else
-                                {
-                                    <span class="text-muted"> (la nivelul mediei)</span>
-                                }
-                            </small>
-
-                            <div class="text-muted small mb-2">
-                                <span class="me-3"><i class="bi bi-calendar"></i> @anunt.An_Fabricatie</span>
-                                <span><i class="bi bi-speedometer2"></i> @anunt.Kilometraj.ToString("N0") km</span>
-                            </div>
-                            <div class="text-muted small mb-2">
-                                @if (anunt.PutereCP > 0)
-                                {
-                                    <span class="me-3"><i class="bi bi-lightning"></i> @anunt.PutereCP CP</span>
-                                }
-                                @if (anunt.CapacitateMotor > 0)
-                                {
-                                    <span><i class="bi bi-gear"></i> @anunt.CapacitateMotor cm³</span>
-                                }
-                            </div>
-                            <p class="card-text text-truncate">@anunt.Descriere</p>
-                        </div>
-
-                        <div class="card-footer bg-white border-0 pb-3">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <small class="text-muted"><i class="bi bi-geo-alt"></i> @anunt.Locatie</small>
-                                <a asp-action="Details" asp-route-id="@anunt.ID_Anunt" class="btn btn-primary w-50">Detalii</a>
-                            </div>
-                        </div>
+        <div class="card shadow-sm border-0 mb-5" style="border-radius: 20px; background: #fdfdfd;">
+            <div class="card-body p-4">
+                <div class="row align-items-center">
+                    <div class="col-md-5">
+                        <h4 class="fw-bold"><i class="bi bi-intersect"></i> Stil vs. Precizie</h4>
+                        <p class="small text-muted">
+                            Graficul suprapune <strong>cea mai bună alegere de Stil</strong> (Cosine) peste
+                            <strong>cea mai bună alegere de Cifre</strong> (KNN).
+                            Zonele mai mari indică o performanță mai bună pe acel criteriu.
+                        </p>
+                        <ul class="list-unstyled small">
+                            <li><i class="bi bi-circle-fill text-primary"></i> <strong>Cosine Similarity:</strong> Optimizează raportul dintre atribute.</li>
+                            <li><i class="bi bi-circle-fill text-info"></i> <strong>KNN Euclidean:</strong> Caută valorile cele mai apropiate de cerința ta.</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-7">
+                        <canvas id="comparisonRadar" style="max-height: 350px;"></canvas>
                     </div>
                 </div>
-            }
+            </div>
         </div>
 
-        <!-- SECTIUNE GRAFICE -->
-        <div class="row g-4 mb-5">
-
-            <!-- RADAR CHART -->
-            <div class="col-lg-6">
-                <div class="card shadow-sm border-0" style="border-radius: 16px;">
-                    <div class="card-body p-4">
-                        <h5 class="fw-bold mb-1">📡 Profil de Potrivire</h5>
-                        <p class="text-muted small mb-3">Cât de bine se potrivește fiecare mașină pe cele 5 criterii</p>
-                        <canvas id="radarChart" height="300"></canvas>
+        <div class="mb-5">
+            <h3 class="fw-bold mb-3"><i class="bi bi-compass text-primary"></i> Top Recomandări: Profil & Stil</h3>
+            <p class="text-muted mb-4 small">Aceste mașini respectă echilibrul caracteristicilor cerute (ex: raport Putere/Preț).</p>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                @foreach (var result in Model.RecomandariStil)
+                {
+                    <div class="col">
+                        @await Html.PartialAsync("_CarCardPartial", result)
                     </div>
-                </div>
+                }
             </div>
+        </div>
 
-            <!-- BAR CHART -->
-            <div class="col-lg-6">
-                <div class="card shadow-sm border-0" style="border-radius: 16px;">
-                    <div class="card-body p-4">
-                        <h5 class="fw-bold mb-1">💰 Preț vs. Media Pieței</h5>
-                        <p class="text-muted small mb-3">Comparație între prețul mașinii și media mașinilor similare</p>
-                        <canvas id="barChart" height="300"></canvas>
+        <hr class="my-5 opacity-25" />
+
+        <div class="mb-5">
+            <h3 class="fw-bold mb-3"><i class="bi bi-ruler text-info"></i> Top Recomandări: Precizie Matematică</h3>
+            <p class="text-muted mb-4 small">Aceste mașini au valorile cele mai apropiate de cifrele exacte introduse de tine.</p>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                @foreach (var result in Model.RecomandariPrecizie)
+                {
+                    <div class="col">
+                        @await Html.PartialAsync("_CarCardPartial", result)
                     </div>
-                </div>
+                }
             </div>
-
         </div>
     }
 </div>
 
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    @if (modelList.Any())
-    {
-        <script>
-                // ── DATE DIN RAZOR ──────────────────────────────────────────────
-                const masini = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(
-        modelList.Select(r => new
+    <script>
+        @if (topStil != null && topPrecizie != null)
         {
-          nume = r.Anunt.Marca + " " + r.Anunt.Model,
-          potrivire = r.ScorSimilaritate,
-          pret = (double)r.Anunt.Pret,
-          mediaPret = (double)r.MediaPretSimilare,
-          an = r.Anunt.An_Fabricatie,
-          km = r.Anunt.Kilometraj,
-          putere = r.Anunt.PutereCP,
-          capacitate = r.Anunt.CapacitateMotor,
-          dealColor = r.DealColor
-        })
-    ));
+            <text>
+                const ctxRadar = document.getElementById('comparisonRadar').getContext('2d');
 
-                // ── CULORI ──────────────────────────────────────────────────────
-                const palette = [
-                    { border: 'rgba(13,110,253,0.9)',  bg: 'rgba(13,110,253,0.15)'  },
-                    { border: 'rgba(25,135,84,0.9)',   bg: 'rgba(25,135,84,0.15)'   },
-                    { border: 'rgba(220,53,69,0.9)',   bg: 'rgba(220,53,69,0.15)'   },
-                ];
-
-                // Normalizare simplă pentru radar (0-100)
-                function norm(val, min, max) {
-                    if (max === min) return 50;
+                // Funcție de normalizare pentru grafic
+                function normValue(val, min, max) {
                     return Math.round(((val - min) / (max - min)) * 100);
                 }
 
-                const preturi    = masini.map(m => m.pret);
-                const ani        = masini.map(m => m.an);
-                const kms        = masini.map(m => m.km);
-                const puteri     = masini.map(m => m.putere);
-                const capacitati = masini.map(m => m.capacitate);
+                const dataStil = [
+                    100 - normValue(@topStil.Anunt.Pret, @topStil.GlobalMinPret, @topStil.GlobalMaxPret),
+                    normValue(@topStil.Anunt.An_Fabricatie, @topStil.GlobalMinAn, @topStil.GlobalMaxAn),
+                    100 - normValue(@topStil.Anunt.Kilometraj, @topStil.GlobalMinKm, @topStil.GlobalMaxKm),
+                    normValue(@topStil.Anunt.PutereCP, @topStil.GlobalMinPutere, @topStil.GlobalMaxPutere),
+                    normValue(@topStil.Anunt.CapacitateMotor, @topStil.GlobalMinCapacitate, @topStil.GlobalMaxCapacitate)
+                ];
 
-                // Cu valorile globale din Razor:
-                const minPret = @modelList[0].GlobalMinPret;
-                const maxPret = @modelList[0].GlobalMaxPret;
-                const minAn   = @modelList[0].GlobalMinAn;
-                const maxAn   = @modelList[0].GlobalMaxAn;
-                const minKm   = @modelList[0].GlobalMinKm;
-                const maxKm   = @modelList[0].GlobalMaxKm;
-                const minPut  = @modelList[0].GlobalMinPutere;
-                const maxPut  = @modelList[0].GlobalMaxPutere;
-                const minCap  = @modelList[0].GlobalMinCapacitate;
-                const maxCap  = @modelList[0].GlobalMaxCapacitate;
+                const dataPrecizie = [
+                    100 - normValue(@topPrecizie.Anunt.Pret, @topPrecizie.GlobalMinPret, @topPrecizie.GlobalMaxPret),
+                    normValue(@topPrecizie.Anunt.An_Fabricatie, @topPrecizie.GlobalMinAn, @topPrecizie.GlobalMaxAn),
+                    100 - normValue(@topPrecizie.Anunt.Kilometraj, @topPrecizie.GlobalMinKm, @topPrecizie.GlobalMaxKm),
+                    normValue(@topPrecizie.Anunt.PutereCP, @topPrecizie.GlobalMinPutere, @topPrecizie.GlobalMaxPutere),
+                    normValue(@topPrecizie.Anunt.CapacitateMotor, @topPrecizie.GlobalMinCapacitate, @topPrecizie.GlobalMaxCapacitate)
+                ];
 
-                // ── RADAR CHART ─────────────────────────────────────────────────
-                const radarDatasets = masini.map((m, i) => ({
-                    label: m.nume,
-                    data: [
-                        100 - norm(m.pret,       minPret, maxPret),  // Preț mic = mai bun
-                        norm(m.an,               minAn,   maxAn),    // An nou = mai bun
-                        100 - norm(m.km,         minKm,   maxKm),    // Km mic = mai bun
-                        norm(m.putere,           minPut,  maxPut),   // Putere mare = mai bun
-                        norm(m.capacitate,       minCap,  maxCap),   // Capacitate
-                    ],
-                    borderColor:     palette[i].border,
-                    backgroundColor: palette[i].bg,
-                    borderWidth: 2,
-                    pointBackgroundColor: palette[i].border,
-                    pointRadius: 4,
-                }));
-
-                new Chart(document.getElementById('radarChart'), {
+                new Chart(ctxRadar, {
                     type: 'radar',
                     data: {
-                        labels: ['Preț Avantajos', 'An Fabricație', 'Kilometraj Redus', 'Putere Motor', 'Capacitate Motor'],
-                        datasets: radarDatasets,
+                        labels: ['Preț Avantajos', 'An Fabricație', 'Kilometraj Redus', 'Putere CP', 'Capacitate'],
+                        datasets: [
+                            {
+                                label: 'Top Stil (@topStil.Anunt.Marca)',
+                                data: dataStil,
+                                borderColor: '#0d6efd',
+                                backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                                borderWidth: 3,
+                                pointRadius: 4
+                            },
+                            {
+                                label: 'Top Precizie (@topPrecizie.Anunt.Marca)',
+                                data: dataPrecizie,
+                                borderColor: '#0dcaf0',
+                                backgroundColor: 'rgba(13, 202, 240, 0.1)',
+                                borderWidth: 3,
+                                pointRadius: 4
+                            }
+                        ]
                     },
                     options: {
-                        responsive: true,
                         scales: {
                             r: {
                                 min: 0, max: 100,
-                                ticks: { stepSize: 25, font: { size: 10 } },
-                                pointLabels: { font: { size: 11 }, color: '#444' },
-                                grid:  { color: 'rgba(0,0,0,0.08)' },
-                                angleLines: { color: 'rgba(0,0,0,0.08)' },
+                                ticks: { display: false },
+                                grid: { color: 'rgba(0,0,0,0.05)' }
                             }
                         },
                         plugins: {
-                            legend: { position: 'bottom', labels: { font: { size: 12 }, padding: 16 } },
-                            tooltip: {
-                                callbacks: {
-                                    label: ctx => ` ${ctx.dataset.label}: ${ctx.raw}/100`
-                                }
-                            }
+                            legend: { position: 'bottom' }
                         }
                     }
                 });
-
-                // ── BAR CHART ────────────────────────────────────────────────────
-                const barLabels = masini.map(m => m.nume);
-
-                const pretDataset = {
-                    label: 'Prețul mașinii (€)',
-                    data: masini.map(m => m.pret),
-                    backgroundColor: masini.map((m, i) => palette[i].border),
-                    borderRadius: 8,
-                    borderSkipped: false,
-                };
-
-                const mediaDataset = {
-                    label: 'Media pieței (€)',
-                    data: masini.map(m => m.mediaPret),
-                    backgroundColor: 'rgba(108,117,125,0.25)',
-                    borderColor:     'rgba(108,117,125,0.7)',
-                    borderWidth: 2,
-                    borderRadius: 8,
-                    borderSkipped: false,
-                };
-
-                new Chart(document.getElementById('barChart'), {
-                    type: 'bar',
-                    data: {
-                        labels: barLabels,
-                        datasets: [pretDataset, mediaDataset],
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: {
-                            legend: { position: 'bottom', labels: { font: { size: 12 }, padding: 16 } },
-                            tooltip: {
-                                callbacks: {
-                                    label: ctx => ` ${ctx.dataset.label}: ${ctx.raw.toLocaleString('ro-RO')} €`
-                                }
-                            }
-                        },
-                        scales: {
-                            y: {
-                                beginAtZero: false,
-                                ticks: {
-                                    callback: val => val.toLocaleString('ro-RO') + ' €',
-                                    font: { size: 11 }
-                                },
-                                grid: { color: 'rgba(0,0,0,0.06)' }
-                            },
-                            x: {
-                                ticks: { font: { size: 11 } },
-                                grid: { display: false }
-                            }
-                        }
-                    }
-                });
-        </script>
-    }
+            </text>
+        }
+    </script>
 }

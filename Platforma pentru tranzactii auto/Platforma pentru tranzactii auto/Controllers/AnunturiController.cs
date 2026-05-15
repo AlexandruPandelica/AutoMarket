@@ -464,16 +464,29 @@ namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei contr
             return View();
         }
 
-        // 2. POST: Preia datele din formular, calculează similaritatea și arată rezultatele
+        // 2. POST: Preia datele din formular, calculează similaritatea și arată rezultatele în format comparativ
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DreamCarResults(DreamCarViewModel model)
         {
             if (!ModelState.IsValid)
+            {
                 return View("DreamCar", model);
+            }
 
-            var recomandari = await _recomandareService.CalculeazaDreamCar(model, 3);
-            return View("DreamCarResults", recomandari);
+            // Apelăm noua metodă care returnează cele două liste (Stil vs Precizie)
+            // DreamCarComparisonViewModel conține: RecomandariStil și RecomandariPrecizie
+            var modelComparativ = await _recomandareService.CalculeazaDreamCarComparativ(model, 3);
+            // Gardă de siguranță dacă service-ul returnează null pe liste
+            modelComparativ.RecomandariStil ??= new List<DreamCarResultViewModel>();
+            modelComparativ.RecomandariPrecizie ??= new List<DreamCarResultViewModel>();
+            // Verificăm dacă am găsit măcar un rezultat în oricare dintre liste
+            if (!modelComparativ.RecomandariStil.Any() && !modelComparativ.RecomandariPrecizie.Any())
+            {
+                ViewBag.Message = "Nu am găsit mașini care să se potrivească filtrelor tale. Încearcă să relaxezi criteriile.";
+            }
+
+            return View("DreamCarResults", modelComparativ);
         }
 
         public IActionResult Comparator()
