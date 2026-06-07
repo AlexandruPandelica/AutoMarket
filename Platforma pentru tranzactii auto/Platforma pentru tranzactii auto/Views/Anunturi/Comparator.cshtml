@@ -130,14 +130,91 @@
         line-height: 1.7;
     }
 
-    /* ── CARDS GRID ── */
-    .cars-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    /* ── COLUMNS LAYOUT ── */
+    .cmp-columns {
         gap: 18px;
         margin-bottom: 2rem;
         align-items: start;
     }
+
+    .cmp-col {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        animation: fadeUp 0.4s ease both;
+    }
+
+    @@keyframes fadeUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* ── SCORE CARD ── */
+    .score-card {
+        background: #fff;
+        border: 1.5px solid #e8ecf0;
+        border-radius: 16px;
+        padding: 1rem 1.25rem;
+        transition: border-color 0.2s;
+    }
+
+        .score-card.best-score {
+            border-color: #2563eb;
+            background: #f0f7ff;
+        }
+
+    .score-label {
+        font-size: 0.62rem;
+        font-weight: 600;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        margin-bottom: 3px;
+    }
+
+    .score-name {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 8px;
+    }
+
+    .score-card.best-score .score-name {
+        color: #1d4ed8;
+    }
+
+    .score-bar-wrap {
+        height: 5px;
+        background: #e8ecf0;
+        border-radius: 99px;
+        overflow: hidden;
+    }
+
+    .score-bar-fill {
+        height: 100%;
+        border-radius: 99px;
+        background: #2563eb;
+        transition: width 1s cubic-bezier(.4,0,.2,1);
+    }
+
+    .score-pct {
+        font-size: 0.7rem;
+        color: #94a3b8;
+        margin-top: 5px;
+        font-weight: 500;
+    }
+
+        .score-pct span {
+            color: #2563eb;
+            font-weight: 700;
+        }
 
     /* ── CAR CARD ── */
     .car-card {
@@ -146,7 +223,6 @@
         border-radius: 20px;
         overflow: hidden;
         position: relative;
-        animation: fadeUp 0.4s ease both;
         transition: box-shadow 0.2s, border-color 0.2s, transform 0.2s;
     }
 
@@ -161,31 +237,6 @@
             box-shadow: 0 0 0 3px #2563eb18, 0 8px 32px #2563eb0d;
         }
 
-        .car-card:nth-child(1) {
-            animation-delay: 0s;
-        }
-
-        .car-card:nth-child(2) {
-            animation-delay: 0.07s;
-        }
-
-        .car-card:nth-child(3) {
-            animation-delay: 0.14s;
-        }
-
-    @@keyframes fadeUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    /* badge recomandat */
     .best-badge {
         position: absolute;
         top: 12px;
@@ -205,7 +256,6 @@
         box-shadow: 0 2px 8px #2563eb40;
     }
 
-    /* Imagine */
     .car-img-wrap {
         height: 185px;
         background: linear-gradient(160deg, #f0f4ff 0%, #e8ecf5 100%);
@@ -253,7 +303,6 @@
             background: #2563eb;
         }
 
-    /* Card body */
     .car-body {
         padding: 1.1rem 1.2rem 0.8rem;
     }
@@ -274,7 +323,6 @@
         gap: 4px;
     }
 
-    /* ── SPECS STRIPS ── */
     .specs-strip {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -304,7 +352,6 @@
             background: #eff6ff;
         }
 
-            /* linie albastră sus pe celulele câștigătoare */
             .spec-cell.hl::before {
                 content: '';
                 position: absolute;
@@ -342,7 +389,6 @@
         color: #1d4ed8;
     }
 
-    /* ── CARD FOOTER ── */
     .car-footer {
         display: flex;
         gap: 8px;
@@ -403,13 +449,12 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        min-height: 400px;
+        min-height: 360px;
         gap: 12px;
         cursor: pointer;
         transition: all 0.22s;
         text-decoration: none;
         color: #cbd5e1;
-        animation: fadeUp 0.4s ease 0.22s both;
     }
 
         .add-card:hover {
@@ -427,7 +472,6 @@
         align-items: center;
         justify-content: center;
         font-size: 1.4rem;
-        transition: all 0.2s;
     }
 
     .add-text {
@@ -555,7 +599,6 @@
         color: #e8ecf0 !important;
     }
 
-    /* legend */
     .cmp-legend {
         display: flex;
         align-items: center;
@@ -581,72 +624,6 @@
         border-radius: 50%;
         flex-shrink: 0;
     }
-
-    /* ── SCORE BAR (nuovo!) ── */
-    .score-section {
-        margin-bottom: 1.5rem;
-    }
-
-    .score-row {
-        display: grid;
-        gap: 18px;
-        align-items: end;
-    }
-
-    .score-card {
-        background: #fff;
-        border: 1.5px solid #e8ecf0;
-        border-radius: 16px;
-        padding: 1rem 1.25rem;
-        animation: fadeUp 0.4s ease 0.1s both;
-    }
-
-        .score-card.best-score {
-            border-color: #2563eb;
-            background: #f0f7ff;
-        }
-
-    .score-label {
-        font-size: 0.7rem;
-        font-weight: 600;
-        color: #94a3b8;
-        text-transform: uppercase;
-        letter-spacing: 0.07em;
-        margin-bottom: 4px;
-    }
-
-    .score-name {
-        font-size: 0.9rem;
-        font-weight: 700;
-        color: #0f172a;
-        margin-bottom: 8px;
-    }
-
-    .score-bar-wrap {
-        height: 6px;
-        background: #f1f3f7;
-        border-radius: 99px;
-        overflow: hidden;
-    }
-
-    .score-bar-fill {
-        height: 100%;
-        border-radius: 99px;
-        background: #2563eb;
-        transition: width 1s cubic-bezier(.4,0,.2,1);
-    }
-
-    .score-pct {
-        font-size: 0.72rem;
-        color: #94a3b8;
-        margin-top: 4px;
-        font-weight: 500;
-    }
-
-        .score-pct span {
-            color: #2563eb;
-            font-weight: 700;
-        }
 </style>
 
 <div class="cmp-root">
@@ -678,13 +655,8 @@
             </a>
         </div>
 
-        <!-- SCORE BARS -->
-        <div id="score-section" class="score-section" style="display:none;">
-            <div class="score-row" id="score-row"></div>
-        </div>
-
-        <!-- CARDS -->
-        <div id="cars-grid" class="cars-grid"></div>
+        <!-- COLUMNS: fiecare coloană = scor (sus) + card mașină (jos) -->
+        <div id="cmp-columns" class="cmp-columns" style="display:none;"></div>
 
         <!-- TABLE -->
         <div id="compare-section" class="compare-section" style="display:none;">
@@ -717,13 +689,11 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
 
-            var lista = JSON.parse(localStorage.getItem('comparator') || '[]');
-            var grid           = document.getElementById('cars-grid');
+            var lista          = JSON.parse(localStorage.getItem('comparator') || '[]');
+            var columnsWrap    = document.getElementById('cmp-columns');
             var emptyDiv       = document.getElementById('cmp-empty');
             var compareSection = document.getElementById('compare-section');
             var subtitle       = document.getElementById('cmp-subtitle');
-            var scoreSection   = document.getElementById('score-section');
-            var scoreRow       = document.getElementById('score-row');
 
             if (lista.length === 0) {
                 emptyDiv.style.display = 'flex';
@@ -757,50 +727,23 @@
             /* ── scor general (0–100) ── */
             function calcScore(m) {
                 var s = 0;
-                if (bPret   > 0) s += (1 - (parseFloat(m.pret)   || 0) / bPret)   * 35; // preț mic = bun
-                if (bAn     > 0) s += ((parseFloat(m.an)     || 0) / bAn)          * 25;
-                if (bKm     > 0) s += (1 - (parseFloat(m.km)     || 0) / bKm)     * 25; // km mici = bun
-                if (bPutere > 0) s += ((parseFloat(m.putere) || 0) / bPutere)      * 15;
-                return Math.round(Math.min(100, Math.max(10, s * 100 / 85 )));
+                if (bPret   > 0) s += (1 - (parseFloat(m.pret)   || 0) / bPret)  * 35;
+                if (bAn     > 0) s += ((parseFloat(m.an)     || 0) / bAn)         * 25;
+                if (bKm     > 0) s += (1 - (parseFloat(m.km)     || 0) / bKm)    * 25;
+                if (bPutere > 0) s += ((parseFloat(m.putere) || 0) / bPutere)     * 15;
+                return Math.round(Math.min(100, Math.max(10, s * 100 / 85)));
             }
 
             var scoruri = lista.map(function (m) { return calcScore(m); });
             var maxScor = Math.max.apply(null, scoruri);
+            var recIdx  = scoruri.indexOf(maxScor);
 
-            /* ── badge recomandat = scor maxim ── */
-            var recIdx = scoruri.indexOf(maxScor);
+            /* ── număr coloane dinamic ── */
+            var totalCols = lista.length < 3 ? lista.length + 1 : 3;
+            columnsWrap.style.display = 'grid';
+            columnsWrap.style.gridTemplateColumns = 'repeat(' + totalCols + ', 1fr)';
 
-            /* ─────────────────────────────
-               SCORE BARS
-            ───────────────────────────── */
-            if (lista.length > 1) {
-                scoreSection.style.display = 'block';
-                scoreRow.style.gridTemplateColumns = 'repeat(' + lista.length + ', 1fr)';
-
-                lista.forEach(function (m, i) {
-                    var sc = scoruri[i];
-                    var isBest = (i === recIdx);
-                    var div = document.createElement('div');
-                    div.className = 'score-card' + (isBest ? ' best-score' : '');
-                    div.innerHTML =
-                        '<div class="score-label">Scor general</div>' +
-                        '<div class="score-name">' + m.nume + (isBest ? ' <i class="bi bi-patch-check-fill" style="color:#2563eb;font-size:.85rem;"></i>' : '') + '</div>' +
-                        '<div class="score-bar-wrap"><div class="score-bar-fill" style="width:0%" data-w="' + sc + '"></div></div>' +
-                        '<div class="score-pct"><span>' + sc + '</span> / 100</div>';
-                    scoreRow.appendChild(div);
-                });
-
-                /* animație bare după render */
-                setTimeout(function () {
-                    document.querySelectorAll('.score-bar-fill').forEach(function (el) {
-                        el.style.width = el.getAttribute('data-w') + '%';
-                    });
-                }, 100);
-            }
-
-            /* ─────────────────────────────
-               CARDURI
-            ───────────────────────────── */
+            /* ── helper spec cell ── */
             function makeCell(label, val, cheie, m) {
                 var hl = cheie && isHL(m, cheie) ? ' hl' : '';
                 return '<div class="spec-cell' + hl + '">' +
@@ -809,32 +752,51 @@
                        '</div>';
             }
 
+            /* ─────────────────────────────
+               COLOANE: scor deasupra, card dedesubt
+            ───────────────────────────── */
             lista.forEach(function (m, i) {
-                var isRec = (i === recIdx);
-
-                var imgHtml = '<img src="/Anunturi/GetImagine/' + m.id + '" ' +
-              'alt="' + m.nume + '" ' +
-              'onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">' +
-              '<div class="car-img-placeholder" style="display:none;">🚗</div>';
-
+                var isRec   = (i === recIdx);
+                var sc      = scoruri[i];
                 var pretFmt = (parseFloat(m.pret) || 0).toLocaleString('ro-RO') + ' €';
                 var kmFmt   = (parseFloat(m.km)   || 0).toLocaleString('ro-RO') + ' km';
 
-                /* strip 1: Preț · An · Km */
-                var s1 = makeCell('Preț',       pretFmt,        'pret',   m) +
-                         makeCell('An',          m.an || '-',    'an',     m) +
-                         makeCell('Kilometraj',  kmFmt,          'km',     m);
+                var imgHtml =
+                    '<img src="/Anunturi/GetImagine/' + m.id + '" alt="' + m.nume + '" ' +
+                    'onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">' +
+                    '<div class="car-img-placeholder" style="display:none;">🚗</div>';
 
-                /* strip 2: Combustibil · Putere · Transmisie */
-                var s2 = makeCell('Combustibil', m.combustibil || '-',         '',       m) +
-                         makeCell('Putere',      m.putere ? m.putere + ' CP' : '-', 'putere', m) +
-                         makeCell('Transmisie',  m.transmisie || '-',          '',       m);
+                var s1 = makeCell('Preț',        pretFmt,                             'pret',   m) +
+                         makeCell('An',           m.an || '-',                         'an',     m) +
+                         makeCell('Kilometraj',   kmFmt,                               'km',     m);
 
-                var card = document.createElement('div');
-                card.className = 'car-card' + (isRec ? ' best-value' : '');
-                card.style.animationDelay = (i * 0.07) + 's';
+                var s2 = makeCell('Combustibil',  m.combustibil || '-',               '',       m) +
+                         makeCell('Putere',       m.putere ? m.putere + ' CP' : '-',  'putere', m) +
+                         makeCell('Transmisie',   m.transmisie || '-',                '',       m);
 
-                card.innerHTML =
+                /* coloana */
+                var col = document.createElement('div');
+                col.className = 'cmp-col';
+                col.style.animationDelay = (i * 0.07) + 's';
+
+                /* ── scor card (sus) ── */
+                var scoreDiv = document.createElement('div');
+                scoreDiv.className = 'score-card' + (isRec ? ' best-score' : '');
+                scoreDiv.innerHTML =
+                    '<div class="score-label">Scor general</div>' +
+                    '<div class="score-name">' +
+                        (isRec ? '<i class="bi bi-patch-check-fill me-1" style="color:#2563eb;font-size:.85rem;"></i>' : '') +
+                        m.nume +
+                    '</div>' +
+                    '<div class="score-bar-wrap">' +
+                        '<div class="score-bar-fill" style="width:0%" data-w="' + sc + '"></div>' +
+                    '</div>' +
+                    '<div class="score-pct"><span>' + sc + '</span> / 100</div>';
+
+                /* ── car card (jos) ── */
+                var carDiv = document.createElement('div');
+                carDiv.className = 'car-card' + (isRec ? ' best-value' : '');
+                carDiv.innerHTML =
                     (isRec ? '<div class="best-badge"><i class="bi bi-patch-check-fill me-1"></i>Recomandat</div>' : '') +
 
                     '<div class="car-img-wrap">' + imgHtml +
@@ -844,8 +806,8 @@
                     '<div class="car-body">' +
                         '<div class="car-name">' + m.nume + '</div>' +
                         '<div class="car-location">' +
-                                '<i class="bi bi-geo-alt-fill" style="color:#ef4444;font-size:.72rem;"></i>' +
-                                '&nbsp;' + (m.locatie || 'Locație necunoscută') +
+                            '<i class="bi bi-geo-alt-fill" style="color:#ef4444;font-size:.72rem;"></i>' +
+                            '&nbsp;' + (m.locatie || 'Locație necunoscută') +
                         '</div>' +
                     '</div>' +
 
@@ -861,21 +823,45 @@
                         '</button>' +
                     '</div>';
 
-                grid.appendChild(card);
+                col.appendChild(scoreDiv);
+                col.appendChild(carDiv);
+                columnsWrap.appendChild(col);
             });
 
-            /* slot + */
+            /* ── slot + (coloană goală) ── */
             if (lista.length < 3) {
-                var add = document.createElement('a');
-                add.href = '/Anunturi';
-                add.className = 'add-card';
-                add.style.animationDelay = (lista.length * 0.07) + 's';
-                add.innerHTML =
+                var addCol = document.createElement('div');
+                addCol.className = 'cmp-col';
+                addCol.style.animationDelay = (lista.length * 0.07) + 's';
+
+                var scorePlaceholder = document.createElement('div');
+                scorePlaceholder.className = 'score-card';
+                scorePlaceholder.style.cssText = 'border-style:dashed;background:transparent;opacity:0.45;';
+                scorePlaceholder.innerHTML =
+                    '<div class="score-label">Scor general</div>' +
+                    '<div class="score-name" style="color:#cbd5e1;">— Slot liber —</div>' +
+                    '<div class="score-bar-wrap"></div>' +
+                    '<div class="score-pct" style="color:#e2e8f0;">— / 100</div>';
+
+                var addCard = document.createElement('a');
+                addCard.href = '/Anunturi';
+                addCard.className = 'add-card';
+                addCard.innerHTML =
                     '<div class="add-icon"><i class="bi bi-plus-lg"></i></div>' +
                     '<div class="add-text">Adaugă a ' + (lista.length + 1) + '-a mașină</div>' +
                     '<div class="add-hint">maxim 3 mașini</div>';
-                grid.appendChild(add);
+
+                addCol.appendChild(scorePlaceholder);
+                addCol.appendChild(addCard);
+                columnsWrap.appendChild(addCol);
             }
+
+            /* ── animație bare ── */
+            setTimeout(function () {
+                document.querySelectorAll('.score-bar-fill').forEach(function (el) {
+                    el.style.width = el.getAttribute('data-w') + '%';
+                });
+            }, 100);
 
             /* ─────────────────────────────
                TABEL
@@ -883,24 +869,22 @@
             compareSection.style.display = 'block';
 
             var rows = [
-                { c:'pret',        l:'💰 Preț',          f:function(v){ return (parseFloat(v)||0).toLocaleString('ro-RO')+' €'; },   t:'min' },
-                { c:'an',          l:'📅 An fabricație',  f:function(v){ return v||'-'; },                                             t:'max' },
-                { c:'km',          l:'📍 Kilometraj',     f:function(v){ return (parseFloat(v)||0).toLocaleString('ro-RO')+' km'; },  t:'min' },
-                { c:'putere',      l:'⚡ Putere',         f:function(v){ return v ? v+' CP' : '-'; },                                  t:'max' },
-                { c:'motor',       l:'🔧 Motor',          f:function(v){ return v ? v+' cm³' : '-'; },                                 t:null  },
-                { c:'combustibil', l:'⛽ Combustibil',    f:function(v){ return v||'-'; },                                             t:null  },
-                { c:'transmisie',  l:'⚙️ Transmisie',     f:function(v){ return v||'-'; },                                             t:null  },
-                { c:'caroserie',   l:'🚗 Caroserie',      f:function(v){ return v||'-'; },                                             t:null  }
+                { c:'pret',        l:'💰 Preț',         f:function(v){ return (parseFloat(v)||0).toLocaleString('ro-RO')+' €'; },  t:'min' },
+                { c:'an',          l:'📅 An fabricație', f:function(v){ return v||'-'; },                                            t:'max' },
+                { c:'km',          l:'📍 Kilometraj',    f:function(v){ return (parseFloat(v)||0).toLocaleString('ro-RO')+' km'; }, t:'min' },
+                { c:'putere',      l:'⚡ Putere',        f:function(v){ return v ? v+' CP' : '-'; },                                 t:'max' },
+                { c:'motor',       l:'🔧 Motor',         f:function(v){ return v ? v+' cm³' : '-'; },                                t:null  },
+                { c:'combustibil', l:'⛽ Combustibil',   f:function(v){ return v||'-'; },                                            t:null  },
+                { c:'transmisie',  l:'⚙️ Transmisie',    f:function(v){ return v||'-'; },                                            t:null  },
+                { c:'caroserie',   l:'🚗 Caroserie',     f:function(v){ return v||'-'; },                                            t:null  }
             ];
 
-            /* header */
             var th = '<tr><th style="width:160px">Specificație</th>';
             lista.forEach(function (m) { th += '<th>' + m.nume + '</th>'; });
             if (lista.length < 3) th += '<th style="color:#e2e8f0">— Slot liber —</th>';
             th += '</tr>';
             document.getElementById('cmp-thead').innerHTML = th;
 
-            /* body */
             var tb = '';
             rows.forEach(function (row) {
                 var bv = row.t ? bestVal(row.c, row.t) : null;
@@ -917,7 +901,6 @@
                 tb += '</tr>';
             });
 
-            /* link anunț */
             tb += '<tr><td>🔗 Link anunț</td>';
             lista.forEach(function (m) {
                 tb += '<td><a href="/Anunturi/Details/' + m.id + '" class="btn-car-view" style="max-width:150px;margin:0 auto;">' +

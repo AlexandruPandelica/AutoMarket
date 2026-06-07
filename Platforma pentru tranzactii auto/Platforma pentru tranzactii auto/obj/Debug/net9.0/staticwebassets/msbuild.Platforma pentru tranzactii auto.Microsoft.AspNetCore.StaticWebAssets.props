@@ -1206,6 +1206,24 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\videos\5b28831c-890e-4b09-9cb7-f08a8da1b62c_audiQ5.mp4'))</OriginalItemSpec>
     </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\videos\6e219f14-65e9-432f-8d41-4885a7a789a3_peugeot-308.mp4'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Platforma pentru tranzactii auto</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Platforma pentru tranzactii auto</BasePath>
+      <RelativePath>videos/6e219f14-65e9-432f-8d41-4885a7a789a3_peugeot-308.mp4</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>fd5ayge1uq</Fingerprint>
+      <Integrity>TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\videos\6e219f14-65e9-432f-8d41-4885a7a789a3_peugeot-308.mp4'))</OriginalItemSpec>
+    </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\videos\87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.mp4'))">
       <SourceType>Package</SourceType>
       <SourceId>Platforma pentru tranzactii auto</SourceId>
@@ -1313,6 +1331,24 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\videos\Chevrolet Camaro SS – Design Details.mp4'))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\videos\peugeot-308.mp4'))">
+      <SourceType>Package</SourceType>
+      <SourceId>Platforma pentru tranzactii auto</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/Platforma pentru tranzactii auto</BasePath>
+      <RelativePath>videos/peugeot-308.mp4</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <Fingerprint>fd5ayge1uq</Fingerprint>
+      <Integrity>TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU=</Integrity>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\videos\peugeot-308.mp4'))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "iJJaF5J2bKQ6m0fJrptwkOfHcXJoKfwAAH9Anctmme0=",
+  "Hash": "jgIwSY3SIUJsbW0EZeqMTS5EPQSaanM6ABFHBPfSv50=",
   "Source": "Platforma pentru tranzactii auto",
   "BasePath": "_content/Platforma pentru tranzactii auto",
   "Mode": "Default",
@@ -5414,6 +5414,27 @@
       "OriginalItemSpec": "wwwroot\\videos\\5b28831c-890e-4b09-9cb7-f08a8da1b62c_audiQ5.mp4"
     },
     {
+      "Identity": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\6e219f14-65e9-432f-8d41-4885a7a789a3_peugeot-308.mp4",
+      "SourceId": "Platforma pentru tranzactii auto",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\",
+      "BasePath": "_content/Platforma pentru tranzactii auto",
+      "RelativePath": "videos/6e219f14-65e9-432f-8d41-4885a7a789a3_peugeot-308#[.{fingerprint}]?.mp4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "fd5ayge1uq",
+      "Integrity": "TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\videos\\6e219f14-65e9-432f-8d41-4885a7a789a3_peugeot-308.mp4"
+    },
+    {
       "Identity": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.mp4",
       "SourceId": "Platforma pentru tranzactii auto",
       "SourceType": "Discovered",
@@ -5538,6 +5559,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\videos\\Chevrolet Camaro SS – Design Details.mp4"
+    },
+    {
+      "Identity": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\peugeot-308.mp4",
+      "SourceId": "Platforma pentru tranzactii auto",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\",
+      "BasePath": "_content/Platforma pentru tranzactii auto",
+      "RelativePath": "videos/peugeot-308#[.{fingerprint}]?.mp4",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "fd5ayge1uq",
+      "Integrity": "TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\videos\\peugeot-308.mp4"
     }
   ],
   "Endpoints": [
@@ -33473,6 +33515,88 @@
       ]
     },
     {
+      "Route": "videos/6e219f14-65e9-432f-8d41-4885a7a789a3_peugeot-308.fd5ayge1uq.mp4",
+      "AssetFile": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\6e219f14-65e9-432f-8d41-4885a7a789a3_peugeot-308.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16307195"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 24 May 2026 11:06:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fd5ayge1uq"
+        },
+        {
+          "Name": "label",
+          "Value": "videos/6e219f14-65e9-432f-8d41-4885a7a789a3_peugeot-308.mp4"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU="
+        }
+      ]
+    },
+    {
+      "Route": "videos/6e219f14-65e9-432f-8d41-4885a7a789a3_peugeot-308.mp4",
+      "AssetFile": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\6e219f14-65e9-432f-8d41-4885a7a789a3_peugeot-308.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16307195"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 24 May 2026 11:06:35 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU="
+        }
+      ]
+    },
+    {
       "Route": "videos/87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.izi7kehbln.mp4",
       "AssetFile": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.mp4",
       "Selectors": [],
@@ -33961,6 +34085,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ="
+        }
+      ]
+    },
+    {
+      "Route": "videos/peugeot-308.fd5ayge1uq.mp4",
+      "AssetFile": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\peugeot-308.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16307195"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 24 May 2026 11:04:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fd5ayge1uq"
+        },
+        {
+          "Name": "label",
+          "Value": "videos/peugeot-308.mp4"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU="
+        }
+      ]
+    },
+    {
+      "Route": "videos/peugeot-308.mp4",
+      "AssetFile": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\peugeot-308.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16307195"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 24 May 2026 11:04:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU="
         }
       ]
     }

@@ -1,8 +1,12 @@
-﻿@{
+﻿@model IEnumerable<Platforma_pentru_tranzactii_auto.Models.Anunturi>
+@using System.Security.Claims
+
+@{
     ViewData["Title"] = "Acasă";
 }
 
 <style>
+    /* ── STILURILE TALE ORIGINALE (NEATINSE) ── */
     .hero-container {
         position: relative;
         width: 100%;
@@ -60,22 +64,170 @@
         .hero-btn:hover {
             background: #0056b3;
             transform: scale(1.05);
+            color: white;
         }
+
+    /* ── STILURI SUPLIMENTARE PENTRU DESIGN PREMIUM ── */
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .stat-divider {
+        border-right: 1px solid #e5e7eb;
+    }
+    @@media (max-width: 767px) {
+        .stat-divider
+
+    {
+        border-right: none;
+        border-bottom: 1px solid #e5e7eb;
+        padding-bottom: 15px;
+    }
+
+    }
+
+    /* Efect de hover pe cardurile auto */
+    .anunt-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 16px !important;
+    }
+
+        .anunt-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08) !important;
+        }
+
+    /* Setări imagini pentru a se întinde perfect (Exact ca la Anunțuri) */
+    .home-card-img-wrapper {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 10; /* Raportul standard de aspect pentru imagini auto */
+        overflow: hidden;
+    }
+
+    .home-card-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Umple cardul natural, fără spații gri laterale */
+    }
+
+    .ai-premium-card {
+        background: linear-gradient(135deg, #0a0f1e 0%, #1e293b 100%);
+        border-radius: 24px;
+    }
 </style>
 
 <div class="hero-container">
-    <!-- VIDEO BACKGROUND -->
-    <img src="/videos/audiRS7.gif" class="hero-video" />
+    <img src="/videos/audiRS7.gif" class="hero-video" alt="Audi RS7 Background" />
 
-    <!-- CONTENT -->
     <div class="hero-content">
         <h1 class="hero-title">Bine ai venit pe AutoMarket</h1>
         <p class="hero-subtitle">
             Platforma modernă de tranzacții auto — Descoperă cele mai noi anunțuri.
         </p>
 
-        <a href="/Anunturi" class="btn hero-btn">
+        <a asp-controller="Anunturi" asp-action="Index" class="btn hero-btn">
             Vezi anunțuri →
         </a>
     </div>
+</div>
+
+<div class="bg-white py-4 shadow-sm border-bottom">
+    <div class="container">
+        <div class="row text-center g-3">
+            <div class="col-6 col-md-3 stat-divider">
+                <h3 class="fw-bold text-primary mb-0">+1,200</h3>
+                <p class="text-muted small mb-0 fw-medium">Mașini Verificate</p>
+            </div>
+            <div class="col-6 col-md-3 stat-divider">
+                <h3 class="fw-bold text-success mb-0">100%</h3>
+                <p class="text-muted small mb-0 fw-medium">Tranzacții Sigure</p>
+            </div>
+            <div class="col-6 col-md-3 stat-divider">
+                <h3 class="fw-bold text-dark mb-0">+500</h3>
+                <p class="text-muted small mb-0 fw-medium">Cumpărători Fericiți</p>
+            </div>
+            <div class="col-6 col-md-3">
+                <h3 class="fw-bold text-warning mb-0">Zilnic</h3>
+                <p class="text-muted small mb-0 fw-medium">Anunțuri Noi</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5 my-3">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <span class="text-primary small fw-bold text-uppercase tracking-wider">Ultimele Noutăți</span>
+            <h2 class="fw-bold text-dark mt-1 mb-0">Cele mai noi anunțuri</h2>
+        </div>
+        <a asp-controller="Anunturi" asp-action="Index" class="btn btn-outline-primary rounded-pill btn-sm px-3 fw-medium">
+            Vezi toate <i class="bi bi-arrow-right ms-1"></i>
+        </a>
+    </div>
+
+    @if (Model == null || !Model.Any())
+    {
+        <div class="text-center py-4 bg-white rounded-3 shadow-sm text-muted">
+            <i class="bi bi-camera-fill fs-2 mb-2 d-block opacity-50"></i>
+            Momentan nu există anunțuri adăugate recente.
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col-12 col-md-4">
+                    <div class="card shadow-sm h-100 anunt-card border-0 overflow-hidden bg-white">
+
+                        <div class="home-card-img-wrapper">
+                            @if (item.Imagine_Anunt != null && item.Imagine_Anunt.Length > 0)
+                            {
+                                <img src="data:image/*;base64,@(Convert.ToBase64String(item.Imagine_Anunt))"
+                                     class="home-card-img"
+                                     alt="Imagine @item.Marca @item.Model" />
+                            }
+                            else
+                            {
+                                <div class="w-100 h-100 d-flex align-items-center justify-content-center bg-light text-muted">
+                                    <i class="bi bi-camera-fill me-2"></i> Fără imagine
+                                </div>
+                            }
+
+                            <span class="position-absolute bottom-0 start-0 m-3 badge bg-dark bg-opacity-75 fs-6 shadow-sm">
+                                @item.Pret.ToString("N0") €
+                            </span>
+                        </div>
+
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold mb-1 text-dark text-truncate">
+                                @item.Marca @item.Model
+                            </h5>
+                            <p class="text-muted small mb-3">
+                                <i class="bi bi-calendar"></i> @item.An_Fabricatie &nbsp;|&nbsp;
+                                <i class="bi bi-speedometer2"></i> @item.Kilometraj.ToString("N0") km
+                            </p>
+
+                            <hr class="my-2 opacity-25">
+
+                            <div class="d-flex justify-content-between align-items-center small text-muted">
+                                <span class="text-truncate" style="max-width: 60%;">
+                                    <i class="bi bi-geo-alt-fill text-primary"></i> @item.Locatie
+                                </span>
+                                <span class="badge bg-light text-secondary border px-2 py-1">Nou</span>
+                            </div>
+                        </div>
+
+                        <div class="card-footer bg-white border-0 pt-0 pb-3 px-3">
+                            <a asp-controller="Anunturi" asp-action="Details" asp-route-id="@item.ID_Anunt" class="btn btn-primary btn-sm w-100 rounded-pill">
+                                Vizualizează Detalii
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            }
+        </div>
+    }
 </div>

@@ -27636,6 +27636,88 @@
       ]
     },
     {
+      "Route": "videos/6e219f14-65e9-432f-8d41-4885a7a789a3_peugeot-308.fd5ayge1uq.mp4",
+      "AssetFile": "videos/6e219f14-65e9-432f-8d41-4885a7a789a3_peugeot-308.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16307195"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 24 May 2026 11:06:35 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fd5ayge1uq"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU="
+        },
+        {
+          "Name": "label",
+          "Value": "videos/6e219f14-65e9-432f-8d41-4885a7a789a3_peugeot-308.mp4"
+        }
+      ]
+    },
+    {
+      "Route": "videos/6e219f14-65e9-432f-8d41-4885a7a789a3_peugeot-308.mp4",
+      "AssetFile": "videos/6e219f14-65e9-432f-8d41-4885a7a789a3_peugeot-308.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16307195"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 24 May 2026 11:06:35 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU="
+        }
+      ]
+    },
+    {
       "Route": "videos/87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.izi7kehbln.mp4",
       "AssetFile": "videos/87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.mp4",
       "Selectors": [],
@@ -28124,6 +28206,88 @@
         {
           "Name": "label",
           "Value": "videos/audiRS7.gif"
+        }
+      ]
+    },
+    {
+      "Route": "videos/peugeot-308.fd5ayge1uq.mp4",
+      "AssetFile": "videos/peugeot-308.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16307195"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 24 May 2026 11:04:23 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "fd5ayge1uq"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU="
+        },
+        {
+          "Name": "label",
+          "Value": "videos/peugeot-308.mp4"
+        }
+      ]
+    },
+    {
+      "Route": "videos/peugeot-308.mp4",
+      "AssetFile": "videos/peugeot-308.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "16307195"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 24 May 2026 11:04:23 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-TQQAUEoEYM/afOmkQGneMzcweiIpnqRu56QQYUwK7ZU="
         }
       ]
     }

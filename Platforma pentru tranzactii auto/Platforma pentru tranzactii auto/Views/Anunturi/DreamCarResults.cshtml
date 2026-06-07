@@ -31,7 +31,7 @@
                         <h4 class="fw-bold"><i class="bi bi-intersect"></i> Stil vs. Precizie</h4>
                         <p class="small text-muted">
                             Graficul suprapune <strong>cea mai bună alegere de Stil</strong> (Cosine) peste
-                            <strong>cea mai bună alegere de Cifre</strong> (KNN).
+                            <strong>cea mai bună alegere de Puncte</strong> (KNN).
                             Zonele mai mari indică o performanță mai bună pe acel criteriu.
                         </p>
                         <ul class="list-unstyled small">
@@ -82,65 +82,65 @@
         @if (topStil != null && topPrecizie != null)
         {
             <text>
-                const ctxRadar = document.getElementById('comparisonRadar').getContext('2d');
+                    const ctxRadar = document.getElementById('comparisonRadar').getContext('2d');
 
-                // Funcție de normalizare pentru grafic
-                function normValue(val, min, max) {
-                    return Math.round(((val - min) / (max - min)) * 100);
-                }
-
-                const dataStil = [
-                    100 - normValue(@topStil.Anunt.Pret, @topStil.GlobalMinPret, @topStil.GlobalMaxPret),
-                    normValue(@topStil.Anunt.An_Fabricatie, @topStil.GlobalMinAn, @topStil.GlobalMaxAn),
-                    100 - normValue(@topStil.Anunt.Kilometraj, @topStil.GlobalMinKm, @topStil.GlobalMaxKm),
-                    normValue(@topStil.Anunt.PutereCP, @topStil.GlobalMinPutere, @topStil.GlobalMaxPutere),
-                    normValue(@topStil.Anunt.CapacitateMotor, @topStil.GlobalMinCapacitate, @topStil.GlobalMaxCapacitate)
-                ];
-
-                const dataPrecizie = [
-                    100 - normValue(@topPrecizie.Anunt.Pret, @topPrecizie.GlobalMinPret, @topPrecizie.GlobalMaxPret),
-                    normValue(@topPrecizie.Anunt.An_Fabricatie, @topPrecizie.GlobalMinAn, @topPrecizie.GlobalMaxAn),
-                    100 - normValue(@topPrecizie.Anunt.Kilometraj, @topPrecizie.GlobalMinKm, @topPrecizie.GlobalMaxKm),
-                    normValue(@topPrecizie.Anunt.PutereCP, @topPrecizie.GlobalMinPutere, @topPrecizie.GlobalMaxPutere),
-                    normValue(@topPrecizie.Anunt.CapacitateMotor, @topPrecizie.GlobalMinCapacitate, @topPrecizie.GlobalMaxCapacitate)
-                ];
-
-                new Chart(ctxRadar, {
-                    type: 'radar',
-                    data: {
-                        labels: ['Preț Avantajos', 'An Fabricație', 'Kilometraj Redus', 'Putere CP', 'Capacitate'],
-                        datasets: [
-                            {
-                                label: 'Top Stil (@topStil.Anunt.Marca)',
-                                data: dataStil,
-                                borderColor: '#0d6efd',
-                                backgroundColor: 'rgba(13, 110, 253, 0.1)',
-                                borderWidth: 3,
-                                pointRadius: 4
-                            },
-                            {
-                                label: 'Top Precizie (@topPrecizie.Anunt.Marca)',
-                                data: dataPrecizie,
-                                borderColor: '#0dcaf0',
-                                backgroundColor: 'rgba(13, 202, 240, 0.1)',
-                                borderWidth: 3,
-                                pointRadius: 4
-                            }
-                        ]
-                    },
-                    options: {
-                        scales: {
-                            r: {
-                                min: 0, max: 100,
-                                ticks: { display: false },
-                                grid: { color: 'rgba(0,0,0,0.05)' }
-                            }
-                        },
-                        plugins: {
-                            legend: { position: 'bottom' }
-                        }
+                    // Funcție de normalizare pentru grafic
+                    function normValue(val, min, max) {
+                        return Math.round(((val - min) / (max - min)) * 100);
                     }
-                });
+
+                    const dataStil = [
+                        100 - normValue(@topStil.Anunt.Pret, @topStil.GlobalMinPret, @topStil.GlobalMaxPret),
+                        normValue(@topStil.Anunt.An_Fabricatie, @topStil.GlobalMinAn, @topStil.GlobalMaxAn),
+                        100 - normValue(@topStil.Anunt.Kilometraj, @topStil.GlobalMinKm, @topStil.GlobalMaxKm),
+                        normValue(@topStil.Anunt.PutereCP, @topStil.GlobalMinPutere, @topStil.GlobalMaxPutere),
+                        normValue(@topStil.Anunt.CapacitateMotor, @topStil.GlobalMinCapacitate, @topStil.GlobalMaxCapacitate)
+                    ];
+
+                    const dataPrecizie = [
+                        100 - normValue(@topPrecizie.Anunt.Pret, @topPrecizie.GlobalMinPret, @topPrecizie.GlobalMaxPret),
+                        normValue(@topPrecizie.Anunt.An_Fabricatie, @topPrecizie.GlobalMinAn, @topPrecizie.GlobalMaxAn),
+                        100 - normValue(@topPrecizie.Anunt.Kilometraj, @topPrecizie.GlobalMinKm, @topPrecizie.GlobalMaxKm),
+                        normValue(@topPrecizie.Anunt.PutereCP, @topPrecizie.GlobalMinPutere, @topPrecizie.GlobalMaxPutere),
+                        normValue(@topPrecizie.Anunt.CapacitateMotor, @topPrecizie.GlobalMinCapacitate, @topPrecizie.GlobalMaxCapacitate)
+                    ];
+
+                    new Chart(ctxRadar, {
+                        type: 'radar',
+                        data: {
+                            labels: ['Preț Avantajos', 'An Fabricație', 'Kilometraj Redus', 'Putere CP', 'Capacitate'],
+                            datasets: [
+                                {
+                                    label: 'Top Stil (@topStil.Anunt.Marca)',
+                                    data: dataStil,
+                                    borderColor: '#0d6efd',
+                                    backgroundColor: 'rgba(13, 110, 253, 0.1)',
+                                    borderWidth: 3,
+                                    pointRadius: 4
+                                },
+                                {
+                                    label: 'Top Precizie (@topPrecizie.Anunt.Marca)',
+                                    data: dataPrecizie,
+                                    borderColor: '#0dcaf0',
+                                    backgroundColor: 'rgba(13, 202, 240, 0.1)',
+                                    borderWidth: 3,
+                                    pointRadius: 4
+                                }
+                            ]
+                        },
+                        options: {
+                            scales: {
+                                r: {
+                                    min: 0, max: 100,
+                                    ticks: { display: false },
+                                    grid: { color: 'rgba(0,0,0,0.05)' }
+                                }
+                            },
+                            plugins: {
+                                legend: { position: 'bottom' }
+                            }
+                        }
+                    });
             </text>
         }
     </script>

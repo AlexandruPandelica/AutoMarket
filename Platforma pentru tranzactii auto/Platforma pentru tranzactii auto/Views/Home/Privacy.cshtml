@@ -7,20 +7,23 @@
 <style>
     .am-wrap {
         font-family: 'DM Sans', sans-serif;
-        color: #1a1a1a;
+        color: #2D3748;
         max-width: 1100px;
         margin: 0 auto;
         padding: 24px 16px 60px;
+        background-color: #fafbfe;
     }
 
-    /* ── HERO ── */
+    /* ── HERO (Refăcut pe culori deschise) ── */
     .am-hero {
         position: relative;
-        background: #0a0f1e;
-        border-radius: 20px;
+        background: linear-gradient(135deg, #e0f2fe 0%, #f0fdf4 100%);
+        border: 1px solid #bae6fd;
+        border-radius: 24px;
         padding: 64px 48px 56px;
         overflow: hidden;
         margin-bottom: 56px;
+        box-shadow: 0 10px 30px rgba(14, 165, 233, 0.05);
     }
 
         .am-hero::before {
@@ -30,7 +33,7 @@
             right: -60px;
             width: 320px;
             height: 320px;
-            background: radial-gradient(circle, #1a4fff33 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.15) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
         }
@@ -42,19 +45,19 @@
             left: 20%;
             width: 200px;
             height: 200px;
-            background: radial-gradient(circle, #0d6efd22 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
         }
 
     .am-hero-tag {
         display: inline-block;
-        background: #1a4fff22;
-        border: 0.5px solid #1a4fff55;
-        color: #7ba7ff;
+        background: #bae6fd;
+        border: 1px solid #7dd3fc;
+        color: #0369a1;
         font-size: 11px;
-        font-weight: 500;
-        letter-spacing: 2px;
+        font-weight: 600;
+        letter-spacing: 1.5px;
         text-transform: uppercase;
         padding: 6px 14px;
         border-radius: 100px;
@@ -65,77 +68,84 @@
         font-family: 'Plus Jakarta Sans', sans-serif;
         font-weight: 800;
         font-size: clamp(1.8rem, 3vw, 2.6rem);
-        color: #fff;
-        line-height: 1.1;
+        color: #0f172a;
+        line-height: 1.2;
         margin: 0 0 20px;
         max-width: 560px;
     }
 
         .am-hero h1 span {
-            color: #4d8fff;
+            color: #0284c7;
+            background: linear-gradient(to right, #0284c7, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
     .am-hero p {
-        color: #8896b3;
+        color: #475569;
         font-size: 1.05rem;
         line-height: 1.7;
         max-width: 480px;
         margin: 0;
-        font-weight: 300;
+        font-weight: 400;
     }
 
     .am-hero-badge {
         position: absolute;
-        top: 48px;
+        top: 50%;
+        transform: translateY(-50%);
         right: 48px;
-        background: #111827;
-        border: 0.5px solid #1e3a5f;
-        border-radius: 14px;
-        padding: 18px 22px;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+        border: 1px solid #e0f2fe;
+        border-radius: 18px;
+        padding: 22px 26px;
         text-align: center;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
     }
 
         .am-hero-badge .num {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            color: #4d8fff;
+            color: #0284c7;
             display: block;
             line-height: 1;
         }
 
         .am-hero-badge .lbl {
             font-size: 11px;
-            color: #8896b3;
+            color: #64748b;
             text-transform: uppercase;
             letter-spacing: 1px;
             display: block;
             margin-top: 6px;
+            font-weight: 500;
         }
 
     /* ── LABELS & TITLES ── */
     .am-section-label {
         font-size: 11px;
-        font-weight: 500;
+        font-weight: 600;
         letter-spacing: 2.5px;
         text-transform: uppercase;
-        color: #4d8fff;
+        color: #0284c7;
         margin-bottom: 10px;
     }
 
     .am-section-title {
         font-family: 'Plus Jakarta Sans', sans-serif;
-        font-weight: 700;
+        font-weight: 800;
         font-size: clamp(1.4rem, 2.5vw, 1.9rem);
-        color: #0a0f1e;
+        color: #0f172a;
         margin: 0 0 10px;
         line-height: 1.2;
     }
 
     .am-section-sub {
-        color: #6b7280;
+        color: #64748b;
         font-size: 0.97rem;
-        font-weight: 300;
+        font-weight: 400;
         line-height: 1.65;
         margin: 0 0 36px;
         max-width: 560px;
@@ -145,50 +155,52 @@
     .am-features {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
+        gap: 20px;
         margin-bottom: 60px;
     }
 
     .am-feat {
         background: #fff;
-        border: 0.5px solid #e5e7eb;
-        border-radius: 16px;
-        padding: 24px 20px;
-        transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        border: 1px solid #e2e8f0;
+        border-radius: 18px;
+        padding: 26px 22px;
+        transition: all 0.25s ease;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01);
     }
 
         .am-feat:hover {
-            border-color: #4d8fff66;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(77, 143, 255, 0.1);
+            border-color: #bae6fd;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 20px rgba(14, 165, 233, 0.08);
         }
 
     .am-feat-icon {
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-        background: #e7f1ff;
+        width: 46px;
+        height: 46px;
+        border-radius: 14px;
+        background: #e0f2fe;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 20px;
-        margin-bottom: 14px;
+        font-size: 22px;
+        margin-bottom: 16px;
+        color: #0284c7;
     }
 
     .am-feat h4 {
         font-family: 'Plus Jakarta Sans', sans-serif;
         font-weight: 700;
-        font-size: 0.95rem;
+        font-size: 1rem;
         margin: 0 0 8px;
-        color: #0a0f1e;
+        color: #0f172a;
     }
 
     .am-feat p {
-        font-size: 0.85rem;
-        color: #6b7280;
+        font-size: 0.88rem;
+        color: #64748b;
         margin: 0;
         line-height: 1.6;
-        font-weight: 300;
+        font-weight: 400;
     }
 
     /* ── TWO COLUMN SECTION ── */
@@ -197,63 +209,58 @@
         grid-template-columns: 1fr 1fr;
         gap: 40px;
         margin-bottom: 60px;
-        align-items: start;
+        align-items: center;
     }
 
     /* ── STATS ── */
     .am-stat-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 12px;
+        gap: 16px;
     }
 
     .am-stat {
-        background: #0a0f1e;
-        border-radius: 14px;
-        padding: 22px 18px;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 24px 20px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.01);
+        text-align: center;
     }
 
         .am-stat .val {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 800;
-            color: #4d8fff;
+            color: #0284c7;
             display: block;
             line-height: 1;
             margin-bottom: 6px;
         }
 
         .am-stat .desc {
-            font-size: 0.82rem;
-            color: #8896b3;
-            font-weight: 300;
+            font-size: 0.85rem;
+            color: #64748b;
+            font-weight: 500;
         }
 
     /* ── MISSION QUOTE ── */
     .am-mission {
-        background: #f3f4f6;
-        border-radius: 14px;
-        padding: 24px 22px;
+        background: #f0fdfa;
+        border-left: 4px solid #0d9488;
+        border-radius: 4px 14px 14px 4px;
+        padding: 20px 22px;
         margin-top: 20px;
     }
 
         .am-mission p {
             font-size: 0.95rem;
-            color: #4b5563;
+            color: #334155;
             line-height: 1.75;
             margin: 0;
-            font-weight: 300;
+            font-weight: 400;
             font-style: italic;
         }
-
-            .am-mission p::before {
-                content: '\201C';
-                font-size: 2rem;
-                color: #4d8fff;
-                line-height: 0;
-                vertical-align: -0.45rem;
-                margin-right: 4px;
-            }
 
     /* ── ROLE PILLS ── */
     .am-team-row {
@@ -265,80 +272,85 @@
 
     .am-role-pill {
         background: #fff;
-        border: 0.5px solid #e5e7eb;
+        border: 1px solid #e2e8f0;
         border-radius: 100px;
         padding: 10px 20px;
         display: flex;
         align-items: center;
         gap: 10px;
         font-size: 0.88rem;
-        color: #374151;
-        font-weight: 400;
+        color: #475569;
+        font-weight: 500;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     }
 
         .am-role-pill .dot {
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: #4d8fff;
+            background: #0284c7;
             flex-shrink: 0;
         }
 
         .am-role-pill.green .dot {
-            background: #22c55e;
+            background: #16a34a;
         }
 
         .am-role-pill.amber .dot {
-            background: #f59e0b;
+            background: #ea580c;
         }
 
-    /* ── CTA ── */
+    /* ── CTA (Refăcut pe albastru intens modern) ── */
     .am-cta {
-        background: #0a0f1e;
-        border-radius: 20px;
+        background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+        border-radius: 24px;
         padding: 48px 44px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 32px;
         flex-wrap: wrap;
+        box-shadow: 0 10px 35px rgba(2, 132, 199, 0.25);
     }
 
     .am-cta-text h3 {
         font-family: 'Plus Jakarta Sans', sans-serif;
         font-weight: 800;
-        font-size: clamp(1.2rem, 2vw, 1.6rem);
+        font-size: clamp(1.3rem, 2vw, 1.7rem);
         color: #fff;
         margin: 0 0 8px;
     }
 
     .am-cta-text p {
-        color: #8896b3;
+        color: #e0f2fe;
         margin: 0;
-        font-size: 0.9rem;
-        font-weight: 300;
+        font-size: 0.95rem;
+        font-weight: 400;
     }
 
     .am-cta-btn {
-        background: #1a4fff;
-        color: #fff;
+        background: #fff;
+        color: #0284c7;
         border: none;
-        border-radius: 10px;
-        padding: 14px 28px;
+        border-radius: 12px;
+        padding: 14px 32px;
         font-family: 'DM Sans', sans-serif;
-        font-size: 0.92rem;
-        font-weight: 500;
+        font-size: 0.95rem;
+        font-weight: 600;
         cursor: pointer;
         white-space: nowrap;
         flex-shrink: 0;
-        transition: background 0.2s ease;
+        transition: all 0.2s ease;
         text-decoration: none;
         display: inline-block;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
         .am-cta-btn:hover {
-            background: #2d5fff;
-            color: #fff;
+            background: #f0fdf4;
+            color: #0369a1;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             text-decoration: none;
         }
 
@@ -349,7 +361,13 @@
         }
 
         .am-hero-badge {
-            display: none;
+            position: relative;
+            transform: none;
+            right: auto;
+            top: auto;
+            margin-top: 24px;
+            display: inline-block;
+            width: 100%;
         }
 
         .am-features {
@@ -358,11 +376,13 @@
 
         .am-two-col {
             grid-template-columns: 1fr;
+            gap: 30px;
         }
 
         .am-cta {
             flex-direction: column;
             text-align: center;
+            padding: 36px 24px;
         }
 
         .am-cta-btn {
@@ -447,7 +467,7 @@
         <div>
             <div class="am-section-label">Misiunea noastră</div>
             <div class="am-section-title">De ce AutoMarket?</div>
-            <p style="color: #6b7280; font-size: 0.93rem; line-height: 1.75; font-weight: 300; margin: 0 0 20px;">
+            <p style="color: #64748b; font-size: 0.95rem; line-height: 1.75; font-weight: 400; margin: 0 0 20px;">
                 Am construit AutoMarket pentru că piața auto merita o platformă
                 modernă — nu doar un site cu anunțuri, ci un ecosistem complet
                 care pune utilizatorul pe primul loc.
