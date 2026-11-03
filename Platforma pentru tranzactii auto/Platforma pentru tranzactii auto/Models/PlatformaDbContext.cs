@@ -13,7 +13,6 @@ public class PlatformaDbContext : IdentityDbContext<Utilizator, IdentityRole<int
     {
     }
 
-    // === DbSet-urile tale ===
     public DbSet<Anunturi>? Anunt { get; set; }
     public DbSet<Favorite>? Favorite { get; set; }
     public DbSet<Comentarii>? Comentarii { get; set; }
@@ -21,27 +20,25 @@ public class PlatformaDbContext : IdentityDbContext<Utilizator, IdentityRole<int
     public DbSet<ImaginiAnunt> ImaginiAnunt { get; set; }
     public DbSet<Contact> Contact { get; set; }
 
-    // 🆕 TABELUL NOU
     public DbSet<Mesaje>? Mesaje { get; set; }
 
-    // 🆕 CONFIGURARE SPECIALĂ (Foarte Important!)
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
-        // Configurare relație Expeditor -> Mesaje
+        // Configurare relatie Expeditor -> Mesaje
         builder.Entity<Mesaje>()
             .HasOne(m => m.Expeditor)
             .WithMany()
             .HasForeignKey(m => m.ExpeditorId)
-            .OnDelete(DeleteBehavior.Restrict); // Evităm ștergerea în cascadă
+            .OnDelete(DeleteBehavior.Restrict); // Evitam stergerea in cascada
 
-        // Configurare relație Destinatar -> Mesaje
+        // Configurare relatie Destinatar -> Mesaje
         builder.Entity<Mesaje>()
             .HasOne(m => m.Destinatar)
             .WithMany()
             .HasForeignKey(m => m.DestinatarId)
-            .OnDelete(DeleteBehavior.Restrict); // Evităm ștergerea în cascadă
+            .OnDelete(DeleteBehavior.Restrict); // Evitam stergerea in cascada
     }
 
 }

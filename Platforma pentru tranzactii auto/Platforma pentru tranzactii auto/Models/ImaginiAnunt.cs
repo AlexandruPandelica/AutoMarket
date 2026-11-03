@@ -8,9 +8,8 @@ namespace Platforma_pentru_tranzactii_auto.Models
         [Key]
         public int ID_Imagine { get; set; }
 
-        public byte[] Imagine { get; set; } // Aici stocăm poza propriu-zisă
+        public byte[] Imagine { get; set; } 
 
-        // Legătura cu Anunțul (Foreign Key)
         public int ID_Anunt { get; set; }
 
         [ForeignKey("ID_Anunt")]

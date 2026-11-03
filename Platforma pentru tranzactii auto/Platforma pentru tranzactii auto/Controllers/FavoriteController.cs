@@ -27,7 +27,6 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
     {
         int userId = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-        // Verificăm dacă există deja în favorite
         var existing = await _context.Favorite
             .FirstOrDefaultAsync(f => f.UserId == userId && f.ID_Anunt == anuntId);
 
@@ -38,7 +37,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
             return RedirectToAction("Index", "Anunturi");
         }
 
-        // Adăugăm
+
         var fav = new Favorite
         {
             UserId = userId,
@@ -55,22 +54,22 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
         // GET: Favorite
         public async Task<IActionResult> Index()
         {
-            // 1. Obținem ID-ul utilizatorului logat curent
+
             var userIdString = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             if (string.IsNullOrEmpty(userIdString))
             {
-                // Dacă nu e logat, redirecționăm sau returnăm o listă goală
+                
                 return RedirectToAction("Login", "Account");
             }
 
             int userId = int.Parse(userIdString);
 
-            // 2. Filtrăm lista de favorite: aducem doar rândurile unde UserId coincide cu cel logat
+            
             var favoriteUtilizator = await _context.Favorite
                 .Include(f => f.Anunt)
                 .Include(f => f.User)
-                .Where(f => f.UserId == userId) // Aceasta este linia care rezolvă problema
+                .Where(f => f.UserId == userId) 
                 .ToListAsync();
 
             return View(favoriteUtilizator);
@@ -105,8 +104,6 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
         }
 
         // POST: Favorite/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID_Favorite,UserId,ID_Anunt")] Favorite favorite)
@@ -141,8 +138,6 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
         }
 
         // POST: Favorite/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID_Favorite,UserId,ID_Anunt")] Favorite favorite)

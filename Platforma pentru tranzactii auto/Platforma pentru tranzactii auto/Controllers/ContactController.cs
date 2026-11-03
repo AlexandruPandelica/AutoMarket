@@ -14,7 +14,6 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
             _context = context;
         }
 
-        // 1. INDEX: Lista de mesaje (Doar pentru Admini)
         [Authorize]
         public async Task<IActionResult> Index()
         {
@@ -24,14 +23,13 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
             return View(mesaje);
         }
 
-        // 2. CREATE (GET): Afișează formularul public
-        // Nu punem [Authorize] pentru că oricine trebuie să poată trimite mesaje
+ 
         public IActionResult Create()
         {
             return View();
         }
 
-        // 3. CREATE (POST): Procesează trimiterea
+        // Create (POST): Proceseaza trimiterea
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Contact model)
@@ -58,8 +56,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
             return View(model);
         }
 
-        // 4. EDIT (GET): Formularul de editare (Doar Admin)
-        // De exemplu, poți marca un mesaj ca "Citit" sau poți corecta date
+
         [Authorize]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -71,7 +68,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
             return View(mesaj);
         }
 
-        // 5. EDIT (POST): Salvare modificări
+
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -79,21 +76,18 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
         {
             if (id != mesajFormular.Id) return NotFound();
 
-            // 1. Citim mesajul original din baza de date
             var mesajDinDb = await _context.Contact.FindAsync(id);
 
             if (mesajDinDb == null) return NotFound();
 
             if (ModelState.IsValid)
             {
-                // 2. Actualizăm DOAR câmpurile editabile
                 mesajDinDb.Nume = mesajFormular.Nume;
                 mesajDinDb.Email = mesajFormular.Email;
                 mesajDinDb.Subiect = mesajFormular.Subiect;
                 mesajDinDb.Mesaj = mesajFormular.Mesaj;
                 mesajDinDb.EsteCitit = mesajFormular.EsteCitit;
 
-                // ⚠️ NU actualizăm DataTrimiterii. O lăsăm pe cea originală din DB (care e deja UTC corect).
 
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -101,7 +95,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
             return View(mesajFormular);
         }
 
-        // 6. DELETE (POST): Ștergere mesaj
+
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -113,7 +107,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
                 _context.Contact.Remove(mesaj);
                 await _context.SaveChangesAsync();
             }
-            // Ne întoarcem la lista de mesaje
+
             return RedirectToAction(nameof(Index));
         }
     }

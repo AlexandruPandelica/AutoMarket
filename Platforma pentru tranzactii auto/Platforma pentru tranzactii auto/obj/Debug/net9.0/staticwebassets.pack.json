@@ -261,8 +261,8 @@
       "PackagePath": "staticwebassets\\videos\\14912521-uhd_2158_3840_60fps.mp4"
     },
     {
-      "Id": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.mp4",
-      "PackagePath": "staticwebassets\\videos\\21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.mp4"
+      "Id": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\24d38039-a8a5-4356-8820-5ba7ffb8ea79_Camaro SS Design Details.mp4",
+      "PackagePath": "staticwebassets\\videos\\24d38039-a8a5-4356-8820-5ba7ffb8ea79_Camaro SS Design Details.mp4"
     },
     {
       "Id": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\5b28831c-890e-4b09-9cb7-f08a8da1b62c_audiQ5.mp4",
@@ -277,8 +277,12 @@
       "PackagePath": "staticwebassets\\videos\\87d26f4d-3ca0-4df5-8588-0db511fac755_14912521-uhd_2158_3840_60fps.mp4"
     },
     {
-      "Id": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\Chevrolet Camaro SS – Design Details.mp4",
-      "PackagePath": "staticwebassets\\videos\\Chevrolet Camaro SS – Design Details.mp4"
+      "Id": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\Camaro SS Design Details.mp4",
+      "PackagePath": "staticwebassets\\videos\\Camaro SS Design Details.mp4"
+    },
+    {
+      "Id": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\Chevrolet Camaro SS Design Details.mp4",
+      "PackagePath": "staticwebassets\\videos\\Chevrolet Camaro SS Design Details.mp4"
     },
     {
       "Id": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\audi.gif",
@@ -297,8 +301,8 @@
       "PackagePath": "staticwebassets\\videos\\audiRS7.gif"
     },
     {
-      "Id": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\peugeot-308.mp4",
-      "PackagePath": "staticwebassets\\videos\\peugeot-308.mp4"
+      "Id": "C:\\Users\\Asus\\Documents\\GitHub\\AutoMarket\\Platforma pentru tranzactii auto\\Platforma pentru tranzactii auto\\wwwroot\\videos\\peugeot 308.mp4",
+      "PackagePath": "staticwebassets\\videos\\peugeot 308.mp4"
     },
     {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.Platforma pentru tranzactii auto.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

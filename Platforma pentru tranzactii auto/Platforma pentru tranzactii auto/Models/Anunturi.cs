@@ -32,23 +32,22 @@ namespace Platforma_pentru_tranzactii_auto.Models
         public int Nr_Vizualizari { get; set; }
         public string Locatie { get; set; }
 
-        // --- PROPRIETATI NOI PENTRU MACHINE LEARNING ---
-        public string? Combustibil { get; set; } // Benzina, Diesel, Electric, Hibrid
-        public string? Transmisie { get; set; }  // Manuala, Automata
+        public string? Combustibil { get; set; } 
+        public string? Transmisie { get; set; }  
 
         [Range(0, int.MaxValue, ErrorMessage = "Capacitatea motorului nu poate fi negativă.")]
-        public int CapacitateMotor { get; set; } // Ex: 1998 (in cm3)
+        public int CapacitateMotor { get; set; } 
 
         [Range(0, int.MaxValue, ErrorMessage = "Puterea nu poate fi negativă.")]
-        public int PutereCP { get; set; }        // Ex: 150 (Cai putere)
-        public string? TipCaroserie { get; set; } // Sedan, SUV, Hatchback, Break
+        public int PutereCP { get; set; }        
+        public string? TipCaroserie { get; set; } 
 
         public byte[]? Imagine_Anunt { get; set; }
-        // Calea catre videoclipul salvat fizic pe server ---
+       
         public string? VideoPath { get; set; }
         public List<ImaginiAnunt>? GalerieImagini { get; set; }
 
-        // FK catre utilizator (proprietar)
+        // FK catre utilizator 
         public int UserId { get; set; }
 
         [ForeignKey("UserId")]

@@ -12,23 +12,22 @@ namespace Platforma_pentru_tranzactii_auto.Models
         [Required(ErrorMessage = "Mesajul nu poate fi gol.")]
         public string Continut { get; set; }
 
-        public DateTime DataTrimiterii { get; set; } = DateTime.UtcNow; // Folosim UTC pentru PostgreSQL
+        public DateTime DataTrimiterii { get; set; } = DateTime.UtcNow; 
 
-        // --- RELAȚII ---
+        // Relatii
 
-        // Cine trimite mesajul (Cumpărătorul)
+        // Cumparatorul
         public int ExpeditorId { get; set; }
 
         [ForeignKey("ExpeditorId")]
         public Utilizator Expeditor { get; set; }
 
-        // Cine primește mesajul (Vânzătorul)
+        // Vanzatorul
         public int DestinatarId { get; set; }
 
         [ForeignKey("DestinatarId")]
         public Utilizator Destinatar { get; set; }
 
-        // Despre ce mașină se discută
         public int ID_Anunt { get; set; }
 
         [ForeignKey("ID_Anunt")]

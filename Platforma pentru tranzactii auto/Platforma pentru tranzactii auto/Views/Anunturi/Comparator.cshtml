@@ -12,7 +12,7 @@
         padding: 2.5rem 0 4rem;
     }
 
-    /* ── HEADER ── */
+
     .cmp-header {
         display: flex;
         align-items: center;
@@ -94,7 +94,7 @@
             box-shadow: 0 4px 16px #2563eb30;
         }
 
-    /* ── EMPTY STATE ── */
+
     .cmp-empty {
         display: none;
         flex-direction: column;
@@ -130,7 +130,7 @@
         line-height: 1.7;
     }
 
-    /* ── COLUMNS LAYOUT ── */
+ 
     .cmp-columns {
         gap: 18px;
         margin-bottom: 2rem;
@@ -156,7 +156,7 @@
         }
     }
 
-    /* ── SCORE CARD ── */
+    
     .score-card {
         background: #fff;
         border: 1.5px solid #e8ecf0;
@@ -216,7 +216,7 @@
             font-weight: 700;
         }
 
-    /* ── CAR CARD ── */
+    
     .car-card {
         background: #fff;
         border: 1.5px solid #e8ecf0;
@@ -440,7 +440,7 @@
             color: #ef4444;
         }
 
-    /* ── ADD SLOT ── */
+
     .add-card {
         background: #fff;
         border: 2px dashed #e2e8f0;
@@ -485,7 +485,7 @@
         color: #cbd5e1;
     }
 
-    /* ── COMPARISON TABLE ── */
+
     .compare-section {
         background: #fff;
         border: 1.5px solid #e8ecf0;
@@ -655,7 +655,7 @@
             </a>
         </div>
 
-        <!-- COLUMNS: fiecare coloană = scor (sus) + card mașină (jos) -->
+        
         <div id="cmp-columns" class="cmp-columns" style="display:none;"></div>
 
         <!-- TABLE -->
@@ -703,7 +703,7 @@
 
             subtitle.textContent = lista.length + ' din 3 mașini selectate · Albastru = cea mai avantajoasă valoare';
 
-            /* ── helpers ── */
+            
             function bestVal(cheie, tip) {
                 var vals = lista.map(function (m) { return parseFloat(m[cheie]) || 0; });
                 return tip === 'min' ? Math.min.apply(null, vals) : Math.max.apply(null, vals);
@@ -738,12 +738,12 @@
             var maxScor = Math.max.apply(null, scoruri);
             var recIdx  = scoruri.indexOf(maxScor);
 
-            /* ── număr coloane dinamic ── */
+            
             var totalCols = lista.length < 3 ? lista.length + 1 : 3;
             columnsWrap.style.display = 'grid';
             columnsWrap.style.gridTemplateColumns = 'repeat(' + totalCols + ', 1fr)';
 
-            /* ── helper spec cell ── */
+            
             function makeCell(label, val, cheie, m) {
                 var hl = cheie && isHL(m, cheie) ? ' hl' : '';
                 return '<div class="spec-cell' + hl + '">' +
@@ -752,9 +752,9 @@
                        '</div>';
             }
 
-            /* ─────────────────────────────
-               COLOANE: scor deasupra, card dedesubt
-            ───────────────────────────── */
+            
+             
+           
             lista.forEach(function (m, i) {
                 var isRec   = (i === recIdx);
                 var sc      = scoruri[i];
@@ -779,7 +779,7 @@
                 col.className = 'cmp-col';
                 col.style.animationDelay = (i * 0.07) + 's';
 
-                /* ── scor card (sus) ── */
+                /* ── scor card */
                 var scoreDiv = document.createElement('div');
                 scoreDiv.className = 'score-card' + (isRec ? ' best-score' : '');
                 scoreDiv.innerHTML =
@@ -793,7 +793,7 @@
                     '</div>' +
                     '<div class="score-pct"><span>' + sc + '</span> / 100</div>';
 
-                /* ── car card (jos) ── */
+                /* car card */
                 var carDiv = document.createElement('div');
                 carDiv.className = 'car-card' + (isRec ? ' best-value' : '');
                 carDiv.innerHTML =
@@ -828,7 +828,7 @@
                 columnsWrap.appendChild(col);
             });
 
-            /* ── slot + (coloană goală) ── */
+            /* coloana goala ── */
             if (lista.length < 3) {
                 var addCol = document.createElement('div');
                 addCol.className = 'cmp-col';
@@ -856,27 +856,25 @@
                 columnsWrap.appendChild(addCol);
             }
 
-            /* ── animație bare ── */
+           
             setTimeout(function () {
                 document.querySelectorAll('.score-bar-fill').forEach(function (el) {
                     el.style.width = el.getAttribute('data-w') + '%';
                 });
             }, 100);
 
-            /* ─────────────────────────────
-               TABEL
-            ───────────────────────────── */
+
             compareSection.style.display = 'block';
 
             var rows = [
-                { c:'pret',        l:'💰 Preț',         f:function(v){ return (parseFloat(v)||0).toLocaleString('ro-RO')+' €'; },  t:'min' },
-                { c:'an',          l:'📅 An fabricație', f:function(v){ return v||'-'; },                                            t:'max' },
-                { c:'km',          l:'📍 Kilometraj',    f:function(v){ return (parseFloat(v)||0).toLocaleString('ro-RO')+' km'; }, t:'min' },
-                { c:'putere',      l:'⚡ Putere',        f:function(v){ return v ? v+' CP' : '-'; },                                 t:'max' },
-                { c:'motor',       l:'🔧 Motor',         f:function(v){ return v ? v+' cm³' : '-'; },                                t:null  },
-                { c:'combustibil', l:'⛽ Combustibil',   f:function(v){ return v||'-'; },                                            t:null  },
-                { c:'transmisie',  l:'⚙️ Transmisie',    f:function(v){ return v||'-'; },                                            t:null  },
-                { c:'caroserie',   l:'🚗 Caroserie',     f:function(v){ return v||'-'; },                                            t:null  }
+                { c:'pret',        l:' Preț',         f:function(v){ return (parseFloat(v)||0).toLocaleString('ro-RO')+' €'; },  t:'min' },
+                { c:'an',          l:' An fabricație', f:function(v){ return v||'-'; },                                            t:'max' },
+                { c:'km',          l:' Kilometraj',    f:function(v){ return (parseFloat(v)||0).toLocaleString('ro-RO')+' km'; }, t:'min' },
+                { c:'putere',      l:' Putere',        f:function(v){ return v ? v+' CP' : '-'; },                                 t:'max' },
+                { c:'motor',       l:' Motor',         f:function(v){ return v ? v+' cm³' : '-'; },                                t:null  },
+                { c:'combustibil', l:' Combustibil',   f:function(v){ return v||'-'; },                                            t:null  },
+                { c:'transmisie',  l:' Transmisie',    f:function(v){ return v||'-'; },                                            t:null  },
+                { c:'caroserie',   l:' Caroserie',     f:function(v){ return v||'-'; },                                            t:null  }
             ];
 
             var th = '<tr><th style="width:160px">Specificație</th>';
@@ -912,7 +910,7 @@
             document.getElementById('cmp-tbody').innerHTML = tb;
         });
 
-        /* ── globale ── */
+        
         function stergeComparator(id) {
             var lista = JSON.parse(localStorage.getItem('comparator') || '[]');
             lista = lista.filter(function (x) { return x.id !== id; });

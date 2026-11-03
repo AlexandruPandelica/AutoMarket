@@ -12,32 +12,31 @@ using Microsoft.AspNetCore.Http;
 using System.Security.Claims;
 using Platforma_pentru_tranzactii_auto.Services;
 
-namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei controller-ele stau în namespace-ul .Controllers
+namespace Platforma_pentru_tranzactii_auto.Controllers 
 {
     public class AnunturiController : Controller
     {
         private readonly PlatformaDbContext _context;
         private readonly UserManager<Utilizator> _userManager;
-        private readonly RecomandareService _recomandareService; // <-- Adaugă asta
+        private readonly RecomandareService _recomandareService; 
         private readonly ClusteringService _clusteringService;
 
         public AnunturiController(PlatformaDbContext context, UserManager<Utilizator> userManager, RecomandareService recomandareService, ClusteringService clusteringService)
         {
             _context = context;
             _userManager = userManager;
-            _recomandareService = recomandareService; // <-- Adaugă asta
+            _recomandareService = recomandareService; 
             _clusteringService = clusteringService;
         }
 
-        // GET: Anunturi
-        // 🔥 MODIFICARE: Am adăugat parametrii pentru filtre (minPret, maxPret, minAn, maxAn)
+        
         public async Task<IActionResult> Index(string searchString, int? minPret, int? maxPret, int? minAn, int? maxAn)
         {
             var anunturiQuery = _context.Anunt
                 .Include(a => a.User)
                 .AsQueryable();
 
-            // 1. Filtrare Text (Marcă, Model, Descriere, Locație)
+            // 1. Filtrare (Marcă, Model, Descriere, Locație)
             if (!String.IsNullOrEmpty(searchString))
             {
                 searchString = searchString.ToLower();
@@ -277,7 +276,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei contr
             anuntDinDb.Marca = anunturiForm.Marca;
             anuntDinDb.Model = anunturiForm.Model;
             anuntDinDb.Pret = anunturiForm.Pret;
-            anuntDinDb.An_Fabricatie = anunturiForm.An_Fabricatie; // ✅ Adaugă asta
+            anuntDinDb.An_Fabricatie = anunturiForm.An_Fabricatie; 
             anuntDinDb.Kilometraj = anunturiForm.Kilometraj;
             anuntDinDb.Locatie = anunturiForm.Locatie;
             anuntDinDb.Descriere = anunturiForm.Descriere;
@@ -458,13 +457,12 @@ namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei contr
             return RedirectToAction(nameof(Edit), new { id = anunt.ID_Anunt });
         }
 
-        // 1. GET: Afișează pagina cu formularul Dream Car
         public IActionResult DreamCar()
         {
             return View();
         }
 
-        // 2. POST: Preia datele din formular, calculează similaritatea și arată rezultatele în format comparativ
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DreamCarResults(DreamCarViewModel model)
@@ -474,13 +472,11 @@ namespace Platforma_pentru_tranzactii_auto.Controllers // Notă: De obicei contr
                 return View("DreamCar", model);
             }
 
-            // Apelăm noua metodă care returnează cele două liste (Stil vs Precizie)
-            // DreamCarComparisonViewModel conține: RecomandariStil și RecomandariPrecizie
             var modelComparativ = await _recomandareService.CalculeazaDreamCarComparativ(model, 3);
-            // Gardă de siguranță dacă service-ul returnează null pe liste
+
             modelComparativ.RecomandariStil ??= new List<DreamCarResultViewModel>();
             modelComparativ.RecomandariPrecizie ??= new List<DreamCarResultViewModel>();
-            // Verificăm dacă am găsit măcar un rezultat în oricare dintre liste
+
             if (!modelComparativ.RecomandariStil.Any() && !modelComparativ.RecomandariPrecizie.Any())
             {
                 ViewBag.Message = "Nu am găsit mașini care să se potrivească filtrelor tale. Încearcă să relaxezi criteriile.";

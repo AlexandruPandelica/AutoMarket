@@ -10,7 +10,7 @@ public class Utilizator : IdentityUser<int>
     public string Adresa { get; set; }
     public byte[]? Imagine_Profil { get; set; }
 
-    // Relații
+    // Relatii
     public ICollection<Anunturi>? Anunturi { get; set; }
     public ICollection<Favorite>? Favorite { get; set; }
     public ICollection<Comentarii>? Comentari { get; set; }

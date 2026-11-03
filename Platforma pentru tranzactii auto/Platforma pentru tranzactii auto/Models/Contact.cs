@@ -20,8 +20,8 @@ namespace Platforma_pentru_tranzactii_auto.Models
         [Required]
         public string Mesaj { get; set; }
 
-        public DateTime DataTrimiterii { get; set; } = DateTime.UtcNow; // Se pune automat data curentă
+        public DateTime DataTrimiterii { get; set; } = DateTime.UtcNow; 
 
-        public bool EsteCitit { get; set; } = false; // Ca să știi dacă l-ai citit sau nu
+        public bool EsteCitit { get; set; } = false; 
     }
 }

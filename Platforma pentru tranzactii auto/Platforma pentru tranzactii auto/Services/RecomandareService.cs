@@ -17,14 +17,14 @@ namespace Platforma_pentru_tranzactii_auto.Services
         public RecomandareService(PlatformaDbContext context, IConfiguration configuration)
         {
             _context = context;
-            // Preluăm limitele globale din appsettings.json pentru normalizarea KNN
+            
             _minValues = configuration.GetSection("KNNSettings:MinValues").Get<double[]>();
             _maxValues = configuration.GetSection("KNNSettings:MaxValues").Get<double[]>();
         }
 
         public async Task<DreamCarComparisonViewModel> CalculeazaDreamCarComparativ(DreamCarViewModel dreamCar, int topRecomandari = 3)
         {
-            // PASUL 1: FILTRARE HARD
+            
             var query = _context.Anunt.AsQueryable();
 
             if (dreamCar.PretDorit > 0)
@@ -37,7 +37,7 @@ namespace Platforma_pentru_tranzactii_auto.Services
             var masiniValide = await query.ToListAsync();
             if (!masiniValide.Any()) return new DreamCarComparisonViewModel();
 
-            // Limite locale pentru Radar Chart
+            
             decimal localMinPret = masiniValide.Min(a => a.Pret);
             decimal localMaxPret = masiniValide.Max(a => a.Pret);
             int localMinAn = masiniValide.Min(a => a.An_Fabricatie);
@@ -49,17 +49,16 @@ namespace Platforma_pentru_tranzactii_auto.Services
             int localMinPutere = masiniValide.Min(a => a.PutereCP);
             int localMaxPutere = masiniValide.Max(a => a.PutereCP);
 
-            // PASUL 2: VECTORI UTILIZATOR — DIFERIȚI pentru fiecare algoritm
-            // Cosine: valori ideale (direcție optimă)
+            
             double[] vectorCosine = {
-            1.0 - NormalizeKNN((double)dreamCar.PretDorit, 0), // preț cât mai mic
-            1.0,  // an cât mai nou
-            0.0,  // km cât mai puțini
+            1.0 - NormalizeKNN((double)dreamCar.PretDorit, 0), 
+            1.0,  // an nou
+            0.0,  // km putini
             NormalizeKNN(dreamCar.CapacitateMotorDorita, 3),
             NormalizeKNN(dreamCar.PutereCPDorita, 4)
             };
 
-            // KNN: valorile EXACTE introduse de utilizator (distanță fizică)
+            
             double[] vectorKNN = {
             NormalizeKNN((double)dreamCar.PretDorit, 0),
             NormalizeKNN(dreamCar.AnMinim, 1),
@@ -69,7 +68,7 @@ namespace Platforma_pentru_tranzactii_auto.Services
             };
             var toateRezultatele = new List<DreamCarResultViewModel>();
 
-            // PASUL 3: CALCUL SCORURI PENTRU TOATE MAȘINILE
+            
             foreach (var masina in masiniValide)
             {
                 double[] vectorMasina = {
@@ -80,7 +79,7 @@ namespace Platforma_pentru_tranzactii_auto.Services
                     NormalizeKNN(masina.PutereCP, 4)
                 };
 
-                // După — fiecare folosește vectorul său propriu
+                
                 double simCosine = CosineSimilarity(vectorCosine, vectorMasina);
                 double distEuclidean = EuclideanDistance(vectorKNN, vectorMasina);
                 double simEuclidean = 1.0 / (1.0 + distEuclidean);
@@ -120,16 +119,16 @@ namespace Platforma_pentru_tranzactii_auto.Services
                 });
             }
 
-            // PASUL 4: SEPARAREA ÎN DOUĂ LISTE
+            // Separarea listelor 
             return new DreamCarComparisonViewModel
             {
-                // Top bazat pe Cosine (Stil/Profil)
+                
                 RecomandariStil = toateRezultatele
                     .OrderByDescending(r => r.ScorSimilaritate)
                     .Take(topRecomandari)
                     .ToList(),
 
-                // Top bazat pe KNN (Cifre exacte/Proximitate)
+                
                 RecomandariPrecizie = toateRezultatele
                     .OrderByDescending(r => r.ScorEuclidian)
                     .Take(topRecomandari)

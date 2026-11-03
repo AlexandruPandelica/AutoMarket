@@ -25,7 +25,6 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user == null) return RedirectToAction("Login", "Account");
 
-            // 1. Preluăm toate mesajele unde utilizatorul este implicat
             var toateMesajele = await _context.Mesaje
                 .Include(m => m.Expeditor)
                 .Include(m => m.Destinatar)
@@ -34,7 +33,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
                 .OrderByDescending(m => m.DataTrimiterii)
                 .ToListAsync();
 
-            // 2. Grupăm mesajele pentru a crea lista de conversații (stânga)
+
             var conversatii = toateMesajele
                 .GroupBy(m => new {
                     PartnerId = m.ExpeditorId == user.Id ? m.DestinatarId : m.ExpeditorId,
@@ -46,7 +45,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
             ViewBag.Conversatii = conversatii;
             ViewBag.CurrentUserId = user.Id;
 
-            // 3. Dacă o conversație este selectată, încărcăm tot istoricul (dreapta)
+            
             if (conversatieId.HasValue)
             {
                 var msgReferinta = toateMesajele.FirstOrDefault(m => m.ID_Mesaj == conversatieId.Value);
@@ -89,7 +88,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
             _context.Mesaje.Add(mesajNou);
             await _context.SaveChangesAsync();
 
-            // Redirecționăm înapoi la conversație folosind ID-ul noului mesaj
+            
             return RedirectToAction(nameof(Index), new { conversatieId = mesajNou.ID_Mesaj });
         }
 
@@ -100,7 +99,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
             var expeditor = await _userManager.GetUserAsync(User);
             if (expeditor == null || string.IsNullOrWhiteSpace(continut)) return BadRequest();
 
-            // Validare: să nu-ți trimiți mesaj singur
+            
             if (expeditor.Id == destinatarId) return RedirectToAction("Details", "Anunturi", new { id = anuntId });
 
             var mesajNou = new Mesaje
@@ -115,7 +114,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
             _context.Mesaje.Add(mesajNou);
             await _context.SaveChangesAsync();
 
-            // Redirecționăm utilizatorul direct în Inbox la noua conversație
+            
             return RedirectToAction("Index", "Mesaje", new { conversatieId = mesajNou.ID_Mesaj });
         }
 
@@ -126,7 +125,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
             var mesaj = await _context.Mesaje.FindAsync(id);
             var user = await _userManager.GetUserAsync(User);
 
-            // Verificăm dacă mesajul există și dacă aparține utilizatorului logat
+            
             if (mesaj != null && mesaj.ExpeditorId == user.Id)
             {
                 if (!string.IsNullOrWhiteSpace(noulContinut))
@@ -156,7 +155,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            // Dacă avem un ID de conversație activă, rămânem acolo
+            
             if (currentConversatieId.HasValue)
             {
                 return RedirectToAction(nameof(Index), new { conversatieId = currentConversatieId.Value });
@@ -165,7 +164,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // Șterge TOATĂ conversația (Metoda NOUĂ)
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> StergeConversatie(int anuntId, int partnerId)
@@ -173,7 +172,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user == null) return Unauthorized();
 
-            // Selectăm toate mesajele dintre utilizatorul curent și partener pentru anunțul specific
+            
             var mesajeDeSters = await _context.Mesaje
                 .Where(m => m.ID_Anunt == anuntId &&
                            ((m.ExpeditorId == user.Id && m.DestinatarId == partnerId) ||
@@ -186,7 +185,7 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            // Fiindcă am șters totul, ne întoarcem la Inbox-ul principal (fără nicio conversație selectată)
+            
             return RedirectToAction(nameof(Index));
         }
 

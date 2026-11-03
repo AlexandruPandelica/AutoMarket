@@ -5,12 +5,11 @@
         public Anunturi Anunt { get; set; }
         public double ScorSimilaritate { get; set; }
         public double ScorEuclidian { get; set; }
-        public string DealLabel { get; set; }    // "Deal Bun", "Pret Corect", "Suprapret"
-        public string DealColor { get; set; }    // "success", "warning", "danger"
+        public string DealLabel { get; set; }    
+        public string DealColor { get; set; }    
         public decimal MediaPretSimilare { get; set; }
-        public decimal DiferentaPret { get; set; } // pozitiv = mai scump, negativ = mai ieftin
+        public decimal DiferentaPret { get; set; } 
 
-        // Adaugă în DreamCarResultViewModel.cs
         public int GlobalMinAn { get; set; }
         public int GlobalMaxAn { get; set; }
         public int GlobalMinKm { get; set; }

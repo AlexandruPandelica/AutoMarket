@@ -27472,8 +27472,8 @@
       ]
     },
     {
-      "Route": "videos/21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.3szfdmbfrz.mp4",
-      "AssetFile": "videos/21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.mp4",
+      "Route": "videos/24d38039-a8a5-4356-8820-5ba7ffb8ea79_Camaro SS Design Details.3szfdmbfrz.mp4",
+      "AssetFile": "videos/24d38039-a8a5-4356-8820-5ba7ffb8ea79_Camaro SS Design Details.mp4",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -27498,7 +27498,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 23 Apr 2026 10:45:20 GMT"
+          "Value": "Mon, 06 Jul 2026 11:08:16 GMT"
         }
       ],
       "EndpointProperties": [
@@ -27512,13 +27512,13 @@
         },
         {
           "Name": "label",
-          "Value": "videos/21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.mp4"
+          "Value": "videos/24d38039-a8a5-4356-8820-5ba7ffb8ea79_Camaro SS Design Details.mp4"
         }
       ]
     },
     {
-      "Route": "videos/21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.mp4",
-      "AssetFile": "videos/21717b39-c891-4445-bbf2-2f9c4410ccce_Chevrolet Camaro SS – Design Details.mp4",
+      "Route": "videos/24d38039-a8a5-4356-8820-5ba7ffb8ea79_Camaro SS Design Details.mp4",
+      "AssetFile": "videos/24d38039-a8a5-4356-8820-5ba7ffb8ea79_Camaro SS Design Details.mp4",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -27543,7 +27543,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Thu, 23 Apr 2026 10:45:20 GMT"
+          "Value": "Mon, 06 Jul 2026 11:08:16 GMT"
         }
       ],
       "EndpointProperties": [
@@ -27800,8 +27800,90 @@
       ]
     },
     {
-      "Route": "videos/Chevrolet Camaro SS – Design Details.3szfdmbfrz.mp4",
-      "AssetFile": "videos/Chevrolet Camaro SS – Design Details.mp4",
+      "Route": "videos/Camaro SS Design Details.3szfdmbfrz.mp4",
+      "AssetFile": "videos/Camaro SS Design Details.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5004408"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Apr 2026 10:45:20 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "3szfdmbfrz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ="
+        },
+        {
+          "Name": "label",
+          "Value": "videos/Camaro SS Design Details.mp4"
+        }
+      ]
+    },
+    {
+      "Route": "videos/Camaro SS Design Details.mp4",
+      "AssetFile": "videos/Camaro SS Design Details.mp4",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "5004408"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "video/mp4"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Thu, 23 Apr 2026 10:45:20 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Heh6ZxV0a5TmJORN02pimglfOqAuEmQCUJVz6vFJDRQ="
+        }
+      ]
+    },
+    {
+      "Route": "videos/Chevrolet Camaro SS Design Details.3szfdmbfrz.mp4",
+      "AssetFile": "videos/Chevrolet Camaro SS Design Details.mp4",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -27840,13 +27922,13 @@
         },
         {
           "Name": "label",
-          "Value": "videos/Chevrolet Camaro SS – Design Details.mp4"
+          "Value": "videos/Chevrolet Camaro SS Design Details.mp4"
         }
       ]
     },
     {
-      "Route": "videos/Chevrolet Camaro SS – Design Details.mp4",
-      "AssetFile": "videos/Chevrolet Camaro SS – Design Details.mp4",
+      "Route": "videos/Chevrolet Camaro SS Design Details.mp4",
+      "AssetFile": "videos/Chevrolet Camaro SS Design Details.mp4",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -28210,8 +28292,8 @@
       ]
     },
     {
-      "Route": "videos/peugeot-308.fd5ayge1uq.mp4",
-      "AssetFile": "videos/peugeot-308.mp4",
+      "Route": "videos/peugeot 308.fd5ayge1uq.mp4",
+      "AssetFile": "videos/peugeot 308.mp4",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -28250,13 +28332,13 @@
         },
         {
           "Name": "label",
-          "Value": "videos/peugeot-308.mp4"
+          "Value": "videos/peugeot 308.mp4"
         }
       ]
     },
     {
-      "Route": "videos/peugeot-308.mp4",
-      "AssetFile": "videos/peugeot-308.mp4",
+      "Route": "videos/peugeot 308.mp4",
+      "AssetFile": "videos/peugeot 308.mp4",
       "Selectors": [],
       "ResponseHeaders": [
         {

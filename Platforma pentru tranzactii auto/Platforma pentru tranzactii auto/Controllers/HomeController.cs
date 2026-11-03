@@ -19,13 +19,12 @@ namespace Platforma_pentru_tranzactii_auto.Controllers
 
         public async Task<IActionResult> Index()
         {
-            // Lu?m cele mai noi 3 anun?uri ordonate dup? data post?rii
             var ultimeleAnunturi = await _context.Anunt
                 .OrderByDescending(a => a.Data_Postarii)
                 .Take(3)
                 .ToListAsync();
 
-            // Trimitem lista de 3 anun?uri c?tre View
+
             return View(ultimeleAnunturi);
         }
 
